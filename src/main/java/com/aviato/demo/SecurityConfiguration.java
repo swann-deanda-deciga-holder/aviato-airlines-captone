@@ -38,7 +38,7 @@ public class SecurityConfiguration {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-// The filterChain() method is declared as a bean that configures the HttpSecurity object. It sets up the login and logout configurations, the pages that can be viewed without logging in, and the pages that require authentication. //
+    // The filterChain() method is declared as a bean that configures the HttpSecurity object. It sets up the login and logout configurations, the pages that can be viewed without logging in, and the pages that require authentication. //
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http

@@ -12,6 +12,21 @@
 
 <h1>Login</h1>
 
+<!--Login form, input data will be sent to LoginController-->
+<form th:action="@{/login}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" th:value="${username}"/><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"/><br>
+
+    <button type="submit">Login</button>
+</form>
+
+
+<!--Link to redirect user to register.html, to create new account-->
+<a href="/register">Don't have an account? Register here.</a>
+
 </body>
 
 </html>
