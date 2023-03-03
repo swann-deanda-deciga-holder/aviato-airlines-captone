@@ -1,4 +1,4 @@
-package com.aviato.demo.models;
+gipackage com.aviato.demo.models;
 
 public class User {
 
@@ -8,6 +8,7 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
+
 
 
     // Constructor created with 5 parameters. //
