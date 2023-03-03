@@ -51,7 +51,7 @@ public class SecurityConfiguration {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
-                /* Pages that can be viewed without having to log in */
+                /* Page that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/booking", "/home", "/login", "/profile", "/register", "/results", "/css/**", "/js/**", "/img/**") // anyone can see the home and the ads pages
