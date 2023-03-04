@@ -1,6 +1,12 @@
 package com.aviato.demo.models;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+
+import javax.management.relation.Role;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -72,4 +78,5 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 }
