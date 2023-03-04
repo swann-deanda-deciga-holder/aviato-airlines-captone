@@ -1,6 +1,15 @@
 package com.aviato.demo.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "user")
+
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
 
     // Created instance variables for all fields. //
     private String username;
