@@ -1,36 +1,84 @@
 package com.aviato.demo.models;
 
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@Table (name = "flight")
 public class Flights {
-    private String flightNumber;
-    private String departureAirport;
-    private String arrivalAirport;
-    private LocalDateTime departureDateTime;
-    private LocalDateTime arrivalDateTime;
-    private int totalSeats;
-    private int availableSeats;
-    private double price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    public Flights(String flightNumber, String departureAirport, String arrivalAirport, LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, int totalSeats, int availableSeats, double price) {
-        this.flightNumber = flightNumber;
+    @Column(name = "flight_id")
+    private Long id;
+
+    @Column(name = "price", nullable = false, precision = 4, scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "departureAirport", nullable = false, length = 50)
+    private String departureAirport;
+
+    @Column(name = "arrivalAirport", nullable = false, length = 50)
+    private String arrivalAirport;
+
+    @Column(name = "layoverLocation", length = 50)
+    private String layoverLocation;
+
+    @Column(name = "arrivalTime", nullable = false)
+    private LocalDateTime arrivalTime;
+
+    @Column(name = "seatType", nullable = false, length = 15)
+    private String seatType;
+
+    @Column(name = "seatAvailable", nullable = false)
+    private boolean seatAvailable;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinTable(name = "flight_user",
+            joinColumns = @JoinColumn(name = "flight_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    //would have to use a set in a many-to-many relationship
+
+    private Set<User> users = new HashSet<>();
+
+    public Flights() {
+    }
+
+    public Flights(Long id, BigDecimal price, String departureAirport, String arrivalAirport, String layoverLocation, LocalDateTime arrivalTime, String seatType, boolean seatAvailable, User user, Set<User> users) {
+        this.id = id;
+        this.price = price;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
-        this.departureDateTime = departureDateTime;
-        this.arrivalDateTime = arrivalDateTime;
-        this.totalSeats = totalSeats;
-        this.availableSeats = availableSeats;
+        this.layoverLocation = layoverLocation;
+        this.arrivalTime = arrivalTime;
+        this.seatType = seatType;
+        this.seatAvailable = seatAvailable;
+        this.user = user;
+        this.users = users;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    // Getters and setters for all fields
-
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
     }
 
     public String getDepartureAirport() {
@@ -49,43 +97,51 @@ public class Flights {
         this.arrivalAirport = arrivalAirport;
     }
 
-    public LocalDateTime getDepartureDateTime() {
-        return departureDateTime;
+    public String getLayoverLocation() {
+        return layoverLocation;
     }
 
-    public void setDepartureDateTime(LocalDateTime departureDateTime) {
-        this.departureDateTime = departureDateTime;
+    public void setLayoverLocation(String layoverLocation) {
+        this.layoverLocation = layoverLocation;
     }
 
-    public LocalDateTime getArrivalDateTime() {
-        return arrivalDateTime;
+    public LocalDateTime getArrivalTime() {
+        return arrivalTime;
     }
 
-    public void setArrivalDateTime(LocalDateTime arrivalDateTime) {
-        this.arrivalDateTime = arrivalDateTime;
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
-    public int getTotalSeats() {
-        return totalSeats;
+    public String getSeatType() {
+        return seatType;
     }
 
-    public void setTotalSeats(int totalSeats) {
-        this.totalSeats = totalSeats;
+    public void setSeatType(String seatType) {
+        this.seatType = seatType;
     }
 
-    public int getAvailableSeats() {
-        return availableSeats;
+    public boolean isSeatAvailable() {
+        return seatAvailable;
     }
 
-    public void setAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
+    public void setSeatAvailable(boolean seatAvailable) {
+        this.seatAvailable = seatAvailable;
     }
 
-    public double getPrice() {
-        return price;
+    public User getUser() {
+        return user;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

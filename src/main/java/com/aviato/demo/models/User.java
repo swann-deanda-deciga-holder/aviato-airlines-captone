@@ -1,67 +1,64 @@
-gipackage com.aviato.demo.models;
+package com.aviato.demo.models;
 
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Entity
+@Table(name="user")
 public class User {
 
-    // Created instance variables for all fields. //
-    private String username;
-    private String password;
-    private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "firstname", nullable = false, length = 20)
     private String firstName;
+
+    @Column(name = "lastname", nullable = false, length = 20)
     private String lastName;
 
+    @Column(name = "email", nullable = false, length = 50)
+    private String email;
 
+    @Column(name = "dob", nullable = false)
+    private LocalDate dob;
 
-    // Constructor created with 5 parameters. //
+    @Column(name = "phone_number", nullable = false, length = 15)
+    private String phoneNumber;
 
-    public User(){};
+    @Column(name = "password", nullable = false, length = 255)
+    private String password;
 
-    public User(String username, String password, String email, String firstName, String lastName) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Payment> payments = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Token> tokens = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Set<Payment> payments;
+
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
+    private Set<Flights> flights;
+
+    public User() {
+    }
+
+    public User(Long id, String firstName, String lastName, String email, LocalDate dob, String phoneNumber, String password, Set<Payment> payments, Set<Flights> flights) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    // Getters and setters for all fields. //
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
+        this.dob = dob;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.payments = payments;
+        this.flights = flights;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }
