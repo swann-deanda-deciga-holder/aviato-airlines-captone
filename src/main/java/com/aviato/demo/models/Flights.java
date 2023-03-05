@@ -1,5 +1,8 @@
 package com.aviato.demo.models;
 
+
+
+
 import java.time.LocalDateTime;
 
 public class Flights {
