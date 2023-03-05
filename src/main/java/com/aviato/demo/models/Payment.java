@@ -22,21 +22,15 @@ public class Payment {
     @JoinColumn(name = "token_id", nullable = false)
     private Token token;
 
-    @Column(name = "amount", nullable = false, precision = 10, scale = 2)
-    private BigDecimal amount;
 
-    @Column(name = "status", nullable = false, length = 20)
-    private String status;
 
     public Payment() {
     }
 
-    public Payment(Long id, User user, Token token, BigDecimal amount, String status) {
+    public Payment(Long id, User user, Token token) {
         this.id = id;
         this.user = user;
         this.token = token;
-        this.amount = amount;
-        this.status = status;
     }
 
     public Long getId() {
@@ -61,21 +55,5 @@ public class Payment {
 
     public void setToken(Token token) {
         this.token = token;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

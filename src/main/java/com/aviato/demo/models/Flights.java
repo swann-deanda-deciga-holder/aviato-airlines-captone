@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -48,7 +49,7 @@ public class Flights {
 //
 //    https://github.com/vishal1605/Movie-seat-project/blob/main/src/main/java/com/bus/beans/Customer.java
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seat> seats = new ArrayList<>();
+    private List<Seats> seats = new ArrayList<>();
 
 
 //    LAZY - To load it on-demand (i.e. lazily) when you call
@@ -67,6 +68,10 @@ public class Flights {
     //would have to use a set in a many-to-many relationship
     private Set<User> users = new HashSet<>();
 
+//    THIS IS TO CHECK THE
+//    private Set<String> uniqueSeatIds = new HashSet<>();
+
+
 
     public Flights() {
     }
@@ -83,6 +88,7 @@ public class Flights {
         this.user = user;
         this.users = users;
     }
+
 
     public Long getId() {
         return id;
@@ -163,4 +169,40 @@ public class Flights {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+    public List<Seats> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seats> seats) {
+        this.seats = seats;
+    }
+    //methods
+
+//    CHECKS THE SET AGAINST THE LIST TO PURGE ANY DUPLICATES
+//    NEED TO PICK WHICH "addSeats" METHOD
+
+
+//    public void addSeat(Seat seat) {
+//        if (uniqueSeatIds.contains(seat.getSeatId())) {
+//            throw new IllegalArgumentException("Duplicate seat ID: " + seat.getSeatId());
+//        }
+//        uniqueSeatIds.add(seat.getSeatId());
+//        seats.add(seat);
+//    }
+    public void addSeat(Seats seat){
+        if(!seats.contains(seat)){
+            seats.add(seat);
+            seat.setFlight(this);
+        }
+    }
+//    REMOVES SEATS
+    public void removeSeat(Seats seat){
+        if(seats.contains(seat)){
+            seats.remove(seat);
+            seat.setFlight(null);
+        }
+    }
+//    SHOULD THERE BE "getAvailableSeats" METHOD & "getSeatsByClass"?
+
 }
