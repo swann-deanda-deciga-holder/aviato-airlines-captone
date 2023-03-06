@@ -1,10 +1,7 @@
 package com.aviato.demo.repositories;
 
-import com.aviato.demo.models.SeatType;
 import com.aviato.demo.models.Seats;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface SeatsRepository extends JpaRepository<Seats, Long> {
 

@@ -32,3 +32,4 @@ void delete(User user);
 //Reference to Repositories
 //https://www.geeksforgeeks.org/spring-boot-crudrepository-with-example/
 
+//private int seat;
