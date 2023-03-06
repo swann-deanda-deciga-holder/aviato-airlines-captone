@@ -29,8 +29,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/ads")
+                .loginPage("/")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()
@@ -42,8 +42,8 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/posts/**",
-                        "/ads/**"
+                        "/booking",
+                        "profile"
                 )
                 .authenticated()
         ;
