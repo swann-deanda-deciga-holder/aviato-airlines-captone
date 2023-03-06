@@ -42,11 +42,13 @@ public class SecurityConfiguration {
                 /* Logout configuration */
                 .and()
                 .logout()
-                .logoutSuccessUrl("/") // append a query string value
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JESSIONID")// append a query string value
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/register", "/css/**", "/js/**", "/img/**") // anyone can see the home and the ads pages
+                .requestMatchers("/", "/register", "/results", "/css/**", "/js/**", "/img/**") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()

@@ -8,5 +8,11 @@
 <body>
 <h1>Results</h1>
 
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+  </form>
+</div>
+
 </body>
 </html>
