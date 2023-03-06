@@ -23,15 +23,15 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute("user") User user, Model model) {
-        User existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-            return "redirect:/";
-        } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "login";
-        }
-    }
+//    @PostMapping("/login")
+//    public String login(@ModelAttribute("user") User user, Model model) {
+//        User existingUser = userRepository.findByEmail(user.getEmail());
+//        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+//            return "redirect:/";
+//        } else {
+//            model.addAttribute("error", "Invalid email or password");
+//            return "login";
+//        }
+//    }
 }
 

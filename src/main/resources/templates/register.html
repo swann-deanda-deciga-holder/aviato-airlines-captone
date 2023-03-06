@@ -13,7 +13,7 @@
 <form method="POST" th:action="@{/register}" th:object="${user}">
 
     <label for="username">Username:</label>
-    <input type="username" id="username" th:field="*{username}" required><br><br>
+    <input type="text" id="username" th:field="*{username}" required><br><br>
 
     <label for="firstName">First Name:</label>
     <input type="text" id="firstName" th:field="*{firstName}" required><br><br>

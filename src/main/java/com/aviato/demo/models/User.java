@@ -1,12 +1,6 @@
 package com.aviato.demo.models;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-
-import javax.management.relation.Role;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -35,6 +29,13 @@ public class User {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
     }
 
     // Getters and setters for all fields. //
