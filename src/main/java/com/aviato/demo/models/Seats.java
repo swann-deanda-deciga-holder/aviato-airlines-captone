@@ -13,8 +13,8 @@ public class Seats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "unique_id", nullable = false, unique = true)
-    private String uniqueSeatId;
+//    @Column(name = "unique_id", nullable = false, unique = true)
+//    private String uniqueSeatId;
 
     @Column(name="class", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -32,7 +32,7 @@ public class Seats {
 
     public Seats(Long id, String uniqueSeatId, SeatType seatType, boolean isBooked, Flights flight) {
         this.id = id;
-        this.uniqueSeatId = uniqueSeatId;
+//        this.uniqueSeatId = uniqueSeatId;
         this.seatType = seatType;
         this.isBooked = isBooked;
         this.flight = flight;
@@ -45,14 +45,14 @@ public class Seats {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getUniqueSeatId() {
-        return uniqueSeatId;
-    }
-
-    public void setUniqueSeatId(String uniqueSeatId) {
-        this.uniqueSeatId = uniqueSeatId;
-    }
+//SHOULD UNIQUE SEAT ID BE INCLUDED?
+//    public String getUniqueSeatId() {
+//        return uniqueSeatId;
+//    }
+//
+//    public void setUniqueSeatId(String uniqueSeatId) {
+//        this.uniqueSeatId = uniqueSeatId;
+//    }
 
     public SeatType getSeatType() {
         return seatType;
@@ -73,7 +73,7 @@ public class Seats {
     public Flights getFlight() {
         return flight;
     }
-
+//methods
     public boolean bookSeat(){
         if(!isBooked){
             isBooked = true;
