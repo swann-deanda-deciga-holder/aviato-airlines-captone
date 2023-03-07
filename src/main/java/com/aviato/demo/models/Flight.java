@@ -5,11 +5,10 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table (name = "flight")
-public class Flights {
+public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,13 +49,19 @@ public class Flights {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    @JoinTable(name = "flight_user",
+//            joinColumns = @JoinColumn(name = "flight_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private List<User> usersList;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "flight_user",
             joinColumns = @JoinColumn(name = "flight_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> usersList;
 
-    public Flights(Long id, BigDecimal price, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, String layoverLocation, LocalDateTime arrivalTime, int durationMinutes, LocalDateTime departureTime, boolean isBooked, int seat, User user, List<User> usersList) {
+    public Flight(Long id, BigDecimal price, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, String layoverLocation, LocalDateTime arrivalTime, int durationMinutes, LocalDateTime departureTime, boolean isBooked, int seat, User user, List<User> usersList) {
         this.id = id;
         this.price = price;
         this.departureAirport = departureAirport;
@@ -73,7 +78,7 @@ public class Flights {
         this.usersList = usersList;
     }
 
-    public Flights() {
+    public Flight() {
         this.seat = 100;
     }
 

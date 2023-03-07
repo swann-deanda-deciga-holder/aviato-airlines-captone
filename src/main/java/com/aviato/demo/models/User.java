@@ -3,7 +3,6 @@ package com.aviato.demo.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -38,23 +37,43 @@ public class User {
 
 
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
-    private List<Flights> flights;
+//    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
+//    private List<Flight> flights;
+
+    //YESTERDAY
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    private List<Flight> flights;
+
+//I ADDED TODAY BY CHAT GPT
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<FlightUser> flightUserList;
+
+    @ManyToMany(mappedBy = "usersList")
+    private List<Flight> flightsList;
 
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String email, LocalDate dob, String phoneNumber, String password, String token, List<Flights> flights) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.dob = dob;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.token = token;
-        this.flights = flights;
-    }
+//    public User(Long id, String firstName, String lastName, String email, LocalDate dob, String phoneNumber, String password, String token, List<Flight> flights) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.dob = dob;
+//        this.phoneNumber = phoneNumber;
+//        this.password = password;
+//        this.token = token;
+//        this.flights = flights;
+//    }
+public User(Long id, String firstName, String lastName, String email, String password, List<Flight> flightsList) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+//    this.flightUserList = flightUserList;
+    this.flightsList = flightsList;
+}
 
     public Long getId() {
         return id;
@@ -120,11 +139,19 @@ public class User {
         this.token = token;
     }
 
-    public List<Flights> getFlights() {
-        return flights;
+//    public List<FlightUser> getFlightUserList() {
+//        return flightUserList;
+//    }
+
+//    public void setFlightUserList(List<FlightUser> flightUserList) {
+//        this.flightUserList = flightUserList;
+//    }
+
+    public List<Flight> getFlightsList() {
+        return flightsList;
     }
 
-    public void setFlights(List<Flights> flights) {
-        this.flights = flights;
+    public void setFlightsList(List<Flight> flightsList) {
+        this.flightsList = flightsList;
     }
 }

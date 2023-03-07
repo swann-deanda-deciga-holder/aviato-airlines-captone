@@ -13,12 +13,12 @@ public class FlightUser {
 
     @ManyToOne
     @JoinColumn(name="flight_id", nullable = false)
-    private Flights flight;
+    private Flight flight;
 
     public FlightUser() {
     }
 
-    public FlightUser(Long id, User user, Flights flight) {
+    public FlightUser(Long id, User user, Flight flight) {
         this.id = id;
         this.user = user;
         this.flight = flight;
@@ -40,11 +40,11 @@ public class FlightUser {
         this.user = user;
     }
 
-    public Flights getFlight() {
+    public Flight getFlight() {
         return flight;
     }
 
-    public void setFlight(Flights flight) {
+    public void setFlight(Flight flight) {
         this.flight = flight;
     }
 }
