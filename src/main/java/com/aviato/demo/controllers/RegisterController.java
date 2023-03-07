@@ -11,21 +11,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
+// Defining controller //
 @Controller
 public class RegisterController {
 
+    // Injecting UserRepo //
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // GET requests to "/register" and adds a new empty "User" object to the model for user-input.
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
         model.addAttribute("user", new User());
-
         return "register";
     }
 
+    // POST requests to "/register". Checks users with same email already exists.
+    // If so, adds error message to model and returns the "register" view again.
+    // Otherwise, encodes user's password and saves user to the database. Finally, it redirects the user to the login page.
     @PostMapping("/register")
     public String register(@ModelAttribute("user") User user, Model model) {
         User existingUser = userRepository.findByEmail(user.getEmail());
@@ -33,10 +39,8 @@ public class RegisterController {
             model.addAttribute("error", "An account with this email already exists");
             return "register";
         }
-        System.out.println(user.getUsername());
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        System.out.println(user.getUsername());
         userRepository.save(user);
         return "redirect:/login";
     }
