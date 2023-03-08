@@ -27,8 +27,18 @@
     <label for="password">Password:</label>
     <input type="password" id="password" th:field="*{password}" required><br><br>
 
+    <div th:if="${#fields.hasErrors('password')}">
+        <span th:if="${#fields.hasErrors('password')}">
+            <span th:errors="*{password}" />
+        </span>
+        <span th:if="${#fields.hasErrors('password')}">
+            <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
+        </span>
+    </div>
+
     <input type="submit" value="Register">
 </form>
+
 
 
 
