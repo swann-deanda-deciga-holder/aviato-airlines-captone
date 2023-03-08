@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
 </head>
 <body>
 
 <h1>Booking</h1>
+
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
 
 </body>
 </html>
