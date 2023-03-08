@@ -2,6 +2,7 @@ package com.aviato.demo.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,26 +13,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "firstname", nullable = false, length = 20)
+    @Column(name = "firstname",  length = 20)
     private String firstName;
 
-    @Column(name = "lastname", nullable = false, length = 20)
+
+    @Column(name = "username", length = 20)
+    private String username;
+
+    @Column(name = "lastname", length = 20)
     private String lastName;
 
-    @Column(name = "email", nullable = false, length = 50)
+    @Column(name = "email", length = 50)
     private String email;
 
-    @Column(name = "dob", nullable = false)
-    private LocalDate dob;
+//    @Column(name = "dob", nullable = false)
+//    private LocalDate dob;
 
-    @Column(name = "phone_number", nullable = false, length = 15)
-    private String phoneNumber;
+//    @Column(name = "phone_number", nullable = false, length = 15)
+//    private String phoneNumber;
 
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 
-    @Column(name = "token", nullable = false, length = 255)
-    private String token;
+//    @Column(name = "token", nullable = false, length = 255)
+//    private String token;
 
 
 
@@ -52,32 +57,44 @@ public class User {
     public User() {
     }
 
-
-
-    // Getters and setters for all fields. //
-//    public User(Long id, String firstName, String lastName, String email, LocalDate dob, String phoneNumber, String password, String token, List<Flight> flights) {
-//        this.id = id;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.email = email;
+    public User(Long id, String firstName, String username, String lastName, String email, LocalDate dob, String phoneNumber, String password, String token, List<Flight> flightsList) {
+        this.id = id;
+        this.firstName = firstName;
+        this.username = username;
+        this.lastName = lastName;
+        this.email = email;
 //        this.dob = dob;
 //        this.phoneNumber = phoneNumber;
-//        this.password = password;
+        this.password = password;
 //        this.token = token;
-//        this.flights = flights;
-//    }
-public User(Long id, String firstName, String lastName, String email, String password, List<Flight> flightsList) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-//    this.flightUserList = flightUserList;
-    this.flightsList = flightsList;
-}
+//        this.flightsList = flightsList;
+    }
+
+    public User(User copy) {
+        this.id = copy.id;
+        this.firstName = copy.firstName;
+        this.username = copy.username;
+        this.lastName = copy.lastName;
+        this.email = copy.email;
+//        this.dob = copy.dob;
+//        this.phoneNumber = copy.phoneNumber;
+        this.password = copy.password;
+//        this.token = copy.token;
+        this.flightsList = new ArrayList<>(copy.flightsList);
+    }
+
+
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -85,7 +102,7 @@ public User(Long id, String firstName, String lastName, String email, String pas
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -93,7 +110,7 @@ public User(Long id, String firstName, String lastName, String email, String pas
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -102,44 +119,44 @@ public User(Long id, String firstName, String lastName, String email, String pas
 
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+//    public LocalDate getDob() {
+//        return dob;
+//    }
+//
+//    public void setDob(LocalDate dob) {
+//        this.dob = dob;
+//    }
+//
+//    public String getPhoneNumber() {
+//        return phoneNumber;
+//    }
+//
+//    public void setPhoneNumber(String phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
+//    public String getToken() {
+//        return token;
+//    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
 
 //    public List<FlightUser> getFlightUserList() {
 //        return flightUserList;
@@ -150,7 +167,7 @@ public User(Long id, String firstName, String lastName, String email, String pas
 //    }
 
     public List<Flight> getFlightsList() {
-        return flightsList;
+        return this.flightsList;
     }
 
     public void setFlightsList(List<Flight> flightsList) {

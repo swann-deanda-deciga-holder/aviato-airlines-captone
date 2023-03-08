@@ -60,7 +60,9 @@ public class Flight {
             joinColumns = @JoinColumn(name = "flight_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> usersList;
-
+    public Flight() {
+        this.seat = 100;
+    }
     public Flight(Long id, BigDecimal price, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, String layoverLocation, LocalDateTime arrivalTime, int durationMinutes, LocalDateTime departureTime, boolean isBooked, int seat, User user, List<User> usersList) {
         this.id = id;
         this.price = price;
@@ -77,11 +79,6 @@ public class Flight {
         this.user = user;
         this.usersList = usersList;
     }
-
-    public Flight() {
-        this.seat = 100;
-    }
-
 
 
 
