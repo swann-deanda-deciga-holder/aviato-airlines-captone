@@ -2,7 +2,7 @@ package com.aviato.demo.models;
 
 import java.time.LocalDateTime;
 
-public class Flights {
+public class Flight {
     private String flightNumber;
     private String departureAirport;
     private String arrivalAirport;
@@ -12,7 +12,7 @@ public class Flights {
     private int availableSeats;
     private double price;
 
-    public Flights(String flightNumber, String departureAirport, String arrivalAirport, LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, int totalSeats, int availableSeats, double price) {
+    public Flight(String flightNumber, String departureAirport, String arrivalAirport, LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, int totalSeats, int availableSeats, double price) {
         this.flightNumber = flightNumber;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
