@@ -1,7 +1,6 @@
 package com.aviato.demo.services;
 
 import com.aviato.demo.models.User;
-import com.aviato.demo.models.UserWithRoles;
 import com.aviato.demo.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
