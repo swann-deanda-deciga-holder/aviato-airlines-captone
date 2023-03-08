@@ -1,67 +1,87 @@
 package com.aviato.demo.models;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
+
 
 @Entity
-@Table(name = "user")
-
+@Table(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    // Created instance variables for all fields. //
-    private String username;
-    private String password;
-    private String email;
+    @Column(name = "firstname", nullable = false, length = 20)
     private String firstName;
+
+    @Column(name = "lastname", nullable = false, length = 20)
     private String lastName;
 
+    @Column(name = "email", nullable = false, length = 50)
+    private String email;
 
-    // Constructor created with 5 parameters. //
+    @Column(name = "dob", nullable = false)
+    private LocalDate dob;
 
-    public User(){};
+    @Column(name = "phone_number", nullable = false, length = 15)
+    private String phoneNumber;
 
-    public User(String username, String password, String email, String firstName, String lastName) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    @Column(name = "password", nullable = false, length = 255)
+    private String password;
+
+    @Column(name = "token", nullable = false, length = 255)
+    private String token;
+
+
+
+//    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
+//    private List<Flight> flights;
+
+    //YESTERDAY
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    private List<Flight> flights;
+
+//I ADDED TODAY BY CHAT GPT
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<FlightUser> flightUserList;
+
+    @ManyToMany(mappedBy = "usersList")
+    private List<Flight> flightsList;
+
+    public User() {
     }
 
-    public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-        email = copy.email;
-        username = copy.username;
-        password = copy.password;
-    }
+
 
     // Getters and setters for all fields. //
+//    public User(Long id, String firstName, String lastName, String email, LocalDate dob, String phoneNumber, String password, String token, List<Flight> flights) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.dob = dob;
+//        this.phoneNumber = phoneNumber;
+//        this.password = password;
+//        this.token = token;
+//        this.flights = flights;
+//    }
+public User(Long id, String firstName, String lastName, String email, String password, List<Flight> flightsList) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+//    this.flightUserList = flightUserList;
+    this.flightsList = flightsList;
+}
 
-    public String getUsername() {
-        return username;
+    public Long getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -80,4 +100,60 @@ public class User {
         this.lastName = lastName;
     }
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+//    public List<FlightUser> getFlightUserList() {
+//        return flightUserList;
+//    }
+
+//    public void setFlightUserList(List<FlightUser> flightUserList) {
+//        this.flightUserList = flightUserList;
+//    }
+
+    public List<Flight> getFlightsList() {
+        return flightsList;
+    }
+
+    public void setFlightsList(List<Flight> flightsList) {
+        this.flightsList = flightsList;
+    }
 }
