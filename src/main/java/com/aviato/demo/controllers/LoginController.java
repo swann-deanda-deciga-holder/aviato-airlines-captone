@@ -27,13 +27,13 @@ public class LoginController {
 
     // Form Validation code, not sure if it works. //
 
-//    @PostMapping("/login")
-//    public String login(@ModelAttribute("user") User user, Model model) {
-//        User existingUser = userRepository.findByEmail(user.getEmail());
-//        if (existingUser == null) {
-//            model.addAttribute("error", "Invalid email or password");
-//            return "login";
-//        }
-//        return "redirect:/";
-//    }
+    @PostMapping("/login")
+    public String login(@ModelAttribute("user") User user, Model model) {
+        User existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser == null) {
+            model.addAttribute("error", "Invalid email or password");
+            return "login";
+        }
+        return "redirect:/";
+    }
 }

@@ -25,16 +25,23 @@
     <input type="email" id="email" th:field="*{email}" required><br><br>
 
     <label for="password">Password:</label>
-    <input type="password" id="password" th:field="*{password}" required><br><br>
+    <input type="password" id="password" th:field="*{password}" required><br>
 
-    <div th:if="${#fields.hasErrors('password')}">
-        <span th:if="${#fields.hasErrors('password')}">
-            <span th:errors="*{password}" />
-        </span>
-        <span th:if="${#fields.hasErrors('password')}">
-            <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
-        </span>
+
+    <!--  Form Validation  -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
     </div>
+
+    <!--  Form Validation Errors  -->
+    <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
+        <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
+    </div>
+
+
+
+
+
 
     <input type="submit" value="Register">
 </form>
