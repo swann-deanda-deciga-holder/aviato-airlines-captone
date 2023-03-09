@@ -13,9 +13,13 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "airline", nullable = false)
+    private String airline;
+
     @Column(name = "price", nullable = false, precision = 4, scale = 2)
     private BigDecimal price;
-
+    @Column(name = "departureTime", nullable = false)
+    private LocalDateTime departureTime;
     @Column(name = "departureAirport", nullable = false, length = 50)
     private String departureAirport;
 
@@ -28,17 +32,15 @@ public class Flight {
     @Column(name = "arrivalCity", nullable = false, length = 50)
     private String arrivalCity;
 
-    @Column(name = "layoverLocation", length = 50)
-    private String layoverLocation;
-
     @Column(name = "arrivalTime", nullable = false)
     private LocalDateTime arrivalTime;
+    @Column(name = "layoverLocation", length = 50)
+    private String layoverLocation;
 
     @Column(name = "durationMinutes", nullable = false)
     private int durationMinutes;
 
-    @Column(name = "departureTime", nullable = false)
-    private LocalDateTime departureTime;
+
 
     @Column(name= "is_Booked")
     private boolean isBooked;
@@ -49,16 +51,13 @@ public class Flight {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-//    @JoinTable(name = "flight_user",
-//            joinColumns = @JoinColumn(name = "flight_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id"))
-//    private List<User> usersList;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "flight_user",
             joinColumns = @JoinColumn(name = "flight_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
+
+
     private List<User> usersList;
     public Flight() {
         this.seat = 100;
@@ -78,9 +77,18 @@ public class Flight {
         this.seat = seat;
         this.user = user;
         this.usersList = usersList;
+        this.airline = airline;
     }
 
 
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
 
     public Long getId() {
         return id;
@@ -195,22 +203,6 @@ public class Flight {
         this.usersList = usersList;
     }
 
-// Time conversion mm:Hh
-//public static String minuteToTime(int minute) {
-//    int hour = minute / 60;
-//    minute %= 60;
-//    String p = "AM";
-//    if (hour >= 12) {
-//        hour %= 12;
-//        p = "PM";
-//    }
-//    if (hour == 0) {
-//        hour = 12;
-//    }
-//    return (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute) + " " + p;
-//}
-
-    //Time Conversion military : regular
 
 
 

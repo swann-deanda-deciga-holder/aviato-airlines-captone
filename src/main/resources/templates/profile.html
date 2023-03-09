@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -121,7 +121,23 @@
 
 
 
-
+  <h2>Flights List:</h2>
+  <ul>
+    <li th:each="flight : ${flights}">
+      <p th:text="${flight.airline}"></p>
+      <p th:text="${flight.price}"></p>
+      <p th:text="${flight.departureAirport}"></p>
+      <p th:text="${flight.departureCity}"></p>
+      <p th:text="${flight.arrivalAirport}"></p>
+      <p th:text="${flight.arrivalCity}"></p>
+      <p th:text="${flight.layoverLocation}"></p>
+      <p th:text="${flight.arrivalTime}"></p>
+      <p th:text="${flight.durationMinutes}"></p>
+      <p th:text="${flight.departureTime}"></p>
+      <p th:text="${flight.isBooked}"></p>
+      <p th:text="${flight.seat}"></p>
+    </li>
+  </ul>
 
 
 
