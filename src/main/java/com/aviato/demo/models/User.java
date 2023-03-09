@@ -80,7 +80,7 @@ public class User {
 //        this.phoneNumber = copy.phoneNumber;
         this.password = copy.password;
 //        this.token = copy.token;
-        this.flightsList = new ArrayList<>(copy.flightsList);
+//        this.flightsList = new ArrayList<>(copy.flightsList);
     }
 
 
