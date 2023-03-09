@@ -1,38 +1,5 @@
 package com.aviato.demo.models;
 
-<<<<<<< HEAD
-import java.time.LocalDateTime;
-
-public class Flight {
-    private String flightNumber;
-    private String departureAirport;
-    private String arrivalAirport;
-    private LocalDateTime departureDateTime;
-    private LocalDateTime arrivalDateTime;
-    private int totalSeats;
-    private int availableSeats;
-    private double price;
-
-    public Flight(String flightNumber, String departureAirport, String arrivalAirport, LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, int totalSeats, int availableSeats, double price) {
-        this.flightNumber = flightNumber;
-        this.departureAirport = departureAirport;
-        this.arrivalAirport = arrivalAirport;
-        this.departureDateTime = departureDateTime;
-        this.arrivalDateTime = arrivalDateTime;
-        this.totalSeats = totalSeats;
-        this.availableSeats = availableSeats;
-        this.price = price;
-    }
-
-    // Getters and setters for all fields
-
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-=======
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -129,7 +96,6 @@ public class Flight {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
->>>>>>> dc828e633f7b610bbcf36394ce45c848da604b93
     }
 
     public String getDepartureAirport() {
@@ -140,8 +106,6 @@ public class Flight {
         this.departureAirport = departureAirport;
     }
 
-<<<<<<< HEAD
-=======
     public String getDepartureCity() {
         return departureCity;
     }
@@ -150,7 +114,6 @@ public class Flight {
         this.departureCity = departureCity;
     }
 
->>>>>>> dc828e633f7b610bbcf36394ce45c848da604b93
     public String getArrivalAirport() {
         return arrivalAirport;
     }
@@ -159,48 +122,6 @@ public class Flight {
         this.arrivalAirport = arrivalAirport;
     }
 
-<<<<<<< HEAD
-    public LocalDateTime getDepartureDateTime() {
-        return departureDateTime;
-    }
-
-    public void setDepartureDateTime(LocalDateTime departureDateTime) {
-        this.departureDateTime = departureDateTime;
-    }
-
-    public LocalDateTime getArrivalDateTime() {
-        return arrivalDateTime;
-    }
-
-    public void setArrivalDateTime(LocalDateTime arrivalDateTime) {
-        this.arrivalDateTime = arrivalDateTime;
-    }
-
-    public int getTotalSeats() {
-        return totalSeats;
-    }
-
-    public void setTotalSeats(int totalSeats) {
-        this.totalSeats = totalSeats;
-    }
-
-    public int getAvailableSeats() {
-        return availableSeats;
-    }
-
-    public void setAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-}
-=======
     public String getArrivalCity() {
         return arrivalCity;
     }
@@ -294,4 +215,3 @@ public class Flight {
 
 
 }
->>>>>>> dc828e633f7b610bbcf36394ce45c848da604b93

@@ -26,30 +26,9 @@ public class User {
     @Column(name = "email", length = 50)
     private String email;
 
-//    @Column(name = "dob", nullable = false)
-//    private LocalDate dob;
-
-//    @Column(name = "phone_number", nullable = false, length = 15)
-//    private String phoneNumber;
 
     @Column(name = "password", nullable = false, length = 255)
     private String password;
-
-//    @Column(name = "token", nullable = false, length = 255)
-//    private String token;
-
-
-
-//    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
-//    private List<Flight> flights;
-
-    //YESTERDAY
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-//    private List<Flight> flights;
-
-//I ADDED TODAY BY CHAT GPT
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<FlightUser> flightUserList;
 
     @ManyToMany(mappedBy = "usersList")
     private List<Flight> flightsList;
@@ -63,11 +42,8 @@ public class User {
         this.username = username;
         this.lastName = lastName;
         this.email = email;
-//        this.dob = dob;
-//        this.phoneNumber = phoneNumber;
         this.password = password;
-//        this.token = token;
-//        this.flightsList = flightsList;
+
     }
 
     public User(User copy) {
@@ -76,8 +52,7 @@ public class User {
         this.username = copy.username;
         this.lastName = copy.lastName;
         this.email = copy.email;
-//        this.dob = copy.dob;
-//        this.phoneNumber = copy.phoneNumber;
+
         this.password = copy.password;
 //        this.token = copy.token;
 //        this.flightsList = new ArrayList<>(copy.flightsList);
