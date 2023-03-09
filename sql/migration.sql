@@ -114,4 +114,3 @@ USE aviato_db;
 #                       token varchar(255) NOT NULL,
 #                       FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
->>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a

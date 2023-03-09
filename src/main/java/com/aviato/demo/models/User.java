@@ -24,10 +24,6 @@ public class User {
     @Column(name = "email", length = 50, nullable = false)
     private String email;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 
@@ -42,11 +38,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-<<<<<<< HEAD
-
-=======
         this.flightsList = flightsList;
->>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
     }
 
     public User(User copy) {
@@ -55,10 +47,6 @@ public class User {
         this.firstName = copy.firstName;
         this.lastName = copy.lastName;
         this.email = copy.email;
-<<<<<<< HEAD
-
-=======
->>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
         this.password = copy.password;
         this.flightsList = copy.flightsList;
     }

@@ -24,11 +24,7 @@ public class RegisterController {
     // GET requests to "/register" and adds a new empty "User" object to the model for user-input.
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
-<<<<<<< HEAD
-        model.addAttribute("user", new User());
-=======
         model.addAttribute("user",new User());
->>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
         return "register";
     }
 
@@ -40,6 +36,15 @@ public class RegisterController {
         User existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser != null) {
             model.addAttribute("error", "An account with this email already exists");
+            return "register";
+        }
+        // Password validation
+        String password = user.getPassword();
+        if (password == null || password.length() < 8) {
+            model.addAttribute("error", "Password must be at least 8 characters long and must contain at least one symbol");
+            return "register";
+        } else if (!password.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")) {
+            model.addAttribute("error", "Password must be at least 8 characters long and must contain at least one symbol");
             return "register";
         }
         String encodedPassword = passwordEncoder.encode(user.getPassword());
