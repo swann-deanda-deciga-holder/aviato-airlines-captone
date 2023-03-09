@@ -21,6 +21,7 @@ public class UserDetailsLoader implements UserDetailsService {
         System.out.println(username);
         User user = users.findByEmail(username);
         System.out.println(user.getEmail());
+
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + username);
         }

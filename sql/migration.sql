@@ -66,7 +66,7 @@
 #
 #
 # CREATE TABLE Flight_User (
-# flight_user_id INT PRIMARY KEY AUTO_INCREMENT,
+# id INT PRIMARY KEY AUTO_INCREMENT,
 # user_id INT NOT NULL,
 # flight_id INT NOT NULL,
 # FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
