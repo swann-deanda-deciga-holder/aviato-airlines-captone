@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -50,18 +50,16 @@
         <figure class="logo">
             <a href="index.html" class=" text-light w-100 d-flex justify-content-center align-items-center">
 
-                <img width="30px" src="assets/img/spades.png" alt="">
+                <img width="30px" src="/img/spades.png" alt="">
                 <h1 class="fs-3">Aviato</h1>
 
             </a>
         </figure>
         <nav>
             <ul>
+
                 <a href="#">
-                    <li class="text-light">Trips</li>
-                </a>
-                <a href="#">
-                    <li class="text-light">Wishlist</li>
+                    <li class="text-light">Our Mission</li>
                 </a>
                 <a href="#">
                     <li class="text-light"><button>Login</button></li>
@@ -119,6 +117,43 @@
     </form>
 
 
+<!--    <form th:action="@{/login}" method="post">-->
+<!--        <label for="email">Email:</label>-->
+<!--        <input type="email" id="email" name="username" required><br>-->
+
+<!--        <label for="password">Password:</label>-->
+<!--        <input type="password" id="password" name="password" required><br>-->
+
+<!--        <button type="submit">Login</button>-->
+<!--    </form>-->
+
+
+<!--    &lt;!&ndash;Link to redirect user to register.html, to create new account&ndash;&gt;-->
+<!--    <a href="/register">Don't have an account? Register here.</a>-->
+
+
+    <form th:action="@{/login}" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+    <!--  Form Validation  -->
+<!--    <div th:if="${error}" class="card-comment card-paper1">-->
+<!--        <p th:text="${error}"></p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;  Form Validation Errors  &ndash;&gt;-->
+<!--    <div th:if="${#fields.hasErrors('password')}" class="card-comment card-paper1">-->
+<!--        <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>-->
+<!--    </div>-->
+
+
+    <!--Link to redirect user to register.html, to create new account-->
+    <a href="/register">Don't have an account? Register here.</a>
 
 
 </main>

@@ -39,6 +39,15 @@ public class RegisterController {
             model.addAttribute("error", "An account with this email already exists");
             return "register";
         }
+        // Password validation
+        String password = user.getPassword();
+        if (password == null || password.length() < 8) {
+            model.addAttribute("error", "Password must be at least 8 characters long and must contain at least one symbol");
+            return "register";
+        } else if (!password.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")) {
+            model.addAttribute("error", "Password must be at least 8 characters long and must contain at least one symbol");
+            return "register";
+        }
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
