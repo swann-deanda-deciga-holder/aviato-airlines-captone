@@ -25,7 +25,7 @@ public class RegisterController {
     // GET requests to "/register" and adds a new empty "User" object to the model for user-input.
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user",new User() );
         return "register";
     }
 

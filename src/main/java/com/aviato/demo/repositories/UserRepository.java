@@ -7,4 +7,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // FindByEmail is being used to find user's email within the login controller. //
     User findByEmail(String email);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> dc828e633f7b610bbcf36394ce45c848da604b93
 }
