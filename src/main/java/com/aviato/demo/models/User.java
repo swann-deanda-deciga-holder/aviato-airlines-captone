@@ -2,7 +2,6 @@ package com.aviato.demo.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,56 +11,63 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "firstname",  length = 20)
+    @Column(name = "username",  length = 20, nullable = true)
+    private String username;
+    @Column(name = "firstname",  length = 20, nullable = false)
     private String firstName;
 
 
-    @Column(name = "username", length = 20)
-    private String username;
 
-    @Column(name = "lastname", length = 20)
+    @Column(name = "lastname", length = 20, nullable = false)
     private String lastName;
 
-    @Column(name = "email", length = 50)
+    @Column(name = "email", length = 50, nullable = false)
     private String email;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 
     @ManyToMany(mappedBy = "usersList")
     private List<Flight> flightsList;
 
-    public User() {
-    }
 
-    public User(Long id, String firstName, String username, String lastName, String email, LocalDate dob, String phoneNumber, String password, String token, List<Flight> flightsList) {
+    public User(Long id, String username, String firstName, String lastName, String email, String password, List<Flight> flightsList) {
         this.id = id;
-        this.firstName = firstName;
         this.username = username;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+<<<<<<< HEAD
 
+=======
+        this.flightsList = flightsList;
+>>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
     }
 
     public User(User copy) {
         this.id = copy.id;
-        this.firstName = copy.firstName;
         this.username = copy.username;
+        this.firstName = copy.firstName;
         this.lastName = copy.lastName;
         this.email = copy.email;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
         this.password = copy.password;
-//        this.token = copy.token;
-//        this.flightsList = new ArrayList<>(copy.flightsList);
+        this.flightsList = copy.flightsList;
     }
 
-
+    public User() {
+    }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(String username) {
@@ -92,7 +98,6 @@ public class User {
         this.lastName = lastName;
     }
 
-
     public String getEmail() {
         return this.email;
     }
@@ -101,21 +106,6 @@ public class User {
         this.email = email;
     }
 
-//    public LocalDate getDob() {
-//        return dob;
-//    }
-//
-//    public void setDob(LocalDate dob) {
-//        this.dob = dob;
-//    }
-//
-//    public String getPhoneNumber() {
-//        return phoneNumber;
-//    }
-//
-//    public void setPhoneNumber(String phoneNumber) {
-//        this.phoneNumber = phoneNumber;
-//    }
 
     public String getPassword() {
         return this.password;
@@ -125,21 +115,6 @@ public class User {
         this.password = password;
     }
 
-//    public String getToken() {
-//        return token;
-//    }
-
-//    public void setToken(String token) {
-//        this.token = token;
-//    }
-
-//    public List<FlightUser> getFlightUserList() {
-//        return flightUserList;
-//    }
-
-//    public void setFlightUserList(List<FlightUser> flightUserList) {
-//        this.flightUserList = flightUserList;
-//    }
 
     public List<Flight> getFlightsList() {
         return this.flightsList;

@@ -3,7 +3,6 @@ package com.aviato.demo.controllers;
 import com.aviato.demo.models.User;
 import com.aviato.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,11 @@ public class RegisterController {
     // GET requests to "/register" and adds a new empty "User" object to the model for user-input.
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
+<<<<<<< HEAD
         model.addAttribute("user", new User());
+=======
+        model.addAttribute("user",new User());
+>>>>>>> 05bb174aa9342cc57e94181ccb616b912c2af38a
         return "register";
     }
 
