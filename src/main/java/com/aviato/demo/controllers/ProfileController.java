@@ -30,14 +30,6 @@ public class ProfileController {
     @PostMapping("/profile/edit")
     //This has to be refactored similar to the mapping as above
     public String editProfile(@ModelAttribute("user") User updatedUser, Principal principal) {
-//        String username = principal.getName();
-
-//        User user = userRepository.findByUsername(username);
-
-        // Update the user object with the edited fields
-//        user.setFirstName(updatedUser.getFirstName());
-//        user.setLastName(updatedUser.getLastName());
-//        user.setEmail(updatedUser.getEmail());
 
         userRepository.save(updatedUser);
 
