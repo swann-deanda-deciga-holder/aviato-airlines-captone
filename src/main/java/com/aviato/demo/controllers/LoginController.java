@@ -1,5 +1,6 @@
 package com.aviato.demo.controllers;
 
+import org.apache.tomcat.util.modeler.BaseAttributeFilter;
 import org.springframework.ui.Model;
 import com.aviato.demo.models.User;
 import com.aviato.demo.repositories.UserRepository;
@@ -22,15 +23,21 @@ public class LoginController {
         return "login";
     }
 
-//    @PostMapping("/login")
-//    public String login(@ModelAttribute("user") User user, Model model) {
-//        User existingUser = userRepository.findByEmail(user.getEmail());
-//        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-//            return "redirect:/";
-//        } else {
-//            model.addAttribute("error", "Invalid email or password");
-//            return "login";
-//        }
-//    }
-}
 
+
+
+    // Form Validation code, not sure if it works. //
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute("user") User user, Model model) {
+        User existingUser = userRepository.findByEmail(user.getEmail());
+
+
+
+        if (existingUser == null) {
+            model.addAttribute("error", "Invalid email or password");
+            return "login";
+        }
+        return "redirect:/";
+    }
+}

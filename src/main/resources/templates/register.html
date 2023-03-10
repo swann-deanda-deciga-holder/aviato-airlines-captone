@@ -12,9 +12,6 @@
 
 <form method="POST" th:action="@{/register}" th:object="${user}">
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" th:field="*{username}" required><br><br>
-
     <label for="firstName">First Name:</label>
     <input type="text" id="firstName" th:field="*{firstName}" required><br><br>
 
@@ -25,10 +22,27 @@
     <input type="email" id="email" th:field="*{email}" required><br><br>
 
     <label for="password">Password:</label>
-    <input type="password" id="password" th:field="*{password}" required><br><br>
+    <input type="password" id="password" th:field="*{password}" required><br>
+
+
+    <!--  Form Validation  -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!--  Form Validation Errors  -->
+    <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
+        <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
+    </div>
+
+
+
+
+
 
     <input type="submit" value="Register">
 </form>
+
 
 
 

@@ -3,7 +3,6 @@ package com.aviato.demo.controllers;
 import com.aviato.demo.models.User;
 import com.aviato.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ public class RegisterController {
     // GET requests to "/register" and adds a new empty "User" object to the model for user-input.
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user",new User());
         return "register";
     }
 
@@ -37,6 +36,15 @@ public class RegisterController {
         User existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser != null) {
             model.addAttribute("error", "An account with this email already exists");
+            return "register";
+        }
+        // Password validation
+        String password = user.getPassword();
+        if (password == null || password.length() < 8) {
+            model.addAttribute("error", "Password must be at least 8 characters long and must contain at least one symbol");
+            return "register";
+        } else if (!password.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")) {
+            model.addAttribute("error", "Password must be at least 8 characters long and must contain at least one symbol");
             return "register";
         }
         String encodedPassword = passwordEncoder.encode(user.getPassword());

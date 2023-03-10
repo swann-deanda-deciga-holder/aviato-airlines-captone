@@ -50,7 +50,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(
                         "/profile", // only authenticated users can create ads
-                        "/booking" // only authenticated users can edit ads
+                        "/booking",
+                        "flight-info",// only authenticated users can edit ads
+                        "/profile/edit"
                 )
                 .authenticated()
         ;
@@ -58,4 +60,3 @@ public class SecurityConfiguration {
     }
 
 }
-
