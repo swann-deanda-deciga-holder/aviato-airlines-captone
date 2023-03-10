@@ -25,18 +25,17 @@
   <div class="offcanvas-body">
     <nav>
       <ul>
-        <a href="#">
-          <li>Trips</li>
+
+        <a th:href="@{/about}">
+          <li class="text-light">Our Mission</li>
         </a>
-        <a href="#">
-          <li>Wishlist</li>
+        <a th:href="@{/login}">
+          <li class="text-light"><button>Login</button></li>
         </a>
-        <a href="#">
-          <li>Login</li>
+        <a th:href="@{/register}">
+          <li class="text-light"><button>Sign Up!</button></li>
         </a>
-        <a href="#">
-          <li>Sign Up!</li>
-        </a>
+
       </ul>
     </nav>
   </div>
@@ -58,13 +57,13 @@
     <nav>
       <ul>
 
-        <a href="#">
+        <a th:href="@{/about}">
           <li class="text-light">Our Mission</li>
         </a>
-        <a href="login.html">
+        <a th:href="@{/login}">
           <li class="text-light"><button>Login</button></li>
         </a>
-        <a href="sign-up.html">
+        <a th:href="@{/register}">
           <li class="text-light"><button>Sign Up!</button></li>
         </a>
 

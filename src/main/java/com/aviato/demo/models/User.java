@@ -111,4 +111,17 @@ public class User {
     public void setFlightsList(List<Flight> flightsList) {
         this.flightsList = flightsList;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", flightsList=" + flightsList +
+                '}';
+    }
 }

@@ -8,6 +8,24 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+
+<nav>
+    <ul>
+
+        <a th:href="@{/about}">
+            <li class="text-light">Our Mission</li>
+        </a>
+        <a th:href="@{/login}">
+            <li class="text-light"><button>Login</button></li>
+        </a>
+        <a th:href="@{/register}">
+            <li class="text-light"><button>Sign Up!</button></li>
+        </a>
+
+    </ul>
+</nav>
+
+
 <h1>Register</h1>
 
 <form method="POST" th:action="@{/register}" th:object="${user}">

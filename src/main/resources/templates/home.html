@@ -50,20 +50,20 @@
             <a href="index.html" class=" text-light w-100 d-flex justify-content-center align-items-center">
 
                 <img width="30px" th:src="@{img/spades.png}" alt="">
-                <h1 class="fs-3">Aviato</h1>
+                <h1 class="fs-3" th:href="@{index.html}">Aviato</h1>
 
             </a>
         </figure>
         <nav>
             <ul>
 
-                <a href="#">
+                <a th:href="@{/about}">
                     <li class="text-light">Our Mission</li>
                 </a>
-                <a href="#">
+                <a th:href="@{/login}">
                     <li class="text-light"><button>Login</button></li>
                 </a>
-                <a href="#">
+                <a th:href="@{/register}">
                     <li class="text-light"><button>Sign Up!</button></li>
                 </a>
 
