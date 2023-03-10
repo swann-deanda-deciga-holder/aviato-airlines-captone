@@ -30,26 +30,6 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/profile/delete")
-    public String deleteProfile(Model model) {
-        User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", userRepository.findById(loggedinUser.getId()).get());
-        return "delete-profile";
-    }
-
-    @PostMapping("/profile/delete")
-    public String confirmDeleteProfile(@RequestParam(value = "confirm", required = true) boolean confirm) {
-        if(confirm) {
-            User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            userRepository.delete(loggedinUser);
-            SecurityContextHolder.clearContext();
-            return "redirect:/login?deleted=true";
-        }
-        else {
-            return "redirect:/home";
-        }
-    }
-}
 
     // DELETE PROFILE FUNCTIONALITY //
 
@@ -59,22 +39,13 @@ public class ProfileController {
 //        model.addAttribute("user", userRepository.findById(loggedinUser.getId()).get());
 //        return "delete-profile";
 //    }
-//
-//    @PostMapping("/profile/delete")
-//    public String confirmDeleteProfile(@RequestParam(value = "confirm", required = true) boolean confirm) {
-//        if(confirm) {
-//            User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            userRepository.delete(loggedinUser);
-//            SecurityContextHolder.clearContext();
-//            return "redirect:/login?deleted=true";
-//        }
-//        else {
-//            return "redirect:/home";
-//        }
-//    }
+
+    @PostMapping("/profile/delete")
+    public String confirmDeleteProfile() {
+        User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userRepository.deleteById(loggedinUser.getId());
+        return "redirect:/login";
+    }
 
 
-
-
-
-//}
+}
