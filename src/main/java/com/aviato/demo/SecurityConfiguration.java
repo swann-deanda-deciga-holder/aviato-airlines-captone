@@ -49,10 +49,10 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/profile", // only authenticated users can create ads
+                        "/profile", // only authenticated users can access these pages
                         "/booking",
-                        "/profile/edit",
-                        "flight-info"// only authenticated users can edit ads
+                        "/profile/edit", "/profile/delete",
+                        "flight-info"
                 )
                 .authenticated()
         ;
