@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.security.Principal;
 
 @Controller
@@ -49,3 +50,31 @@ public class ProfileController {
         }
     }
 }
+
+    // DELETE PROFILE FUNCTIONALITY //
+
+//    @GetMapping("/profile/delete")
+//    public String deleteProfile(Model model) {
+//        User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user", userRepository.findById(loggedinUser.getId()).get());
+//        return "delete-profile";
+//    }
+//
+//    @PostMapping("/profile/delete")
+//    public String confirmDeleteProfile(@RequestParam(value = "confirm", required = true) boolean confirm) {
+//        if(confirm) {
+//            User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            userRepository.delete(loggedinUser);
+//            SecurityContextHolder.clearContext();
+//            return "redirect:/login?deleted=true";
+//        }
+//        else {
+//            return "redirect:/home";
+//        }
+//    }
+
+
+
+
+
+//}
