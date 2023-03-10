@@ -25,6 +25,6 @@ public class CheckoutController {
                                         .build())
                         .build();
         Session session = Session.create(params);
-        return "checkout.html";
+        return "checkout";
     }
 }
