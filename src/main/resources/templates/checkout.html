@@ -1,11 +1,11 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Buy cool new product</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="https://js.stripe.com/v3/"></script>
+  <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
+<th:block th:insert="~{partials/head:: head}"></th:block>
+
 <section>
   <div class="product">
     <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
@@ -18,5 +18,9 @@
     <button type="submit" id="checkout-button">Checkout</button>
   </form>
 </section>
+
+
+<th:block th:insert="~{partials/footer:: footer}"></th:block>
+<th:block th:insert="~{partials/scripts:: scripts}"></th:block>
 </body>
 </html>

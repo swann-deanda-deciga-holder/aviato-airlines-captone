@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="searchBar">
+<section class="search-bar_section ">
+  <form id="form" class="color-prime
+        search-flight-cont" action="#" method="POST">
+    <div class="drop-tabs justify-content-center
+            justify-content-md-start flex-wrap">
+      <!-- <label for="passenger">passenger</label> -->
+      <select name="trip type" id="trip-type">
+        <option id="oneway" value="oneway">One Way</option>
+        <option id="round" value="round">Round trip</option>
+      </select>
+      <select name="passenger" id="passenger">
+        <option value="Adult">Adult</option>
+        <option value="Child">Child</option>
+      </select>
+      <select name="ecom" id="ecom">
+        <option value="economy">Economy</option>
+        <option value="Business">Business</option>
+      </select>
+<!--      <label for="lugguge">Bags</label>-->
+<!--      <input type="number" placeholder="0" min="0" name="lugguge">-->
+
+    </div>
+
+    <div class="drop-tabs flex-wrap justify-content-center
+                justify-content-md-start" id="flight-search">
+      <div class="input-group mb-3 searchbar-w">
+        <span class="input-group-text" id="inputGroup-sizing-default">From</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="Dallas">
+      </div>
+      <div class="input-group mb-3 searchbar-w">
+        <span class="input-group-text" id="inputGroup-sizing-default">To</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="San Antonio">
+      </div>
+      <div class="fit-content d-flex gap-3 flex-wrap align-items-center justify-content-center"
+           id="dates">
+        <div class="input-group mb-3 w-25 searchbar-w">
+          <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+          <input class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-default" type="date">
+        </div>
+      </div>
+
+    </div>
+  </form>
+</section>
+</th:block>
+</html>

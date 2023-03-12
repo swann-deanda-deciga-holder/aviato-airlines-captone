@@ -3,7 +3,7 @@
     --font-bolds_desks: 1.2rem;
     --header-height: 72px;
     --header-wrapper-w: 95%;
-    --header-nav-width: 550px;
+    --header-nav-width: 320px;
     --header-nav-width_mob: 190px;
     --header-nav-height: 100%;
     --main-content-gap: 0rem;
@@ -92,7 +92,7 @@ body {
 }
 
 main {
-    padding-bottom: 2rem;
+    /*padding-bottom: 2rem;*/
     position: relative;
     width: 100%;
     min-height: fit-content;
@@ -130,9 +130,10 @@ section {
 .hero {
     width: 100%;
     min-height: 100vh;
-    /*background-image: url("../assets/img/plane-over-earth.jpeg");*/
+    background-image: url("../img/beach.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center 40%;
 }
 
 .input-cont {
@@ -154,7 +155,8 @@ header {
     height: var(--header-height);
     display: grid;
     place-items: center;
-    box-shadow: 0px 10px 2px #000000;
+    border-bottom:  calc(1px / 6) solid #cbcbcb;
+    /*box-shadow: 0px 10px 2px #000000;*/
 }
 
 .header-wrapper {
@@ -227,6 +229,7 @@ header nav ul a li:hover {
     border-bottom: #ffffff solid 2px;
 }
 
+
 header nav ul li, header nav ul a, header nav ul a:visited, header nav ul a:hover,
 .offcanvas-body nav ul a {
     text-decoration: none;
@@ -255,6 +258,10 @@ button {
 
 button:hover {
     outline: #b1b1b1 solid;
+}
+button#profile-btn{
+    outline: none;
+
 }
 
 .btn-submit {
