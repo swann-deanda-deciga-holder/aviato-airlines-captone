@@ -10,7 +10,7 @@
       <!-- <label for="passenger">passenger</label> -->
       <select name="trip type" id="trip-type">
         <option id="oneway" value="oneway">One Way</option>
-        <option id="round" value="round">Round trip</option>
+        <option id="round" value="roundtrip">Round trip</option>
       </select>
       <select name="passenger" id="passenger">
         <option value="Adult">Adult</option>
@@ -39,14 +39,21 @@
       </div>
       <div class="fit-content d-flex gap-3 flex-wrap align-items-center justify-content-center"
            id="dates">
+
         <div class="input-group mb-3 w-25 searchbar-w">
           <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
           <input class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default" type="date">
         </div>
+
+
+      </div>
+      <div class="fit-content d-flex gap-3 flex-wrap align-items-start justify-content-center">
+        <button type="submit" id="submit" class="btn btn-submit p-4">Submit</button>
       </div>
 
     </div>
+
   </form>
 </section>
 </th:block>
