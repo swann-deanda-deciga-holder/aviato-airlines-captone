@@ -10,6 +10,14 @@
 
 <h1>Booking</h1>
 
+<a th:href="@{/about}">
+    <li class="text-light">Our Mission</li>
+</a>
+<a th:href="@{/}">
+    <li class="text-light"><button>home</button></li>
+</a>
+
+
 <div th:if="${#authorization.expression('isAuthenticated()')}">
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Logout"/>

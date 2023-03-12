@@ -26,9 +26,8 @@
     <div class="offcanvas-body">
         <nav>
             <ul>
-
-                <a th:href="@{/about}">
-                    <li class="text-light">Our Mission</li>
+                <a th:href="@{/}">
+                    <li class="text-light">Home</li>
                 </a>
                 <a th:href="@{/login}">
                     <li class="text-light"><button>Login</button></li>
@@ -36,9 +35,15 @@
                 <a th:href="@{/register}">
                     <li class="text-light"><button>Sign Up!</button></li>
                 </a>
+                <div th:if="${#authorization.expression('isAuthenticated()')}">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Logout"/>
+                    </form>
+                </div>
             </ul>
         </nav>
     </div>
+
 </div>
 
 
@@ -68,8 +73,8 @@
                 <a href="login.html">
                     <li class="text-light"><button>Login</button></li>
                 </a>
-                <a href="#">
-                    <li class="text-light"><button>Sign Up!</button></li>
+                <a href="/">
+                    <li class="text-light"><button>Home</button></li>
                 </a>
 
             </ul>
