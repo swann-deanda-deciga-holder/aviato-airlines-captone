@@ -16,8 +16,6 @@ public class User {
     @Column(name = "firstname",  length = 20, nullable = false)
     private String firstName;
 
-
-
     @Column(name = "lastname", length = 20, nullable = false)
     private String lastName;
 
