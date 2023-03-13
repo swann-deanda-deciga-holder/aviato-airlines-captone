@@ -50,6 +50,12 @@ public class Flight {
     private String cabin;
     @Column(name = "seat", nullable = false)
     private int seat;
+
+    @Column(name = "adult")
+    private int adult;
+
+    @Column(name = "child", nullable = false)
+    private int child;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -64,7 +70,7 @@ public class Flight {
         this.seat = 100;
     }
 
-    public Flight(Long id, String airline, String flightNumber, BigDecimal price, LocalDateTime departureTime, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, LocalDateTime arrivalTime, String layoverCount, BigInteger durationMinutes, boolean roundTrip, boolean isBooked, String cabin, int seat, User user, List<User> usersList) {
+    public Flight(Long id, String airline, String flightNumber, BigDecimal price, LocalDateTime departureTime, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, LocalDateTime arrivalTime, String layoverCount, BigInteger durationMinutes, boolean roundTrip, boolean isBooked, String cabin, int seat, int adult, int child, User user, List<User> usersList) {
         this.id = id;
         this.airline = airline;
         this.flightNumber = flightNumber;
@@ -81,52 +87,10 @@ public class Flight {
         this.isBooked = isBooked;
         this.cabin = cabin;
         this.seat = seat;
+        this.adult = adult;
+        this.child = child;
         this.user = user;
         this.usersList = usersList;
-    }
-
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public String getLayoverCount() {
-        return layoverCount;
-    }
-
-    public void setLayoverCount(String layoverCount) {
-        this.layoverCount = layoverCount;
-    }
-
-    public void setDurationMinutes(BigInteger durationMinutes) {
-        this.durationMinutes = durationMinutes;
-    }
-
-    public String getCabin() {
-        return cabin;
-    }
-
-    public void setCabin(String cabin) {
-        this.cabin = cabin;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public boolean isRoundTrip() {
-        return roundTrip;
-    }
-
-    public void setRoundTrip(boolean roundTrip) {
-        this.roundTrip = roundTrip;
-    }
-
-    public String getAirline() {
-        return airline;
-    }
-
-    public void setAirline(String airline) {
-        this.airline = airline;
     }
 
     public Long getId() {
@@ -137,12 +101,36 @@ public class Flight {
         this.id = id;
     }
 
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
     }
 
     public String getDepartureAirport() {
@@ -185,12 +173,28 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    public LocalDateTime getDepartureTime() {
-        return departureTime;
+    public String getLayoverCount() {
+        return layoverCount;
     }
 
-    public void setDepartureTime(LocalDateTime departureTime) {
-        this.departureTime = departureTime;
+    public void setLayoverCount(String layoverCount) {
+        this.layoverCount = layoverCount;
+    }
+
+    public BigInteger getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public void setDurationMinutes(BigInteger durationMinutes) {
+        this.durationMinutes = durationMinutes;
+    }
+
+    public boolean isRoundTrip() {
+        return roundTrip;
+    }
+
+    public void setRoundTrip(boolean roundTrip) {
+        this.roundTrip = roundTrip;
     }
 
     public boolean isBooked() {
@@ -201,12 +205,36 @@ public class Flight {
         isBooked = booked;
     }
 
+    public String getCabin() {
+        return cabin;
+    }
+
+    public void setCabin(String cabin) {
+        this.cabin = cabin;
+    }
+
     public int getSeat() {
         return seat;
     }
 
     public void setSeat(int seat) {
         this.seat = seat;
+    }
+
+    public int getAdult() {
+        return adult;
+    }
+
+    public void setAdult(int adult) {
+        this.adult = adult;
+    }
+
+    public int getChild() {
+        return child;
+    }
+
+    public void setChild(int child) {
+        this.child = child;
     }
 
     public User getUser() {
@@ -224,8 +252,4 @@ public class Flight {
     public void setUsersList(List<User> usersList) {
         this.usersList = usersList;
     }
-
-
-
-
 }
