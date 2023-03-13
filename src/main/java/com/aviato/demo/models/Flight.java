@@ -42,6 +42,8 @@ public class Flight {
 
 
 
+
+
     @Column(name= "is_Booked")
     private boolean isBooked;
 
