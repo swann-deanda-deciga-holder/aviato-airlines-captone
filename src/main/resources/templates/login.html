@@ -122,12 +122,19 @@
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br>
+
+        <!--  Form Validation  -->
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+        </div>
+
         <button type="submit">Login</button>
     </form>
 
 
-    <!--Link to redirect user to register.html, to create new account-->
+
     <a href="/register">Don't have an account? Register here.</a>
+
 
 
 
