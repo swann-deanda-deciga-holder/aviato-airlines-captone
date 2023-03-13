@@ -2,90 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/img/spade-circle.png">
-    <title>Aviato</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="/css/reset.css">
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-    <link rel="stylesheet" href="/css/main.css">
+    <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
-
-
-
-
 <body class="color-prime">
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-
-        <!--Comment out nav bar thats not properly displaying-->
-
-<!--    <div class="offcanvas-body">-->
-<!--        <nav>-->
-<!--            <ul>-->
-<!--                <a th:href="@{/}">-->
-<!--                    <li class="text-light">Home</li>-->
-<!--                </a>-->
-<!--                <a th:href="@{/login}">-->
-<!--                    <li class="text-light"><button>Login</button></li>-->
-<!--                </a>-->
-<!--                <a th:href="@{/register}">-->
-<!--                    <li class="text-light"><button>Sign Up!</button></li>-->
-<!--                </a>-->
-<!--                <div th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--                    <form th:action="@{/logout}" method="post">-->
-<!--                        <input type="submit" value="Logout"/>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--    </div>-->
-
-</div>
-
-
-
-
-<header class="color-prime">
-    <div class="header-wrapper">
-        <figure class="logo">
-            <a href="index.html" class=" text-light w-100 d-flex justify-content-center align-items-center">
-
-                <img width="30px" src="/img/spades.png" alt="">
-                <h1 class="fs-3">Aviato</h1>
-
-            </a>
-        </figure>
-
-        <!--Working nav-bar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" th:href="@{/}">Aviato</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/profile}">profile</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <menu class="text-light">
-            <ion-icon name="menu-outline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight"></ion-icon>
-        </menu>
-    </div>
-
+<th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
+<header>
+    <th:block th:insert="~{partials/header:: header}"></th:block>
 </header>
 <main class="color-accent">
 
@@ -94,19 +16,13 @@
         <div class="cont align-items-start justify-content-between p-4">
 
             <div class="hidden card-comment card-glass color-sub">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil modi tenetur perferendis ut
-                voluptatum animi recusandae molestias incidunt fugiat ipsa! Labore magni ipsum tempore! Dolore,
-                consequatur? Repellat nostrum dolorem quia?
+                At Aviato Flying Spades, our mission is to make travel easier and more accessible for everyone. We believe that everyone should have the opportunity to explore new places and experience new cultures, and we're dedicated to providing an online flight reservation system that makes it easier than ever before to find and book affordable flights to a wide range of destinations around the world.
             </div>
             <div class="hidden card-comment card-glass align-self-end color-sub">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil modi tenetur perferendis ut
-                voluptatum animi recusandae molestias incidunt fugiat ipsa! Labore magni ipsum tempore! Dolore,
-                consequatur? Repellat nostrum dolorem quia?
+                Our team is committed to creating a user-friendly platform that puts the needs of our customers first. Whether you're looking to book a last-minute weekend getaway or a long-haul flight for your next vacation, our platform is designed to provide you with the information and tools you need to find the perfect flight at a price that fits your budget.
             </div>
             <div class="hidden card-comment card-glass color-sub">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil modi tenetur perferendis ut
-                voluptatum animi recusandae molestias incidunt fugiat ipsa! Labore magni ipsum tempore! Dolore,
-                consequatur? Repellat nostrum dolorem quia?
+                At the heart of our mission is a commitment to quality and innovation. We're constantly working to improve our platform and add new features that make it easier and more convenient for our users to plan and book their travel. Whether you're a seasoned traveler or a first-time flyer, we're here to help you make the most of your journey and experience the world in a whole new way. Become an Ace when flying with Spades.
             </div>
         </div>
     </section>
@@ -124,15 +40,8 @@
 
 
 </main>
-<footer class="color-prime">
-    footer
-</footer>
-
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<!--<script src="js/bootstrap.bundle.min.js"></script>-->
-<script src="/js/effects.js"></script>
+<th:block th:insert="~{partials/footer:: footer}"></th:block>
+<th:block th:insert="~{partials/scripts:: scripts}"></th:block>
 </body>
 
 </html>

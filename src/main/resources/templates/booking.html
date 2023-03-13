@@ -1,38 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-
+    <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
+<th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
+<header>
+    <th:block th:insert="~{partials/header:: header}"></th:block>
+</header>
 
 <h1>Booking</h1>
 
-<!--Working nav bar-->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/}">Aviato</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/about}">About</a>
-            </li>
-        </ul>
-    </div>
-    <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
-        </form>
-    </div>
-</nav>
-
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+<th:block th:insert="~{partials/footer:: footer}"></th:block>
+<th:block th:insert="~{partials/scripts:: scripts}"></th:block>
 </body>
 </html>
