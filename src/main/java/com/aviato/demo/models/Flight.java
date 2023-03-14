@@ -39,11 +39,10 @@ public class Flight {
     private LocalDateTime arrivalTime;
     @Column(name = "layoverCount", length = 50)
     private String layoverCount;
-    @Column(name = "durationMinutes", nullable = false)
-    private BigInteger durationMinutes;
+    @Column(name = "duration", nullable = false)
+    private String duration;
     @Column(name= "is_roundTrip")
     private boolean roundTrip;
-
     @Column(name= "is_Booked")
     private boolean isBooked;
     @Column(name = "cabin", nullable = false)
@@ -65,12 +64,14 @@ public class Flight {
             joinColumns = @JoinColumn(name = "flight_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
 
+
+
     private List<User> usersList;
     public Flight() {
         this.seat = 100;
     }
 
-    public Flight(Long id, String airline, String flightNumber, BigDecimal price, LocalDateTime departureTime, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, LocalDateTime arrivalTime, String layoverCount, BigInteger durationMinutes, boolean roundTrip, boolean isBooked, String cabin, int seat, int adult, int child, User user, List<User> usersList) {
+    public Flight(Long id, String airline, String flightNumber, BigDecimal price, LocalDateTime departureTime, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, LocalDateTime arrivalTime, String layoverCount, String duration, boolean roundTrip, boolean isBooked, String cabin, int seat, int adult, int child, User user, List<User> usersList) {
         this.id = id;
         this.airline = airline;
         this.flightNumber = flightNumber;
@@ -82,7 +83,7 @@ public class Flight {
         this.arrivalCity = arrivalCity;
         this.arrivalTime = arrivalTime;
         this.layoverCount = layoverCount;
-        this.durationMinutes = durationMinutes;
+        this.duration = duration;
         this.roundTrip = roundTrip;
         this.isBooked = isBooked;
         this.cabin = cabin;
@@ -91,6 +92,11 @@ public class Flight {
         this.child = child;
         this.user = user;
         this.usersList = usersList;
+    }
+
+    // method to update seats based on number of seats booked
+    public void updateSeats(int numSeats) {
+        this.seat -= numSeats; // subtract numSeats from seats
     }
 
     public Long getId() {
@@ -181,14 +187,6 @@ public class Flight {
         this.layoverCount = layoverCount;
     }
 
-    public BigInteger getDurationMinutes() {
-        return durationMinutes;
-    }
-
-    public void setDurationMinutes(BigInteger durationMinutes) {
-        this.durationMinutes = durationMinutes;
-    }
-
     public boolean isRoundTrip() {
         return roundTrip;
     }
@@ -251,5 +249,13 @@ public class Flight {
 
     public void setUsersList(List<User> usersList) {
         this.usersList = usersList;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }
