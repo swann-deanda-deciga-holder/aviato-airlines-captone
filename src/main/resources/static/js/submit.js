@@ -217,41 +217,8 @@
                         </div>
                         <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
             
-                        <!-- +++++++++++++++++++ ROUNDTRIP ++++++++++++++++++++++++++ -->
-                        <div class="${display} info-row">
-                            <div class="info-column">
-                                <img src="assets/img/UA.png" alt="">
-                            </div>
-                            <div class="info-column ms-3 flex-column justify-content-center">
-                                <p class="responsive-font fw-bold">
-                                    <span id="flight-start-time-roundtrip">${Hour12Time(roundtripArr[i].departureTime)}</span>
-                                    -
-                                    <span id="flight-end-time-roundtrip">${Hour12Time(roundtripArr[i].departureTime)}</span>
-                                </p>
 
-                                <p id="airline-name-roundtrip">
-                                    ${roundtripArr[i].airline[0]}
-                                </p>
-                            </div>
-                            <div class="info-column">
-                                <p id="stopOver-type-roundtrip">Nonstop</p>
-                            </div>
-                            <div class="info-column ms-3 flex-column justify-content-center">
-
-                                <p class="fs-13 fw-bold">
-                                    <span id="flight-duration-roundtrip">3h</span>
-                                </p>
-
-                                <p id="airport-names-cont-roundtrip">
-                                    <span id="airport1-roundtrip">LGA</span>
-                                    -
-                                    <span id="airport2-roundtrip">DFW</span>
-                                </p>
-                            </div>
-                        </div>
-                        
-                       <!-- +++++++++++++++++++ ROUNDTRIP ++++++++++++++++++++++++++ -->
-
+                       
                        
 
 
