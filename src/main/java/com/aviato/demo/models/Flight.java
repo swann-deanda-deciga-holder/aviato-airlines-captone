@@ -184,4 +184,4 @@ public class Flight {
     public void setUsersList(List<User> usersList) {
         this.usersList = usersList;
     }
-}
+ }
