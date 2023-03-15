@@ -7,7 +7,6 @@
     let submit = document.getElementById("form-submit")
 
     let dates = document.getElementById("dates")
-    console.log("DATE FORM : ",dates);
 
     let div = document.createElement("div");
     div.classList.add("input-group")
@@ -20,28 +19,22 @@
     let input = document.createElement("input")
     input.classList.add("form-control")
     input.setAttribute("type","date");
+    input.setAttribute("required", "true");
+
     div.appendChild(span);
     div.appendChild(input);
 
-
-    console.log("Div: ",div);
-
-
-
     tripType.addEventListener("change", ()=>{
-        console.log(tripType.value)
         if (tripType.value == "roundtrip"){
-            dates.append(div);
+            dates.insertBefore(div,submit)
         }else{
             if (tripType.value == "oneway")
                 dates.removeChild(div)
-
         }
-
-
     })
+
+
     tripType.addEventListener("click",(e)=>{
-        console.log(tripType.value);
     })
 
 
