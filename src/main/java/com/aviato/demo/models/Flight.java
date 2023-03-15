@@ -1,71 +1,63 @@
 package com.aviato.demo.models;
 
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table (name = "flight")
+@Table(name="flight")
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "airline", nullable = false)
+    @Column(name = "airline", nullable = false, length = 50)
     private String airline;
 
-    @Column(name = "price", nullable = false, precision = 4, scale = 2)
-    private BigDecimal price;
-    @Column(name = "departureTime", nullable = false)
-    private LocalDateTime departureTime;
-    @Column(name = "departureAirport", nullable = false, length = 50)
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+    @Column(name = "departure_airport", nullable = false, length = 50)
     private String departureAirport;
 
-    @Column(name = "departureCity", nullable = false, length = 50)
+    @Column(name = "departure_city", nullable = false, length = 50)
     private String departureCity;
 
-    @Column(name = "arrivalAirport", nullable = false, length = 50)
+    @Column(name = "arrival_airport", nullable = false, length = 50)
     private String arrivalAirport;
 
-    @Column(name = "arrivalCity", nullable = false, length = 50)
+    @Column(name = "arrival_city", nullable = false, length = 50)
     private String arrivalCity;
 
-    @Column(name = "arrivalTime", nullable = false)
-    private LocalDateTime arrivalTime;
-    @Column(name = "layoverLocation", length = 50)
+    @Column(name = "layover_location", length = 50)
     private String layoverLocation;
 
-    @Column(name = "durationMinutes", nullable = false)
-    private int durationMinutes;
+    @Column(name = "arrival_time", nullable = false)
+    private LocalDateTime arrivalTime;
 
+    @Column(name = "duration_minutes", nullable = false)
+    private Integer durationMinutes;
 
+    @Column(name = "departure_time", nullable = false)
+    private LocalDateTime departureTime;
 
+    @Column(name = "is_booked", nullable = false)
+    private Boolean isBooked;
 
+    @Column(name = "seat", nullable = false)
+    private String seat;
 
-    @Column(name= "is_Booked")
-    private boolean isBooked;
-
-    private int seat;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "flight_user",
-            joinColumns = @JoinColumn(name = "flight_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-
-
+    @ManyToMany(mappedBy = "flightsList")
     private List<User> usersList;
+
     public Flight() {
-        this.seat = 100;
     }
-    public Flight(Long id, BigDecimal price, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, String layoverLocation, LocalDateTime arrivalTime, int durationMinutes, LocalDateTime departureTime, boolean isBooked, int seat, User user, List<User> usersList) {
+
+    public Flight(Long id, String airline, Double price, String departureAirport, String departureCity,
+                  String arrivalAirport, String arrivalCity, String layoverLocation, LocalDateTime arrivalTime,
+                  Integer durationMinutes, LocalDateTime departureTime, Boolean isBooked, String seat, List<User> usersList) {
         this.id = id;
+        this.airline = airline;
         this.price = price;
         this.departureAirport = departureAirport;
         this.departureCity = departureCity;
@@ -77,19 +69,7 @@ public class Flight {
         this.departureTime = departureTime;
         this.isBooked = isBooked;
         this.seat = seat;
-        this.user = user;
         this.usersList = usersList;
-        this.airline = airline;
-    }
-
-
-
-    public String getAirline() {
-        return airline;
-    }
-
-    public void setAirline(String airline) {
-        this.airline = airline;
     }
 
     public Long getId() {
@@ -100,11 +80,19 @@ public class Flight {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -129,6 +117,7 @@ public class Flight {
     }
 
     public void setArrivalAirport(String arrivalAirport) {
+
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -156,11 +145,11 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    public int getDurationMinutes() {
+    public Integer getDurationMinutes() {
         return durationMinutes;
     }
 
-    public void setDurationMinutes(int durationMinutes) {
+    public void setDurationMinutes(Integer durationMinutes) {
         this.durationMinutes = durationMinutes;
     }
 
@@ -172,29 +161,20 @@ public class Flight {
         this.departureTime = departureTime;
     }
 
-
-    public boolean isBooked() {
+    public Boolean getBooked() {
         return isBooked;
     }
 
-    public void setBooked(boolean booked) {
+    public void setBooked(Boolean booked) {
         isBooked = booked;
     }
 
-    public int getSeat() {
+    public String getSeat() {
         return seat;
     }
 
-    public void setSeat(int seat) {
+    public void setSeat(String seat) {
         this.seat = seat;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public List<User> getUsersList() {
@@ -204,8 +184,4 @@ public class Flight {
     public void setUsersList(List<User> usersList) {
         this.usersList = usersList;
     }
-
-
-
-
 }

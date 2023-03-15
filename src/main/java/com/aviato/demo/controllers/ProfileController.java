@@ -77,9 +77,8 @@ public class ProfileController {
 
         // Add the list of flights to the model //
         model.addAttribute("flights", flights);
-
         // Return the "flights" view //
-        return "flights";
+        return "profile";
     }
 
     @PostMapping("/profile/flights/{flightId}")

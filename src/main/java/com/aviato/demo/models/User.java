@@ -1,9 +1,7 @@
 package com.aviato.demo.models;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
-
 
 @Entity
 @Table(name="user")
@@ -15,19 +13,18 @@ public class User {
     private String username;
     @Column(name = "firstname",  length = 20, nullable = false)
     private String firstName;
-
     @Column(name = "lastname", length = 20, nullable = false)
     private String lastName;
-
     @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
-
     @Column(name = "password", nullable = false, length = 255)
     private String password;
-
-    @ManyToMany(mappedBy = "usersList")
+    @ManyToMany
+    @JoinTable(
+            name = "flight_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "flight_id"))
     private List<Flight> flightsList;
-
 
     public User(Long id, String username, String firstName, String lastName, String email, String password, List<Flight> flightsList) {
         this.id = id;
@@ -92,7 +89,6 @@ public class User {
         this.email = email;
     }
 
-
     public String getPassword() {
         return this.password;
     }
@@ -100,7 +96,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     public List<Flight> getFlightsList() {
         return this.flightsList;
@@ -122,5 +117,4 @@ public class User {
                 ", flightsList=" + flightsList +
                 '}';
     }
-
 }
