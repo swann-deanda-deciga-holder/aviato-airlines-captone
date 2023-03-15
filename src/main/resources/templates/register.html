@@ -33,8 +33,10 @@
     <div class="container">
         <div class="text-center">
             <a class="d-inline-block mb-28" href="#">
-<!--                <img class="img-fluid" src="" alt="">-->
-<!--                <h1 class="fs-13 text-white">Aviato</h1>-->
+
+                <!--                <img class="img-fluid" src="" alt="">-->
+                <h1 class="fs-13 text-white">Aviato</h1>
+
             </a>
         </div>
         <div class="row g-16">
@@ -88,13 +90,13 @@
                             <a class="text-white" th:href="@{/login}">Login now</a>
                         </p>
 
-                            <div th:if="${error}" class="alert alert-danger">
-                                <p th:text="${error}"></p>
-                            </div>
-                            <!--  Form Validation Errors  -->
-                            <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
-                                <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
-                            </div>
+                        <div th:if="${error}" class="alert alert-danger">
+                            <p th:text="${error}"></p>
+                        </div>
+                        <!--  Form Validation Errors  -->
+                        <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
+                            <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
+                        </div>
 
                     </form>
                 </div>

@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-// Defining controller //
 @Controller
 public class RegisterController {
 
-    // Injecting UserRepo //
+    // Injecting instances //
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // GET requests to "/register" and adds a new empty "User" object to the model for user-input.
+    // GET requests to "/register" and adds a new empty "User" object to the model for user-input. //
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
+
+        // Add a new empty "User" object to the model for user-input //
         model.addAttribute("user",new User());
         return "register";
     }

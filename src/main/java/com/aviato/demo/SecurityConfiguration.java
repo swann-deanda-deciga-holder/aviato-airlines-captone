@@ -43,16 +43,16 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/","home", "/register", "/results", "/css/**", "/js/**", "/img/**", "/about") // anyone can see the home and the ads pages
+                .requestMatchers("/","home", "/register", "/results", "/css/**", "/js/**", "/img/**", "/about", "/error/**", "/aboutUs", "/mission") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/profile", // only authenticated users can create ads
+                        "/profile", // only authenticated users can access these pages
                         "/booking",
-                        "/profile/edit",
-                        "flight-info"// only authenticated users can edit ads
+                        "/profile/edit", "/profile/delete",
+                        "flight-info"
                 )
                 .authenticated()
         ;
