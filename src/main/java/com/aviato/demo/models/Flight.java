@@ -14,12 +14,8 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Name of airline carrier... ie American Airline
     @Column(name = "airline", nullable = false)
     private String airline;
-
-    //Added today March 13th
-    //AA1234
     @Column(name = "flightNumber", nullable = false)
     private String flightNumber;
     @Column(name = "price", nullable = false, precision = 4, scale = 2)
