@@ -33,6 +33,7 @@ public class Flight {
     private String arrivalCity;
     @Column(name = "arrivalTime", nullable = false)
     private LocalDateTime arrivalTime;
+
     @Column(name = "layoverCount", length = 50)
     private String layoverCount;
     @Column(name = "duration", nullable = false)

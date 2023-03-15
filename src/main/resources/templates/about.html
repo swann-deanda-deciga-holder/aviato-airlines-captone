@@ -110,8 +110,131 @@
 <header>
     <th:block th:insert="~{partials/header:: header}"></th:block>
 </header>
-<main class="color-accent">
 
+
+<section class="position-relative pt-24 pb-36 bg-black overflow-hidden">
+    <img class="position-absolute end-0 top-0" src="gradia-assets/elements/teams/radial.svg" alt="">
+    <div class="position-relative container" style="z-index: 50;">
+        <div class="mw-lg mb-20">
+            <h2 class="fs-10 text-white mb-5">Team Members</h2>
+            <p class="text-secondary-light">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
+                Velit officia consequat duis enim velit mollit.</p>
+        </div>
+        <div class="container">
+            <div class="row g-6">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="p-10 h-100 bg-white">
+                        <div class="d-flex justify-content-center mb-7">
+
+
+                            <!--REPLACE PICTURE-->
+                            <img class="img-fluid" th:src="@{/img/carlos-deAnda.jpg}" alt="">
+
+                        </div>
+                        <div class="text-center pb-8 border-bottom">
+                            <h3 class="fs-16">Carlos Deanda</h3>
+                            <p class="fs-19 text-dark mb-0">Software Developer</p>
+                        </div>
+                        <h3 class="mb-0 pt-8"><a class="nav-link fs-20 fw-semibold text-center text-uppercase" href="#">Contact
+                            us</a></h3>
+
+                        <div>
+                            <a th:href="@{'https://www.linkedin.com/in/carlos-deanda-dev/'}">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+
+                            </a>
+                            <a th:href="@{https://github.com/raynaldo-deanda}">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="p-10 h-100 bg-white">
+                        <div class="d-flex justify-content-center mb-7">
+
+
+                            <!--REPLACE PICTURE-->
+                            <img class="img-fluid" th:src="@{/img/herbert-holder.jpg}" alt=""/>
+
+
+                        </div>
+                        <div class="text-center pb-8 border-bottom">
+                            <h3 class="fs-16">Herbert Holder </h3>
+                            <p class="fs-19 text-dark mb-0">Software Developer</p>
+                        </div>
+                        <h3 class="mb-0 pt-8"><a class="nav-link fs-20 fw-semibold text-center text-uppercase" href="#">Contact
+                            us</a></h3>
+
+                        <div>
+                            <a th:href="@{https://www.linkedin.com/in/herbertrholder/}">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a th:href="@{https://github.com/HerbertRHolder}">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="p-10 h-100 bg-white">
+                        <div class="d-flex justify-content-center mb-7">
+
+
+                            <!--REPLACE PICTURE-->
+                            <img class="img-fluid" th:src="@{/img/paul-swann.jpg}" alt=""/>
+
+
+                        </div>
+                        <div class="text-center pb-8 border-bottom">
+                            <h3 class="fs-16">Paul Swann</h3>
+                            <p class="fs-19 text-dark mb-0">Software Developer</p>
+                        </div>
+                        <h3 class="mb-0 pt-8"><a class="nav-link fs-20 fw-semibold text-center text-uppercase" href="#">Contact
+                            us</a></h3>
+                        <a th:href="@{https://www.linkedin.com/in/paul-d-swann/}">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a th:href="@{https://www.github.com/paulswann44}">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="p-10 h-100 bg-white">
+                        <div class="d-flex justify-content-center mb-7">
+
+
+                            <!--REPLACE PICTURE-->
+                            <img class="img-fluid" th:src="@{/img/steve-deciga.jpg}" alt="Steve Deciga"/>
+
+
+                        </div>
+                        <div class="text-center pb-8 border-bottom">
+                            <h3 class="fs-16">Steve Deciga</h3>
+                            <p class="fs-19 text-dark mb-0">Software Developer</p>
+                        </div>
+                        <h3 class="mb-0 pt-8"><a class="nav-link fs-20 fw-semibold text-center text-uppercase" href="#">Contact
+                            us</a></h3>
+
+                        <a th:href="@{https://www.linkedin.com/in/steve-deciga}">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+
+
+                        <a th:href="@{https://github.com/Deciga97}">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
+
+                    </div>
+                </div>
+<main class="color-accent">
 
                     </div>
                 </div>
@@ -137,8 +260,8 @@
                 consequatur? Repellat nostrum dolorem quia?
             </div>
         </div>
-    </section> -->
-
+    </div>
+</section>
 
 
 </main>

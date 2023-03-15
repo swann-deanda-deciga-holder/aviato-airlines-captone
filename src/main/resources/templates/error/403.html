@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:include="partials/head::head"></th:block>
+</head>
+<body>
+<th:block th:include="partials/offcanvas::offcanvas"></th:block>
+<header>
+  <th:block th:include="partials/header::header"></th:block>
+</header>
+<main>
+  <div class="container py-16">
+    <div class="text-center">
+      <a href="#" class="d-inline-block mb-36">
+        <img src="../../gradia-assets/logos/gradia-name-black.svg" alt="">
+      </a>
+      <div class="mb-36">
+        <h2 class="d-inline-block fs-1" style="background: linear-gradient(98.24deg, #CEE9C1 0%, #83C8DE 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">403</h2>
+        <h4 class="fs-17 fw-semibold text-secondary ms-16 text-uppercase mb-0" style="letter-spacing: 70px;">Error</h4>
+      </div>
+      <div class="mw-md-xl mx-auto">
+        <h2 class="fs-7 lh-sm mb-5">Page not found</h2>
+        <p class="fs-17 text-muted mb-11">Try something different or go back to the homepage.</p>
+        <div class="d-md-inline-block rounded-pill overflow-hidden">
+          <div style="padding:2px; background: linear-gradient(98.24deg, #6CD5F7 0%, #FEE2CE 35.94%, #B0A9DF 69.27%, #5B6AF0 100%);">
+            <button class="btn btn-light fs-20 text-uppercase px-5 py-4 w-100 h-100 rounded-pill" type="button" style="letter-spacing: 1px;">Go back to Homepage</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
