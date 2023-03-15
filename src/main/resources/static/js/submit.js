@@ -256,8 +256,6 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->  
-                                                
                     </div>
                     <!-- need to be in form  -->
                     <div class="buy-deal-cont d-flex justify-content-center">
