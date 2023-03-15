@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Test View</title>
+  <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
+<th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
+<header>
+  <th:block th:insert="~{partials/header:: header}"></th:block>
+</header>
+
 <h1>Test View</h1>
 <p>Here is some data: <span th:text="${data}"></span></p>
+
+
+<th:block th:insert="~{partials/footer:: footer}"></th:block>
+<th:block th:insert="~{partials/scripts:: scripts}"></th:block>
+
+
 </body>
+
+
+
 </html>

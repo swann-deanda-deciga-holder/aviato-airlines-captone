@@ -2,66 +2,157 @@
 <!--Thymeleaf established as templating language-->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
+<th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
+<header>
+    <th:block th:insert="~{partials/header:: header}"></th:block>
+</header>
+<!--<h1>Register</h1>-->
+<!--<form method="POST" th:action="@{/register}" th:object="${user}">-->
+<!--    <label for="firstName">First Name:</label>-->
+<!--    <input type="text" id="firstName" th:field="*{firstName}" required><br><br>-->
+<!--    <label for="lastName">Last Name:</label>-->
+<!--    <input type="text" id="lastName" th:field="*{lastName}" required><br><br>-->
+<!--    <label for="email">Email:</label>-->
+<!--    <input type="email" id="email" th:field="*{email}" required><br><br>-->
+<!--    <label for="password">Password:</label>-->
+<!--    <input type="password" id="password" th:field="*{password}" required><br>-->
+<!--    &lt;!&ndash;  Form Validation  &ndash;&gt;-->
+<!--    <div th:if="${error}" class="alert alert-danger">-->
+<!--        <p th:text="${error}"></p>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;  Form Validation Errors  &ndash;&gt;-->
+<!--    <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">-->
+<!--        <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>-->
+<!--    </div>-->
+<!--    <input type="submit" value="Register">-->
+<!--</form>-->
+<section class="pt-20 pb-32 bg-black overflow-hidden">
+    <div class="container">
+        <div class="text-center">
+            <a class="d-inline-block mb-28" href="#">
+<!--                <img class="img-fluid" src="" alt="">-->
+<!--                <h1 class="fs-13 text-white">Aviato</h1>-->
+            </a>
+        </div>
+        <div class="row g-16">
 
-<nav>
-    <ul>
+            <div class="col-12 col-md-6">
+                <div class="mw-md-lg">
+                    <h2 class="fs-10 text-white mb-2">Sign up for free</h2>
+                    <p class="fs-17 text-dark mb-16">Lorem ipsum dolor sit amet, consectetur adipis.</p>
+                    <form method="POST" th:action="@{/register}" th:object="${user}">
+                        <div class="row mb-4 g-4">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="fs-18 fw-medium text-white mb-3" for="firstName">First Name</label>
+                                    <div class="rounded-1" style="padding: 1px; background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
+                                        <input class="bg-black text-dark px-5 py-4 w-100 border-0 rounded-1"  style="border-radius: 3px;" type="text" id="firstName" name="firstName" th:field="*{firstName}"  placeholder="Peter" required>
+                                    </div>
+                                </div>
+                            </div>
 
-        <a th:href="@{/about}">
-            <li class="text-light">Our Mission</li>
-        </a>
-        <a th:href="@{/login}">
-            <li class="text-light"><button>Login</button></li>
-        </a>
-        <a th:href="@{/register}">
-            <li class="text-light"><button>Sign Up!</button></li>
-        </a>
-
-    </ul>
-</nav>
-
-
-<h1>Register</h1>
-
-<form method="POST" th:action="@{/register}" th:object="${user}">
-
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" th:field="*{firstName}" required><br><br>
-
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" th:field="*{lastName}" required><br><br>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" required><br><br>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" th:field="*{password}" required><br>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="fs-18 fw-medium text-white mb-3" for="lastName">Last Name</label>
+                                    <div class="rounded-1" style="padding: 1px; background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
+                                        <input class="bg-black text-dark px-5 py-4 w-100 border-0 rounded-1"  style="border-radius: 3px;" type="text" id="lastName" name="lastName" th:field="*{lastName}"  placeholder="Parker" required>
+                                    </div>
+                                </div>
+                            </div>
 
 
-    <!--  Form Validation  -->
-    <div th:if="${error}" class="alert alert-danger">
-        <p th:text="${error}"></p>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="fs-18 fw-medium text-white mb-3" for="email">Email address</label>
+                                    <div class="rounded-1" style="padding: 1px; background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
+                                        <input class="bg-black text-dark px-5 py-4 w-100 border-0 rounded-1" style="border-radius: 3px;" type="email" id="email" th:field="*{email}" placeholder="i.e. brony@prettyponys.com" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="fs-18 fw-medium text-white mb-3" for="password">Password</label>
+                                    <div class="rounded-1" style="padding: 1px; background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
+                                        <input class="bg-black text-dark px-5 py-4 w-100 border-0 rounded-1"  style="border-radius: 3px;" type="password" id="password" th:field="*{password}" placeholder="Secret :3" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #56C1E3 0%, #5B6AF0 100%);">Sign Up</button>
+                        <p class="text-dark mb-0">
+                            <span>Already have an account?</span>
+                            <a class="text-white" th:href="@{/login}">Login now</a>
+                        </p>
+
+                            <div th:if="${error}" class="alert alert-danger">
+                                <p th:text="${error}"></p>
+                            </div>
+                            <!--  Form Validation Errors  -->
+                            <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
+                                <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
+                            </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="d-flex justify-content-center">
+                    <div class="d-inline-block p-1 rounded-pill" style="background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%);">
+                        <img class="img-fluid rounded-pill" th:src="@{img/woman.jpeg}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!--  Form Validation Errors  -->
-    <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
-        <p>Password must be at least 8 characters long and contain at least 1 symbol.</p>
-    </div>
+</section>
 
 
 
 
 
+<th:block th:insert="~{partials/footer:: footer}"></th:block>
+<th:block th:insert="~{partials/scripts:: scripts}"></th:block>
+<script>
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    // myHeaders.append("Authorization", "Bearer AoFHSlg9KtEyxPUFmWwraHejbg6O");
+    // let urlencoded = new URLSearchParams();
+    // urlencoded.append("grant_type”, “client_credentials");
+    // urlencoded.append("client_id", "APME4obuvBeTqAqYbbIylpBqx0F9Vof6");
+    // urlencoded.append("client_secret", "BVLRoqFc88NfQBf1");
+    console.log("hello world")
+    // let thread = new Worker("../js/worker.js")
 
-    <input type="submit" value="Register">
-</form>
+
+    let requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: {
+            grant_type: "client_credentials",
+            client_id: "APME4obuvBeTqAqYbbIylpBqx0F9Vof6",
+            client_secret: "BVLRoqFc88NfQBf1"
+        },
+        redirect: "follow"
+    };
+    fetch("https://test.api.amadeus.com/v1/security/oauth2/token", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            fetch("https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200", result.access_token)
+                .then(response => response.json()).then(res => {
+                console.log(`res: `, res);
+            }).catch(error => console.log("error", error))
+
+            console.log(result)
 
 
+
+        })
+        .catch(error => console.log("error", error));
+</script>
 
 
 </body>
