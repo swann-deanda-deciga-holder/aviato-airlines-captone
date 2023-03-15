@@ -22,7 +22,7 @@
     });
     let BASE = `https://api.flightapi.io`;
     // let KEY = `640f1b3ff75e113b18803e12`;
-    let KEY = `6410e0f1f75e113b18804391`;
+    let KEY = `6411d2b6f75e113b1880490b`;
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
@@ -218,37 +218,6 @@
                         <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
             
                         <!-- +++++++++++++++++++ ROUNDTRIP ++++++++++++++++++++++++++ -->
-                        <div class="${display} info-row">
-                            <div class="info-column">
-                                <img src="assets/img/UA.png" alt="">
-                            </div>
-                            <div class="info-column ms-3 flex-column justify-content-center">
-                                <p class="responsive-font fw-bold">
-                                    <span id="flight-start-time-roundtrip">${Hour12Time(roundtripArr[i].departureTime)}</span>
-                                    -
-                                    <span id="flight-end-time-roundtrip">${Hour12Time(roundtripArr[i].departureTime)}</span>
-                                </p>
-
-                                <p id="airline-name-roundtrip">
-                                    ${roundtripArr[i].airline[0]}
-                                </p>
-                            </div>
-                            <div class="info-column">
-                                <p id="stopOver-type-roundtrip">Nonstop</p>
-                            </div>
-                            <div class="info-column ms-3 flex-column justify-content-center">
-
-                                <p class="fs-13 fw-bold">
-                                    <span id="flight-duration-roundtrip">3h</span>
-                                </p>
-
-                                <p id="airport-names-cont-roundtrip">
-                                    <span id="airport1-roundtrip">LGA</span>
-                                    -
-                                    <span id="airport2-roundtrip">DFW</span>
-                                </p>
-                            </div>
-                        </div>
                         
                        <!-- +++++++++++++++++++ ROUNDTRIP ++++++++++++++++++++++++++ -->
 
@@ -265,9 +234,22 @@
                         </div>
                         <div class="buy-deal-row">
                             <a href="booking.html"></a>
+                            <form action="/create/checkout/session" method="POST">
+                            <input type="hidden"  class="d-none" name="departureTime" value='${Hour12Time(tranferArr[i].departureTime)}'>
+                             <input type="hidden"  class="d-none" name="arrivalTime" value='${Hour12Time(tranferArr[i].arrivalTime)}'>
+                              <input type="hidden"  class="d-none" name="duration" value='${tranferArr[i].duration}'>
+                               <input type="hidden"  class="d-none" name="cabin" value='${tranferArr[i].departureAirport}'>
+                                <input type="hidden" class="d-none"  name="arrivalAirport" value='${tranferArr[i].arrivalAirport}'>
+                                 <input type="hidden"  class="d-none" name="price" value='$${tranferArr[i].price}'>
+                                  <input type="hidden"  class="d-none" name="airline" value='${tranferArr[i].airline[0]}'>
+                                 <input type="hidden"  class="d-none" name="cabin" value='${tranferArr[i].cabin}'>
+
+                        
+                            
                             <button class="btn-buy fw-bold">Get Ticket
                                 <ion-icon name="paper-plane-outline"></ion-icon>
                             </button>
+                            </form>
                         </div>
                     </div>
                 </div>
