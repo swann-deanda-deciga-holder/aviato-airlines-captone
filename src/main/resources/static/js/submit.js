@@ -5,7 +5,11 @@
     // Enum Declarations for State Management
     let display = "d-none";
     let layover = "Nonstop";
+    let submit = document.getElementById("submit");
     let loader = document.getElementById("loading-screen");
+    let isloading = false;
+    let renderContainer = document.getElementById("render-container");
+    let searched = false;
     const DISPLAY = Object.freeze({
         NONE: "d-none",
         FLEX: "d-flex"
@@ -19,12 +23,12 @@
         CHILD: "child"
     });
     const TRIP_CABIN = Object.freeze({
-        ECONOMY: "economy",
-        BUSINESS: "business"
+        ECONOMY: "Economy",
+        BUSINESS: "Business"
     });
     let BASE = `https://api.flightapi.io`;
     // let KEY = `640f1b3ff75e113b18803e12`;
-    let KEY = `6411ef78e055523b129e12bd`;
+    let KEY = `641222f31ec2973b2848bbbc`;
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
@@ -71,16 +75,29 @@
 
 
 
+        submit.addEventListener("click", ()=>{
+            loader.style.display = "flex";
+        })
 
 
 
-
-    document.addEventListener("DOMContentLoaded", ()=>{
+    // document.addEventListener("DOMContentLoaded", ()=>{
         let form = document.getElementById("form");
         // console.log("form: ",form)
         form.addEventListener("submit", (evt)=>{
+            // if(isloading){
+            // }
+
+            submit.setAttribute("disabled", true);
+            if (searched === true){
+                let tickets = document.querySelectorAll(".ticket");
+                tickets.forEach(ticket =>{
+                    ticket.remove()
+
+                })
+            }
+
             evt.preventDefault();
-            loader.style.display = "block"
             let event = [];
             for (let i = 0;i< evt.target.length-1;i++){
 
@@ -93,8 +110,8 @@
             };
             // \ ========== Trim and format for API ============== /
             if(event[3].includes(" ") || event[4].includes(" ")){
-                event[3] = event[3].trim().replaceAll(" ", '-')
-                event[4] = event[4].trim().replaceAll(" ", '-')
+                event[3] = event[3].trim().replaceAll(" ", '-').toLowerCase()
+                event[4] = event[4].trim().replaceAll(" ", '-').toLowerCase()
             }
             // \ ========== Trim and format for API ============== /
 
@@ -117,7 +134,7 @@
                             // /======= Default PARAMS ======\
                             let DATE = dateObject.ONE_DATE;
                             let TRIP = TRIP_TYPE.ONEWAY;
-                            let CABIN = TRIP_CABIN.ECONOMY;
+                            let CABIN = "";
                             // \======= Default PARAMS ======/
 
                             if (event[0] === TRIP_TYPE.ROUNDTRIP){
@@ -125,18 +142,25 @@
                                 TRIP = TRIP_TYPE.ROUNDTRIP;
                                 display = DISPLAY.FLEX
                             }
-                            if(event[2] === TRIP_CABIN.BUSINESS){
+                            if(event[1] === TRIP_CABIN.BUSINESS){
                                 CABIN = TRIP_CABIN.BUSINESS;
+                            }else {
+                                CABIN = TRIP_CABIN.ECONOMY;
                             }
+                            console.log("CABIN: ",CABIN)
 
                             // Query
                             fetch(`${BASE}/${TRIP}/${KEY}/${airport1.data[0].iata}/${airport2.data[0].iata}/${DATE}/1/0/0/${CABIN}/USD`, requestOptions)
                                 .then(response => response.json())
                                 .then(result => {
+
+
+                                    renderContainer.innerHTML = "";
                                     console.log("Status",result.status);
                                     if (result.status == 504) {
                                         alert("Sorry there are no flights.");
                                         loader.style.display = "none"
+
                                         // throw new Error('Sorry there are no flights');
                                     }
                                     // console.log("Airport1: ",airport1.data[0].iata)
@@ -161,7 +185,6 @@
 
                                         // FOR LOOP FOR ONEWAY TRIP
                                         for (let i = 0; i < result.legs.length; i++) {
-                                            console.log("stopovers",result.legs[i].stopoversCount)
                                             if(result.legs[i].stopoversCount == 0 ){
                                                 layover = "Nonstop"
                                             }else {
@@ -191,8 +214,7 @@
                                         } // end of for loop
                                     } // end of if (TRIP === TRIP_TYPE.ONEWAY)
 
-                                    let renderContainer = document.getElementById("render-container");
-
+                                    loader.style.display = "none";
                                         let HTML = "";
                                     for (let i = 0; i<10;i++) {
 
@@ -202,7 +224,7 @@
                 <div class="ticket card-paper1">
                     <div class="info-cont">
                         <div class="info-row mb-4 border-bottom justify-content-between m-0">
-                            <p>${tranferArr[i].cabin}</p>
+                            <p>${CABIN}</p>
                         </div>
                         <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
                         <div class="info-row">
@@ -211,7 +233,8 @@
                             </div>
                             <div class="info-column ms-3 flex-column justify-content-center">
                                 <p class="responsive-font fw-bold">
-                                    <span id="flight-start-time-oneway">${Hour12Time(tranferArr[i].departureTime)}</span>
+             
+                                    <span id="flight-start-time-oneway">${Hour12Time( tranferArr[i].departureTime )}</span>
                                     -
                                     <span id="flight-end-time-oneway">${Hour12Time(tranferArr[i].arrivalTime)}</span>
                                 </p>
@@ -233,20 +256,13 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
-            
-                        <!-- +++++++++++++++++++ ROUNDTRIP ++++++++++++++++++++++++++ -->
-                        
-                       <!-- +++++++++++++++++++ ROUNDTRIP ++++++++++++++++++++++++++ -->
-
-                       
-
-
+                        <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->  
+                                                
                     </div>
                     <!-- need to be in form  -->
-                    <div class="buy-deal-cont">
+                    <div class="buy-deal-cont d-flex justify-content-center">
                       
-                        <div class="buy-deal-row">
+                        <div class="buy-deal-row mb-3">
                             <span class="fs-13" id="price">$${tranferArr[i].price}</span>
                         </div>
                         <div class="buy-deal-row">
@@ -275,13 +291,16 @@
                                     } // end of loop
 
                                     renderContainer.innerHTML = HTML;
+                                    submit.setAttribute("disabled",false)
+                                    submit.removeAttribute("disabled");
+                                    searched = true;
 
 
 
 
 
                                     console.log(tranferArr)
-                                    console.log(search);
+                                    console.log("search: ",search);
 
 
 
@@ -321,7 +340,7 @@
 
 
 
-    }) // dom loaded
+    // }) // dom loaded
 })();
 
 //
