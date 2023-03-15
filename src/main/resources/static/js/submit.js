@@ -4,6 +4,8 @@
     "use strict"
     // Enum Declarations for State Management
     let display = "d-none";
+    let layover = "Nonstop";
+    let loader = document.getElementById("loading-screen");
     const DISPLAY = Object.freeze({
         NONE: "d-none",
         FLEX: "d-flex"
@@ -22,7 +24,7 @@
     });
     let BASE = `https://api.flightapi.io`;
     // let KEY = `640f1b3ff75e113b18803e12`;
-    let KEY = `6411d2b6f75e113b1880490b`;
+    let KEY = `6411ef78e055523b129e12bd`;
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
@@ -78,6 +80,7 @@
         // console.log("form: ",form)
         form.addEventListener("submit", (evt)=>{
             evt.preventDefault();
+            loader.style.display = "block"
             let event = [];
             for (let i = 0;i< evt.target.length-1;i++){
 
@@ -130,6 +133,12 @@
                             fetch(`${BASE}/${TRIP}/${KEY}/${airport1.data[0].iata}/${airport2.data[0].iata}/${DATE}/1/0/0/${CABIN}/USD`, requestOptions)
                                 .then(response => response.json())
                                 .then(result => {
+                                    console.log("Status",result.status);
+                                    if (result.status == 504) {
+                                        alert("Sorry there are no flights.");
+                                        loader.style.display = "none"
+                                        // throw new Error('Sorry there are no flights');
+                                    }
                                     // console.log("Airport1: ",airport1.data[0].iata)
                                     // console.log( "Airport2: ",airport2.data[0].iata)
                                     console.log(result)
@@ -147,9 +156,17 @@
                                     let flightObj = {};
                                     let flightBackObj = {};
 
+
                                     if (TRIP === TRIP_TYPE.ONEWAY) {
+
                                         // FOR LOOP FOR ONEWAY TRIP
                                         for (let i = 0; i < result.legs.length; i++) {
+                                            console.log("stopovers",result.legs[i].stopoversCount)
+                                            if(result.legs[i].stopoversCount == 0 ){
+                                                layover = "Nonstop"
+                                            }else {
+                                                layover = "layover: "+ result.legs[i].stopoversCount;
+                                            }
                                             // need to add round trip
                                             flightObj = {
                                                 departureTime: result.legs[i].departureTime,
@@ -157,6 +174,7 @@
                                                 departureAirport: result.legs[i].departureAirportCode,
                                                 arrivalAirport: result.legs[i].arrivalAirportCode,
                                                 duration: result.legs[i].duration,
+                                                layover: layover,
                                                 price: result.fares[i].price.totalAmountUsd,
                                                 cabin: CABIN,
                                                 trip: TRIP,
@@ -177,19 +195,19 @@
 
                                         let HTML = "";
                                     for (let i = 0; i<10;i++) {
+
                                         HTML +=
                                         `                                                                              
                                           <div class="tickets-cont d-flex ">
                 <div class="ticket card-paper1">
                     <div class="info-cont">
-                        <div class="info-row border-bottom justify-content-between m-0">
-                            <p>Best Deal</p>
-                            <ion-icon id="like" fill="#ffffff"class="fs-13" name="heart"></ion-icon>
+                        <div class="info-row mb-4 border-bottom justify-content-between m-0">
+                            <p>${tranferArr[i].cabin}</p>
                         </div>
                         <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
                         <div class="info-row">
                             <div class="info-column">
-                                <img src="img/spirit.png" alt="">
+                                <ion-icon class="fs-12" name="airplane-sharp"></ion-icon>
                             </div>
                             <div class="info-column ms-3 flex-column justify-content-center">
                                 <p class="responsive-font fw-bold">
@@ -202,7 +220,7 @@
                                 </p>
                             </div>
                             <div class="info-column">
-                                <p id="stopOver-type-oneway">Nonstop</p>
+                                <p id="stopOver-type-oneway">${layover}</p>
                             </div>
                             <div class="info-column ms-3 flex-column justify-content-center">
                                 <p id="flight-duration-oneway" class="fs-15 fw-bold">
@@ -227,7 +245,6 @@
                     </div>
                     <!-- need to be in form  -->
                     <div class="buy-deal-cont">
-                        ${tranferArr[i].cabin}
                       
                         <div class="buy-deal-row">
                             <span class="fs-13" id="price">$${tranferArr[i].price}</span>
@@ -270,9 +287,16 @@
 
 
                                 }).catch(error => console.log(error))
+        // fetch 2
+        }).catch(error => {
 
-        }).catch(error => console.log('error', error));
 
+
+
+
+            console.log('error', error)});
+
+         // fetch 1
         console.log("fetch1")
     }).catch(error => console.log(error))
 

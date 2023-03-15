@@ -9,7 +9,29 @@
   <th:block th:insert="~{partials/header:: header}"></th:block>
 </header>
 <th:block th:insert="~{partials/searchBar:: searchBar}"></th:block>
+<style>
+  .loading-screen {
+    background-color: #fff;
+    display: none;
+    z-index: 9999;
+  }
 
+  .loading-icon {
+    margin-top: 4rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-top-color: #333;
+    animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
 
 <main class="color-accent">
 
@@ -17,6 +39,10 @@
 
 
   <section id="render-container" class="d-flex flex-column gap-5">
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-icon"></div>
+      <p>Loading...</p>
+    </div>
   </section>
 </main>
 <th:block th:insert="~{partials/footer:: footer}"></th:block>

@@ -112,7 +112,9 @@ main section .cont {
     justify-content: center;
     align-items: center;
 }
-
+#render-container{
+    min-height: 500px;
+}
 label {
     display: flex;
     align-items: center;
@@ -412,12 +414,15 @@ select {
     display: flex;
 }
 .ticket .info-cont {
+    position: relative;
     width: 70%;
     height: 100%;
     display: flex;
+    justify-content: start;
     flex-direction: column;
     border-right: 1px solid #000000;
 }
+
 .info-row {
     /*margin-top: 1rem;*/
     padding-left: 1rem;
