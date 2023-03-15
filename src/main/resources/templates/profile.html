@@ -22,7 +22,7 @@
 
 
   <!--Editing profile-->
-
+<div>
   <h2>Edit Profile:</h2>
   <form th:action="@{/profile/edit}" th:object="${user}" th:method="post">
     <input type="hidden" th:field="*{id}">
@@ -41,6 +41,7 @@
     <br>
     <br>
   </form>
+</div>
 
   <!--Deleting account-->
 
@@ -53,11 +54,13 @@
   <br>
 
   <!--Flight list-->
-
+<div>
   <h2>Flights List:</h2>
   <ul>
-    <li th:each="flight : ${flights}">
-      <p th:text="${flight.airline}"></p>
+<!--    <li th:each="flight : ${flights}">-->
+    <li th:each="flight : ${user.flightsList}">
+
+    <p th:text="${flight.airline}"></p>
       <p th:text="${flight.price}"></p>
       <p th:text="${flight.departureAirport}"></p>
       <p th:text="${flight.departureCity}"></p>
@@ -67,11 +70,20 @@
       <p th:text="${flight.arrivalTime}"></p>
       <p th:text="${flight.departureTime}"></p>
       <p th:text="${flight.seat}"></p>
+
+<!--        <td th:text="${flight.airline}"></td>-->
+<!--        <td th:text="${flight.departureCity} + ' (' + ${flight.departureAirport} + ') at ' + ${flight.departureTime}"></td>-->
+<!--        <td th:text="${flight.arrivalCity} + ' (' + ${flight.arrivalAirport} + ') at ' + ${flight.arrivalTime}"></td>-->
+<!--        <td th:text="${flight.layoverCount}"></td>-->
+<!--        <td th:text="'$' + ${flight.price}"></td>-->
+        <td>
+
       <form th:action="@{/profile/flights/{flightId}(flightId=${flight.id})}" method="post">
         <button type="submit">Cancel Flight</button>
       </form>
     </li>
   </ul>
+</div>
 
 
 

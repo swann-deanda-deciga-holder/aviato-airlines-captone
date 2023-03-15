@@ -18,8 +18,8 @@ public class Flight {
     private String airline;
     @Column(name = "flightNumber", nullable = false)
     private String flightNumber;
-    @Column(name = "price", nullable = false, precision = 4, scale = 2)
-    private BigDecimal price;
+    @Column(name = "price", nullable = false)
+    private double price;
     @Column(name = "departureTime", nullable = false)
     private LocalDateTime departureTime;
     //Departure Airport -ie dfw
@@ -56,19 +56,13 @@ public class Flight {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "flight_user",
-            joinColumns = @JoinColumn(name = "flight_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-
-
-
+    @ManyToMany(mappedBy = "flightsList")
     private List<User> usersList;
     public Flight() {
         this.seat = 100;
     }
 
-    public Flight(Long id, String airline, String flightNumber, BigDecimal price, LocalDateTime departureTime, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, LocalDateTime arrivalTime, String layoverCount, String duration, boolean roundTrip, boolean isBooked, String cabin, int seat, int adult, int child, User user, List<User> usersList) {
+    public Flight(Long id, String airline, String flightNumber, double price, LocalDateTime departureTime, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, LocalDateTime arrivalTime, String layoverCount, String duration, boolean roundTrip, boolean isBooked, String cabin, int seat, int adult, int child, User user, List<User> usersList) {
         this.id = id;
         this.airline = airline;
         this.flightNumber = flightNumber;
@@ -90,6 +84,19 @@ public class Flight {
         this.user = user;
         this.usersList = usersList;
     }
+    //delete
+    public Flight(String airline, double price, String departureAirport, String departureCity, String arrivalAirport, String arrivalCity, LocalDateTime departureTime, LocalDateTime arrivalTime, int seat) {
+        this.airline = airline;
+        this.price = price;
+        this.departureAirport = departureAirport;
+        this.departureCity = departureCity;
+        this.arrivalAirport = arrivalAirport;
+        this.arrivalCity = arrivalCity;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.seat = seat;
+    }
+
 
     // method to update seats based on number of seats booked
     public void updateSeats(int numSeats) {
@@ -120,11 +127,11 @@ public class Flight {
         this.flightNumber = flightNumber;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

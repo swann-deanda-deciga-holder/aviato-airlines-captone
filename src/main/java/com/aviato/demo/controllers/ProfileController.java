@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,7 +30,6 @@ public class ProfileController {
 
 
     // Method that maps to the "/profile" URL and returns the "profile" view //
-
     @GetMapping("/profile")
     public String userProfile(Model model) {
 
@@ -79,7 +81,7 @@ public class ProfileController {
         model.addAttribute("flights", flights);
 
         // Return the "flights" view //
-        return "flights";
+        return "profile";
     }
 
     @PostMapping("/profile/flights/{flightId}")
@@ -100,6 +102,8 @@ public class ProfileController {
         // Redirect back to the "flights" view //
         return "redirect:/profile/flights";
     }
+
+
 
 
 
