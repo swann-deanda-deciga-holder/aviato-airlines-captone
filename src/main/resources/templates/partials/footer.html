@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="footer">
+<section class="pt-24 pb-16 overflow-hidden bg-black">
+  <div class="container">
+    <div class="text-center">
+      <a class="d-inline-block mb-16" href="#">
+        <img width="30px" th:src="@{img/spades.png}" alt="">
+        <h1 class="fs-13 text-white">Aviato</h1>
+      </a>
+      <ul class="nav justify-content-center border-bottom pb-8">
+        <li class="nav-item">
+          <a class="nav-link px-5" th:href="@{/}">
+            <h3 class="fs-18 fw-medium text-secondary mb-0 text-white">Features</h3>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-5 text-white" href="#">
+            <h3 class="fs-18 fw-medium text-secondary mb-0 text-white">Pricing</h3>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-5" href="#">
+            <h3 class="fs-18 fw-medium mb-0 text-white">Affiliate Program</h3>
+          </a>
+        </li>
+      </ul>
+      <p class="fs-19 pt-8 mb-0 text-white">© Copyright 2022. All Rights Reserved by Aviato.</p>
+    </div>
+  </div>
+</section>
+</th:block>
+</html>

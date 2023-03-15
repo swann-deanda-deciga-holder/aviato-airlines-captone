@@ -3,7 +3,7 @@
     --font-bolds_desks: 1.2rem;
     --header-height: 72px;
     --header-wrapper-w: 95%;
-    --header-nav-width: 550px;
+    --header-nav-width: 320px;
     --header-nav-width_mob: 190px;
     --header-nav-height: 100%;
     --main-content-gap: 0rem;
@@ -92,7 +92,7 @@ body {
 }
 
 main {
-    padding-bottom: 2rem;
+    /*padding-bottom: 2rem;*/
     position: relative;
     width: 100%;
     min-height: fit-content;
@@ -130,9 +130,10 @@ section {
 .hero {
     width: 100%;
     min-height: 100vh;
-    /*background-image: url("../assets/img/plane-over-earth.jpeg");*/
+    background-image: url("../img/beach.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center 40%;
 }
 
 .input-cont {
@@ -154,7 +155,8 @@ header {
     height: var(--header-height);
     display: grid;
     place-items: center;
-    box-shadow: 0px 10px 2px #000000;
+    border-bottom:  calc(1px / 6) solid #cbcbcb;
+    /*box-shadow: 0px 10px 2px #000000;*/
 }
 
 .header-wrapper {
@@ -227,6 +229,7 @@ header nav ul a li:hover {
     border-bottom: #ffffff solid 2px;
 }
 
+
 header nav ul li, header nav ul a, header nav ul a:visited, header nav ul a:hover,
 .offcanvas-body nav ul a {
     text-decoration: none;
@@ -255,6 +258,10 @@ button {
 
 button:hover {
     outline: #b1b1b1 solid;
+}
+button#profile-btn{
+    outline: none;
+
 }
 
 .btn-submit {
@@ -373,11 +380,12 @@ select {
 }
 
 .card-glass {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px 0 rgba(28, 38, 30, 0.37);
+    background: rgba(0, 0, 0, 0.37);
+    /*backdrop-filter: blur(5px);*/
+    /*-webkit-backdrop-filter: blur(5px);*/
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(227, 222, 222, 0.18);
 }
 
 .card-paper1 {
@@ -410,8 +418,8 @@ select {
     flex-direction: column;
     border-right: 1px solid #000000;
 }
-.ticket .info-cont .info-row {
-    margin-top: 1rem;
+.info-row {
+    /*margin-top: 1rem;*/
     padding-left: 1rem;
     padding-right: 1rem;
     width: 100%;
@@ -419,6 +427,7 @@ select {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /*border-bottom: calc(1px / 2) solid ;*/
 }
 .ticket .info-cont .info-row .info-column {
     width: fit-content;
@@ -469,6 +478,14 @@ footer {
 }
 
 @media screen and (max-width: 700px) {
+    .btn-buy {
+        /*padding: .2rem;*/
+        /*margin-right:1rem;*/
+        /*font-size:1rem;*/
+        display: none;
+    }
+
+
     .responsive-height {
         height: 100vh;
     }
@@ -494,6 +511,7 @@ footer {
     }
     .ticket {
         flex-direction: column;
+        width: 96%;
     }
     .ticket .info-cont {
         width: 100%;
@@ -509,7 +527,7 @@ footer {
     }
     .ticket .buy-deal-cont {
         width: 100%;
-        height: 3rem;
+        height: fit-content;
         display: flex;
         flex-direction: row;
         align-items: center;

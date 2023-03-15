@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-
+    <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
+<th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
+<header>
+    <th:block th:insert="~{partials/header:: header}"></th:block>
+</header>
 
 <h1>Booking</h1>
 
@@ -15,6 +16,7 @@
         <input type="submit" value="Logout"/>
     </form>
 </div>
-
+<th:block th:insert="~{partials/footer:: footer}"></th:block>
+<th:block th:insert="~{partials/scripts:: scripts}"></th:block>
 </body>
 </html>
