@@ -1,42 +1,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<th:block th:fragment="head">
+<th:block th:fragment="header">
 <header class="color-prime">
     <div class="header-wrapper">
         <figure class="logo">
-            <a href="index.html" class=" text-light w-100 d-flex justify-content-center align-items-center">
+            <a th:href="@{/}" class=" text-light w-100 d-flex justify-content-center align-items-center">
 
-                <img width="30px" th:src="@{img/spade.png}" alt="">
-                <h1 class="fs-3">Aviato</h1>
+                <img width="30px" th:src="@{img/spades.png}" alt="">
+                <h1 class="fs-13 text-white">Aviato</h1>
             </a>
         </figure>
         <nav>
             <ul>
-
-<!--                <ul>-->
-<!--                    <li sec:authorize="isAnonymous()"><a class="nav-link" href="/login">Login</a></li>-->
-<!--                    <li sec:authorize="isAuthenticated()"><a class="nav-link" href="/logout">Logout</a></li>-->
-<!--                    <li sec:authorize="isAuthenticated()">Wellcome, <span sec:authentication="name"></span></li>-->
-<!--                </ul>-->
-
                 <a href="#">
                     <li class="text-light">Our Mission</li>
                 </a>
-                <a href="#" >
+                <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
                     <li class="text-light"><button>Login</button></li>
                 </a>
-                <a href="#">
+                <a th:href="@{/register}" sec:authorize="!isAuthenticated()">
                     <li class="text-light"><button>Sign Up!</button></li>
                 </a>
-                <a href="#" sec:authorize="isAuthenticated()">
-                    <li class="text-light"><button sec:authentication="principal.firstName"></button></li>
+                <a th:href="@{/profile}" sec:authorize="isAuthenticated()">
+                    <li class="text-light"><button id="profile-btn" class="bg-transparent d-flex gap-1
+                    text-white justify-content-center align-items-center">
+                        <ion-icon class="fs-13 text-white" name="person-circle-outline"></ion-icon>
+                        <p sec:authentication="principal.firstName"></p></button></li>
                 </a>
 
 
             </ul>
         </nav>
-        <menu class="text-light">
-            <ion-icon name="menu-outline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        <menu class="text-white" style="color: #ffffff !important;z-index: 800 !important;">
+            <ion-icon  class="text-white " name="menu-outline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                       aria-controls="offcanvasRight"></ion-icon>
         </menu>
     </div>

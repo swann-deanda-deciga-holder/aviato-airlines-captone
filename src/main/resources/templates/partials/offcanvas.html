@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="offcanvas">
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav>
+        <ul>
+
+          <a th:href="@{/about}">
+            <li class="text-light">Our Mission</li>
+          </a>
+          <a th:href="@{/login}">
+            <li class="text-light"><button>Login</button></li>
+          </a>
+          <a th:href="@{/register}">
+            <li class="text-light"><button>Sign Up!</button></li>
+          </a>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</th:block>
+</html>
