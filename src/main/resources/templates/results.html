@@ -4,34 +4,14 @@
   <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body class="color-prime">
+<div id="alert" class="alert alert-danger" role="alert">
+  A simple dark alert—check it out!
+</div>
 <th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
 <header>
   <th:block th:insert="~{partials/header:: header}"></th:block>
 </header>
 <th:block th:insert="~{partials/searchBar:: searchBar}"></th:block>
-<style>
-  .loading-screen {
-    background-color: #fff;
-    display: none;
-    z-index: 9999;
-  }
-
-  .loading-icon {
-    margin-top: 4rem;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 3px solid rgba(0, 0, 0, 0.3);
-    border-top-color: #333;
-    animation: spin 1s ease-in-out infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
 
 <main class="color-accent">
 

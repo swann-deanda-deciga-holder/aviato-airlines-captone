@@ -7,28 +7,26 @@
     let layover = "Nonstop";
     let submit = document.getElementById("submit");
     let loader = document.getElementById("loading-screen");
+    let alertBar = document.getElementById("alert");
+    let CABIN = "Economy";
+    let TRIP = "onewaytrip"
     let isloading = false;
+    let LIMIT = 10;
     let renderContainer = document.getElementById("render-container");
     let searched = false;
     const DISPLAY = Object.freeze({
         NONE: "d-none",
         FLEX: "d-flex"
     });
-    const TRIP_TYPE = Object.freeze({
-        ROUNDTRIP: "roundtrip",
-        ONEWAY: "onewaytrip"
-    });
-    const TRIP_PASSENGER = Object.freeze({
-        ADULT: "adult",
-        CHILD: "child"
+    const alert = Object.freeze({
+        NOT_EXIST: "Sorry there are no flights for this search",
     });
     const TRIP_CABIN = Object.freeze({
         ECONOMY: "Economy",
         BUSINESS: "Business"
     });
     let BASE = `https://api.flightapi.io`;
-    // let KEY = `640f1b3ff75e113b18803e12`;
-    let KEY = `641222f31ec2973b2848bbbc`;
+    let KEY = `641287a7f75e113b18804e86`;
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
@@ -57,6 +55,14 @@
         }
         return result;
     }
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     function Hour12Time(militaryTime){
         const [hours, minutes] = militaryTime.split(':').map(Number);
         const isPM = hours >= 12;
@@ -75,9 +81,8 @@
 
 
 
-        submit.addEventListener("click", ()=>{
-            loader.style.display = "flex";
-        })
+        // submit.addEventListener("click", ()=>{
+        // })
 
 
 
@@ -85,10 +90,14 @@
         let form = document.getElementById("form");
         // console.log("form: ",form)
         form.addEventListener("submit", (evt)=>{
+            alertBar.classList.remove("slide-down");
+            loader.style.display = "flex";
+            console.log()
+
             // if(isloading){
             // }
 
-            submit.setAttribute("disabled", true);
+            // submit.setAttribute("disabled", true);
             if (searched === true){
                 let tickets = document.querySelectorAll(".ticket");
                 tickets.forEach(ticket =>{
@@ -120,33 +129,34 @@
             fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[3]}&type=airport`, requestOptions)
                 .then(response => response.json())
                 .then(airport1 => {
+                    console.log("fetch1 status:",airport1.status)
 
                     // City 2
                     fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[4]}&type=airport`, requestOptions)
                         .then(response => response.json())
                         .then(airport2 => {
+                            try {
+
+                                //tryStatements
+                            } catch (error) {
+                                //catchStatements
+                            } finally {
+                                //finallyStatements
+                            }
+                            console.log("fetch1 status:",airport2.status)
+
                             console.log("fetch2")
                             const dateObject = Object.freeze({
-                                ONE_DATE: event[5],
-                                TWO_DATE: `${event[5]}/${event[6]}`
+                                ONE_DATE: event[5]
                             });
 
                             // /======= Default PARAMS ======\
                             let DATE = dateObject.ONE_DATE;
-                            let TRIP = TRIP_TYPE.ONEWAY;
-                            let CABIN = "";
+
                             // \======= Default PARAMS ======/
 
-                            if (event[0] === TRIP_TYPE.ROUNDTRIP){
-                                DATE = dateObject.TWO_DATE;
-                                TRIP = TRIP_TYPE.ROUNDTRIP;
-                                display = DISPLAY.FLEX
-                            }
-                            if(event[1] === TRIP_CABIN.BUSINESS){
-                                CABIN = TRIP_CABIN.BUSINESS;
-                            }else {
-                                CABIN = TRIP_CABIN.ECONOMY;
-                            }
+
+
                             console.log("CABIN: ",CABIN)
 
                             // Query
@@ -157,12 +167,14 @@
 
                                     renderContainer.innerHTML = "";
                                     console.log("Status",result.status);
-                                    if (result.status == 504) {
-                                        alert("Sorry there are no flights.");
-                                        loader.style.display = "none"
-
-                                        // throw new Error('Sorry there are no flights');
+                                    if(result.status !== 200){
+                                        if (result.status === 504) {
+                                            alertBar.innerText = alert.NOT_EXIST;
+                                            alertBar.classList.add("slide-down");
+                                            loader.style.display = "none"
+                                        }
                                     }
+
                                     // console.log("Airport1: ",airport1.data[0].iata)
                                     // console.log( "Airport2: ",airport2.data[0].iata)
                                     console.log(result)
@@ -181,16 +193,17 @@
                                     let flightBackObj = {};
 
 
-                                    if (TRIP === TRIP_TYPE.ONEWAY) {
 
                                         // FOR LOOP FOR ONEWAY TRIP
-                                        for (let i = 0; i < result.legs.length; i++) {
-                                            if(result.legs[i].stopoversCount == 0 ){
-                                                layover = "Nonstop"
-                                            }else {
-                                                layover = "layover: "+ result.legs[i].stopoversCount;
+                                        for (let i = 0; i < LIMIT; i++) {
+                                            if (result.legs[i].stopoversCount !== undefined){
+                                                if(result.legs[i].stopoversCount == 0 ){
+                                                    layover = "Nonstop"
+                                                }else {
+                                                    layover = "layover: "+ result.legs[i].stopoversCount;
+                                                }
                                             }
-                                            // need to add round trip
+
                                             flightObj = {
                                                 departureTime: result.legs[i].departureTime,
                                                 arrivalTime: result.legs[i].arrivalTime,
@@ -212,13 +225,16 @@
                                                 }
                                             }) // end of forEach
                                         } // end of for loop
-                                    } // end of if (TRIP === TRIP_TYPE.ONEWAY)
+                                    tranferArr = shuffleArray(tranferArr);
+                                    let sh = [1, 2, 3, 4]
+                                    console.log("sh : ",shuffleArray(sh));
 
                                     loader.style.display = "none";
                                         let HTML = "";
                                     for (let i = 0; i<10;i++) {
 
                                         HTML +=
+                                    // Template literal starts
                                         `                                                                              
                                           <div class="tickets-cont d-flex ">
                 <div class="ticket card-paper1">
@@ -261,11 +277,11 @@
                     <div class="buy-deal-cont d-flex justify-content-center">
                       
                         <div class="buy-deal-row mb-3">
-                            <span class="fs-13" id="price">$${tranferArr[i].price}</span>
+                            <span class="fs-13" id="price">$${tranferArr[i].price.toPrecision(5)}</span>
                         </div>
                         <div class="buy-deal-row">
                             <a href="booking.html"></a>
-                            <form action="/create/checkout/session" method="POST">
+                            <form action="/checkout" method="GET">
                             <input type="hidden"  class="d-none" name="departureTime" value='${Hour12Time(tranferArr[i].departureTime)}'>
                              <input type="hidden"  class="d-none" name="arrivalTime" value='${Hour12Time(tranferArr[i].arrivalTime)}'>
                               <input type="hidden"  class="d-none" name="duration" value='${tranferArr[i].duration}'>
@@ -306,16 +322,33 @@
                                 }).catch(error => console.log(error))
         // fetch 2
         }).catch(error => {
+                        // console.log("err stat: ",error.message)
+                        if (error.message.includes("Cannot read properties of undefined")){
+                                alertBar.innerHTML = alert.NOT_EXIST;
+                                alertBar.classList.add("slide-down");
+                        }
 
 
 
 
-
-            console.log('error', error)});
+            // console.log("Airport2 err: ",error)
+        });
 
          // fetch 1
         console.log("fetch1")
-    }).catch(error => console.log(error))
+    }).catch(error => {
+                if (error.message.includes("Cannot read properties of undefined")){
+                    alertBar.innerHTML = alert.NOT_EXIST;
+                    alertBar.classList.add("slide-down");
+                    submit.setAttribute("disabled", false);
+                }
+        // console.log("err stat: ",error.status)
+        // console.log("Airport1 err: ",error)
+
+
+
+
+    })
 
 
 
