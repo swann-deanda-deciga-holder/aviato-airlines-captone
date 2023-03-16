@@ -2,6 +2,7 @@
 <html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="searchBar">
+
 <section class="search-bar_section ">
   <form id="form" class="pb-6 color-prime box-shadow_bottom
         search-flight-cont h-100 justify-content-start" action="#" method="POST">
@@ -49,13 +50,8 @@
                  aria-describedby="inputGroup-sizing-default" type="date">
         </div>
       </div>
-      <div class="fit-content d-flex gap-3 flex-wrap align-items-start justify-content-center">
-        <button type="submit" id="submit" class="btn btn-submit p-4">Submit</button>
-      </div>
 
-    </div>
-
-  </form>
-</section>
+    </form>
+  </section>
 </th:block>
 </html>
