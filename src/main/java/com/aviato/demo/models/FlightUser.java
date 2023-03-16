@@ -2,6 +2,8 @@ package com.aviato.demo.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 public class FlightUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +17,16 @@ public class FlightUser {
     @JoinColumn(name="flight_id", nullable = false)
     private Flight flight;
 
+   @OneToMany(mappedBy = "flightsToUser")
+    private List<User> usersList;
     public FlightUser() {
     }
 
-    public FlightUser(Long id, User user, Flight flight) {
+    public FlightUser(Long id, User user, Flight flight, List<User> usersList) {
         this.id = id;
         this.user = user;
         this.flight = flight;
+        this.usersList = usersList;
     }
 
     public Long getId() {
@@ -46,5 +51,13 @@ public class FlightUser {
 
     public void setFlight(Flight flight) {
         this.flight = flight;
+    }
+
+    public List<User> getUsersList() {
+        return usersList;
+    }
+
+    public void setUsersList(List<User> usersList) {
+        this.usersList = usersList;
     }
 }
