@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
 <th:block th:insert="~{partials/head:: head}"></th:block>
+<div>
+  <h1 th:text="${departureTime}" ></h1>
+  <h1 th:text="${arrivalTime}" ></h1>
+  <h1 th:text="${arrivalAirport}" ></h1>
+  <h1 th:text="${airline}" ></h1>
 
+
+</div>
 <form action='/charge' method='POST' id='checkout-form'>
   <input type='hidden' th:value='${amount}' name='amount' />
   <label>Price:<span th:text='${amount/100}' /></label>

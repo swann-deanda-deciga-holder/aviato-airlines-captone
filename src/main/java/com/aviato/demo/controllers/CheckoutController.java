@@ -9,9 +9,7 @@ import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -25,13 +23,24 @@ public class CheckoutController {
         this.paymentsService = paymentsService;
     }
 
-    @RequestMapping("/checkout")
-    public String checkout(Model model) {
-        model.addAttribute("amount", 50 * 100); // in cents
+    @GetMapping("/checkout")
+    public String checkout(Model model,
+                           @RequestParam double price,
+                           @RequestParam String departureTime,
+                           @RequestParam String arrivalTime,
+                           @RequestParam String arrivalAirport,
+                           @RequestParam String airline
+                           ) {
+        model.addAttribute("amount", price); // in cents
         model.addAttribute("stripePublicKey", stripePublicKey);
         model.addAttribute("currency", ChargeRequest.Currency.USD);
+        model.addAttribute("departureTime", departureTime);
+        model.addAttribute("arrivalTime", arrivalTime);
+        model.addAttribute("arrivalAirport", arrivalAirport);
+        model.addAttribute("airline", airline);
         return "checkout";
     }
+
     @PostMapping("/charge")
     public String charge(ChargeRequest chargeRequest, Model model)
             throws StripeException {
@@ -50,7 +59,10 @@ public class CheckoutController {
         model.addAttribute("error", ex.getMessage());
         return "paymentStatus";
     }
+
 }
+
+
 
 
 
