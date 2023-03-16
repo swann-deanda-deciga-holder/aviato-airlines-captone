@@ -23,7 +23,7 @@
         BUSINESS: "Business"
     });
     let BASE = `https://api.flightapi.io`;
-    let KEY = `64136aa9e055523b129e183b`;
+    let KEY = `64138433f75e113b18804e8c`;
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
