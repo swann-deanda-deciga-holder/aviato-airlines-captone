@@ -8,6 +8,7 @@
     let submit = document.getElementById("submit");
     let loader = document.getElementById("loading-screen");
     let isloading = false;
+    let LIMIT = 10;
     let renderContainer = document.getElementById("render-container");
     let searched = false;
     const DISPLAY = Object.freeze({
@@ -28,7 +29,7 @@
     });
     let BASE = `https://api.flightapi.io`;
     // let KEY = `640f1b3ff75e113b18803e12`;
-    let KEY = `641222f31ec2973b2848bbbc`;
+    let KEY = `641287a7f75e113b18804e86`;
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
@@ -57,6 +58,14 @@
         }
         return result;
     }
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     function Hour12Time(militaryTime){
         const [hours, minutes] = militaryTime.split(':').map(Number);
         const isPM = hours >= 12;
@@ -75,9 +84,8 @@
 
 
 
-        submit.addEventListener("click", ()=>{
-            loader.style.display = "flex";
-        })
+        // submit.addEventListener("click", ()=>{
+        // })
 
 
 
@@ -85,6 +93,9 @@
         let form = document.getElementById("form");
         // console.log("form: ",form)
         form.addEventListener("submit", (evt)=>{
+            loader.style.display = "flex";
+            console.log()
+
             // if(isloading){
             // }
 
@@ -157,7 +168,7 @@
 
                                     renderContainer.innerHTML = "";
                                     console.log("Status",result.status);
-                                    if (result.status == 504) {
+                                    if (result.status === 504) {
                                         alert("Sorry there are no flights.");
                                         loader.style.display = "none"
 
@@ -184,7 +195,7 @@
                                     if (TRIP === TRIP_TYPE.ONEWAY) {
 
                                         // FOR LOOP FOR ONEWAY TRIP
-                                        for (let i = 0; i < result.legs.length; i++) {
+                                        for (let i = 0; i < LIMIT; i++) {
                                             if(result.legs[i].stopoversCount == 0 ){
                                                 layover = "Nonstop"
                                             }else {
@@ -213,6 +224,9 @@
                                             }) // end of forEach
                                         } // end of for loop
                                     } // end of if (TRIP === TRIP_TYPE.ONEWAY)
+                                    tranferArr = shuffleArray(tranferArr);
+                                    let sh = [1, 2, 3, 4]
+                                    console.log("sh : ",shuffleArray(sh));
 
                                     loader.style.display = "none";
                                         let HTML = "";
@@ -261,7 +275,7 @@
                     <div class="buy-deal-cont d-flex justify-content-center">
                       
                         <div class="buy-deal-row mb-3">
-                            <span class="fs-13" id="price">$${tranferArr[i].price}</span>
+                            <span class="fs-13" id="price">$${tranferArr[i].price.toPrecision(5)}</span>
                         </div>
                         <div class="buy-deal-row">
                             <a href="booking.html"></a>
