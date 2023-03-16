@@ -23,7 +23,8 @@
         BUSINESS: "Business"
     });
     let BASE = `https://api.flightapi.io`;
-    let KEY = `64138433f75e113b18804e8c`;
+    let KEY = `641287a7f75e113b18804e86`;
+
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
@@ -60,7 +61,9 @@
         }
         return array;
     }
+
     function Hour12Time(militaryTime) {
+
         const [hours, minutes] = militaryTime.split(':').map(Number);
         const isPM = hours >= 12;
         const hours12 = hours % 12 || 12;
@@ -85,6 +88,7 @@
         evt.preventDefault();
         let event = [];
         for (let i = 0; i < evt.target.length - 1; i++) {
+
 
             event[i] = evt.target[i].value;
             console.log(`event: ${i}: `, evt.target[i].value);
@@ -221,6 +225,7 @@
                     </div>
                     <!-- need to be in form  -->
                     <div class="buy-deal-cont d-flex justify-content-center">
+
                          <div class="buy-deal-row mb-3">
                             <span class="fs-13" id="price">$${tranferArr[i].price.toPrecision(5)}</span>
                         </div>

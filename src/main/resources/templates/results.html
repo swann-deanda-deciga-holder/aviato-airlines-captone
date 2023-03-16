@@ -5,6 +5,7 @@
 </head>
 <body class="color-prime">
 <div id="alert" class="alert alert-danger" role="alert">
+
   Sorry something went wrong.
 </div>
 <th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
@@ -14,51 +15,21 @@
 <th:block th:insert="~{partials/searchBar:: searchBar}"></th:block>
 
 
-<section class="position-relative pt-24 pb-36 bg-black overflow-hidden">
-  <img class="position-absolute end-0 top-0" src="gradia-assets/elements/teams/radial.svg" alt="">
-  <div class="position-relative container" style="z-index: 50;">
-    <div class="mw-lg mb-20">
 
 
 
 
-<!--<style>-->
-<!--  .loading-screen {-->
-<!--    background-color: #fff;-->
-<!--    display: none;-->
-<!--    z-index: 9999;-->
-<!--  }-->
+<main class="color-accent">
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-icon"></div>
+  </div>
+  <section id="render-container" class="d-flex flex-column gap-5">
 
-<!--  .loading-icon {-->
-<!--    margin-top: 4rem;-->
-<!--    width: 40px;-->
-<!--    height: 40px;-->
-<!--    border-radius: 50%;-->
-<!--    border: 3px solid rgba(0, 0, 0, 0.3);-->
-<!--    border-top-color: #333;-->
-<!--    animation: spin 1s ease-in-out infinite;-->
-<!--  }-->
-
-<!--  @keyframes spin {-->
-<!--    to {-->
-<!--      transform: rotate(360deg);-->
-<!--    }-->
-<!--  }-->
-<!--</style>-->
-
-<!--<main class="color-accent">-->
+  </section>
 
 
 
-
-<!--  <section id="render-container" class="d-flex flex-column gap-5">-->
-<!--    <div id="loading-screen" class="loading-screen">-->
-<!--      <div class="loading-icon"></div>-->
-<!--    </div>-->
-<!--  </section>-->
-
-
-</section >
+</main>
 
 <th:block th:insert="~{partials/footer:: footer}"></th:block>
 <th:block th:insert="~{partials/scripts:: scripts}"></th:block>
