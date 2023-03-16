@@ -4,6 +4,7 @@
     <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body class="color-prime">
+
 <th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
 <header>
     <th:block th:insert="~{partials/header:: header}"></th:block>
@@ -18,8 +19,7 @@
                     <div class="mw-md-xl  card-comment card-glass">
                         <h2 class="fs-7 mb-8 text-white">Book your Flight, Pack your bags, and let us do the Rest!</h2>
                         <p class="fs-17 text-white text-center mw-md-md mb-10">One-way, endless possibilities! <br> Discover your next destination with us!</p>
-                        <div class="col-auto">
-                    </div>
+                        <div class="col-auto"></div>
                 </div>
 
             </div>
@@ -27,11 +27,11 @@
         </div>
     </section>
     <section class="scroller-cont color-prime box-shadow_top gap-7">
-        <div id="plane" class="dol">
-            sdlcsndclksndc sldckns skdlcns  skcd sc  slkcs
+        <div id="plane">
+            <img class="plane-outline" th:src="@{img/plane-outline.png}" alt="">
         </div>
-        <div class="card-comment glass align-self-start ms-12">
-            dlf ins clv sdkncvsldk cvmnsdl cvkdgio edlksndv dlkn gro ighe ndvedogn weoi fhn ewclkd nflw
+        <div class="card-comment glass align-self-start align-items-md-center align-items-sm-center  ms-12 animate__animated animate__fadeInLeft">
+            <p>Search for flights based on departure, destination airports, and travel dates.</p>
         </div>
 
 
@@ -40,18 +40,17 @@
 
     </section>
     <section class="scroller-cont color-prime">
-        <div class="card-comment glass align-self-end me-12">
-            dlf ins clv sdkncvsldk cvmnsdl cvkdgio edlksndv dlkn gro ighe ndvedogn weoi fhn ewclkd nflw
+        <div class="hidden card-comment glass align-self-end me-12 align-items-md-center align-items-sm-center">
+           <p>Discover a list of available flights with details such as flight times, airlines, and prices</p>
         </div>
     </section>
     <section class="scroller-cont color-prime">
-        <div class="card-comment glass align-self-start ms-12">
-            dlf ins clv sdkncvsldk cvmnsdl cvkdgio edlksndv dlkn gro ighe ndvedogn weoi fhn ewclkd nflw
-        </div>
+        <div class="hidden card-comment glass align-self-start ms-12 align-items-md-center align-items-sm-center">
+           <p>Once you have selected a flight, start the payment process Safe and Securely</p> </div>
     </section>
     <section class="scroller-cont color-prime">
-        <div class="card-comment glass align-self-end me-12">
-            dlf ins clv sdkncvsldk cvmnsdl cvkdgio edlksndv dlkn gro ighe ndvedogn weoi fhn ewclkd nflw
+        <div class="hidden card-comment glass align-self-end me-12 align-items-md-center align-items-sm-center">
+           <p>Receive an email about your flight itinerary and view your payment details</p>
         </div>
     </section>
 
@@ -69,6 +68,8 @@
 <th:block th:insert="~{partials/scripts:: scripts}"></th:block>
 <script th:src="@{js/search-bar.js}"></script>
 <script th:src="@{js/scroll.js}"></script>
+<script th:src="@{js/effects.js}"></script>
+
 
 
 
