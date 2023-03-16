@@ -1,108 +1,109 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <th:block th:insert="~{partials/head:: head}"></th:block>
+    <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
-<body>
+<body class="color-prime">
 <th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
 <header>
-  <th:block th:insert="~{partials/header:: header}"></th:block>
+    <th:block th:insert="~{partials/header:: header}"></th:block>
 </header>
-<main class="color-accent justify-content-center">
+
+<section class="position-relative pt-24 pb-36 bg-black overflow-hidden">
+    <img class="position-absolute end-0 top-0" src="gradia-assets/elements/teams/radial.svg" alt="">
+    <div class="position-relative container" style="z-index: 50;">
+        <div class="mw-lg mb-20">
+
+            <!--Code below renders user's name who is currently logged in-->
+
+            <h2 class="fs-10 text-white mb-5"
+                th:text="'Welcome, ' + ${user.firstName} + ' ' + ${user.lastName} + '!'"></h2>
+            <p class="text-secondary-light">Here, you can edit any personal information, and view/cancel flights.</p>
+        </div>
 
 
-  <!-- Displaying user information -->
+        <!--Edit Profile-->
 
-  <h1 th:text="'Welcome, ' + ${user.firstName} + ' ' + ${user.lastName} + '!'"></h1>
-  <p th:text="'Email: ' + ${user.email}"></p>
+        <h4 class="fs-10 text-white mb-5">Edit Profile</h4>
 
-  </div>
+        <form th:action="@{/profile/edit}" th:object="${user}" th:method="post" class="mt-5" style="padding: 30px; border-radius: 5px;">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group mb-3">
+                <label class="fs-18 fw-medium text-dark mb-2" for="firstName">First Name:</label>
+                <div class="rounded-1" style="padding: 1px; background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
+                    <input class="bg-black text-white px-5 py-4 w-100 border-0 rounded-1" style="border-radius: 3px;" type="text" id="firstName" th:field="*{firstName}" required/>
+                </div>
+            </div>
 
-  <br>
+            <div class="form-group mb-3">
+                <label class="fs-18 fw-medium text-dark mb-2" for="lastName">Last Name:</label>
+                <div class="rounded-1" style="padding: 1px; background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
+                    <input class="bg-black text-white px-5 py-4 w-100 border-0 rounded-1" style="border-radius: 3px;" type="text" id="lastName" th:field="*{lastName}" required/>
+                </div>
+            </div>
 
+            <div class="form-group mb-3">
+                <label class="fs-18 fw-medium text-dark mb-2" for="email">Email:</label>
+                <div class="rounded-1" style="padding: 1px; background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
+                    <input class="bg-black text-white px-5 py-4 w-100 border-0 rounded-1" style="border-radius: 3px;" type="email" id="email" th:field="*{email}" required/>
+                </div>
+            </div>
 
-  <!--Editing profile-->
-
-  <h2>Edit Profile:</h2>
-  <form th:action="@{/profile/edit}" th:object="${user}" th:method="post">
-    <input type="hidden" th:field="*{id}">
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" th:field="*{firstName}" value="" required/>
-
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" th:field="*{lastName}" value="" required/>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" value="" required/>
-    <input type="hidden" th:field="*{password}">
-
-    <button type="submit">Save Changes</button>
-
-    <br>
-    <br>
-  </form>
-
-  <!--Deleting account-->
-
-  <h2>Delete Profile</h2>
-  <form th:method="post" onsubmit="return confirm('Are you sure you want to delete your account?')" th:action="@{/profile/delete}">
-    <input type="submit" value="Delete">
-  </form>
-
-  <br>
-  <br>
-
-  <!--Flight list-->
-
-  <h2>Flights List:</h2>
-
-  <table>
-    <thead>
-    <tr>
-      <th>Flight Number</th>
-      <th>Airline</th>
-      <th>Departure</th>
-      <th>Arrival</th>
-      <th>Layover</th>
-      <th>Price</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="flight : ${user.flightsList}">
-<!--      <td th:text="${flight.flightNumber}"></td>-->
-      <td th:text="${flight.airline}"></td>
-      <td th:text="${flight.departureCity} + ' (' + ${flight.departureAirport} + ') at ' + ${flight.departureTime}"></td>
-      <td th:text="${flight.arrivalCity} + ' (' + ${flight.arrivalAirport} + ') at ' + ${flight.arrivalTime}"></td>
-      <td th:text="${flight.layoverLocation}"></td>
-      <td th:text="'$' + ${flight.price}"></td>
-      <td>
-        <form th:action="@{/profile/flights/{flightId}(flightId=${flight.id})}" method="post">
-          <button type="submit">Cancel Flight</button>
+            <input type="hidden" th:field="*{password}">
+            <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #56C1E3 0%, #5B6AF0 100%);">Save Changes</button>
         </form>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+
+
+
+        <!--Delete Profile-->
+        <form class="mb-8" th:method="post" onsubmit="return confirm('Are you sure you want to delete your account?')" th:action="@{/profile/delete}">
+            <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #56C1E3 0%, #5B6AF0 100%);">Delete Profile</button>
+        </form>
+
+        <!--Flight list-->
+
+        <h2>Flights List:</h2>
+
+        <table class="table table-striped table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Airline</th>
+                <th scope="col">Departure</th>
+                <th scope="col">Arrival</th>
+                <th scope="col">Layover</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="flight, flightInfo : ${flights}">
+                <th scope="row" th:text="${flightInfo.count}"></th>
+                <td th:text="${flight.airline}"></td>
+                <td th:text="${flight.departureCity} + ' (' + ${flight.departureAirport} + ') at ' + ${flight.departureTime}"></td>
+                <td th:text="${flight.arrivalCity} + ' (' + ${flight.arrivalAirport} + ') at ' + ${flight.arrivalTime}"></td>
+                <td th:text="${flight.layoverLocation}"></td>
+                <td th:text="'$' + ${flight.price}"></td>
+                <td>
+                    <form th:action="@{/profile/flights/{flightId}(flightId=${flight.id})}" method="post">
+                        <button type="submit">Cancel Flight</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
 
 
 
-  <br>
-  <br>
-
-  <!-- Log out function -->
-
-  <div th:if="${#authorization.expression('isAuthenticated()')}">
-    <form th:action="@{/logout}" method="post">
-      <input type="submit" value="Logout"/>
-    </form>
 
 
+    </div>
+</section>
 
 
 </main>
-
 <th:block th:insert="~{partials/footer:: footer}"></th:block>
 <th:block th:insert="~{partials/scripts:: scripts}"></th:block>
 </body>
