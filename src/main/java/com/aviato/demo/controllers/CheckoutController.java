@@ -60,6 +60,11 @@ public class CheckoutController {
     @PostMapping("/charge")
     public String charge(ChargeRequest chargeRequest, Model model)
             throws StripeException {
+
+        // 1. Grab all flight data from hidden inputs in paymentStatus.html using @RequestParam
+        // 2. Use RequestParam data to build Flight object.
+        // 3. Save Flight obj to database
+
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(ChargeRequest.Currency.USD);
         Charge charge = paymentsService.charge(chargeRequest);
