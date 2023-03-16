@@ -88,6 +88,7 @@ body {
  }
 
 .loading-icon {
+    outline: red dashed;
     margin-top: 4rem;
     width: 40px;
     height: 40px;
