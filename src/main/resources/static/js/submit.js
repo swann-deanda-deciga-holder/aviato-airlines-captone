@@ -1,34 +1,29 @@
-
-
-(function(){
+(function () {
     "use strict"
     // Enum Declarations for State Management
     let display = "d-none";
     let layover = "Nonstop";
     let submit = document.getElementById("submit");
     let loader = document.getElementById("loading-screen");
-    let isloading = false;
+    let alertBar = document.getElementById("alert");
+    let CABIN = "Economy";
+    let TRIP = "onewaytrip"
+    let LIMIT = 10;
     let renderContainer = document.getElementById("render-container");
     let searched = false;
     const DISPLAY = Object.freeze({
         NONE: "d-none",
         FLEX: "d-flex"
     });
-    const TRIP_TYPE = Object.freeze({
-        ROUNDTRIP: "roundtrip",
-        ONEWAY: "onewaytrip"
-    });
-    const TRIP_PASSENGER = Object.freeze({
-        ADULT: "adult",
-        CHILD: "child"
+    const alert = Object.freeze({
+        NOT_EXIST: "Sorry there are no flights for this search",
     });
     const TRIP_CABIN = Object.freeze({
         ECONOMY: "Economy",
         BUSINESS: "Business"
     });
     let BASE = `https://api.flightapi.io`;
-    // let KEY = `640f1b3ff75e113b18803e12`;
-    let KEY = `641222f31ec2973b2848bbbc`;
+    let KEY = `64136aa9e055523b129e183b`;
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
     function mergeSort(arr) {
@@ -40,6 +35,7 @@
         const right = arr.slice(mid);
         return merge(mergeSort(left), mergeSort(right));
     }
+
     function merge(left, right) {
         let result = [];
         while (left.length && right.length) {
@@ -57,168 +53,134 @@
         }
         return result;
     }
-    function Hour12Time(militaryTime){
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    function Hour12Time(militaryTime) {
         const [hours, minutes] = militaryTime.split(':').map(Number);
         const isPM = hours >= 12;
         const hours12 = hours % 12 || 12;
         const time12 = `${hours12}:${minutes.toString().padStart(2, '0')} ${isPM ? 'PM' : 'AM'}`;
         return time12;
     }
+     // ++++++++++++++++++++++ Functions End +++++++++++++++++++++++++++++++++||
+
+    let form = document.getElementById("form");
+    // Form Event
+    form.addEventListener("submit", (evt) => {
+        alertBar.classList.remove("slide-down");
+        // Loader flex
+        loader.style.display = "flex";
+        if (searched === true) {
+            let tickets = document.querySelectorAll(".ticket");
+            tickets.forEach(ticket => {
+                ticket.remove()
+            })
+        }
+
+        evt.preventDefault();
+        let event = [];
+        for (let i = 0; i < evt.target.length - 1; i++) {
+
+            event[i] = evt.target[i].value;
+            console.log(`event: ${i}: `, evt.target[i].value);
+        }
+        let requestOptions = {
+            method: 'GET',
+            redirect: 'manual'
+        };
+        // \ ========== Trim and format for API ============== /
+        if (event[3].includes(" ") || event[4].includes(" ")) {
+            event[3] = event[3].trim().replaceAll(" ", '-').toLowerCase()
+            event[4] = event[4].trim().replaceAll(" ", '-').toLowerCase()
+        }
+        // \ ========== Trim and format for API ============== /
 
 
-    // ++++++++++++++++++++++ Functions End +++++++++++++++++++++++++++++++++
+        // City 1
+        fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[3]}&type=airport`, requestOptions)
+            .then(response => response.json())
+            .then(airport1 => {
+                console.log("fetch1 status:", airport1.status)
 
+                // City 2
+                fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[4]}&type=airport`, requestOptions)
+                    .then(response => response.json())
+                    .then(airport2 => {
+                        console.log("fetch2")
+                        const dateObject = Object.freeze({
+                            ONE_DATE: event[5]
+                        });
 
+                        // /======= Default PARAMS ======\
+                        let DATE = dateObject.ONE_DATE;
+                        // \======= Default PARAMS ======/
 
-
-
-
-
-
-        submit.addEventListener("click", ()=>{
-            loader.style.display = "flex";
-        })
-
-
-
-    // document.addEventListener("DOMContentLoaded", ()=>{
-        let form = document.getElementById("form");
-        // console.log("form: ",form)
-        form.addEventListener("submit", (evt)=>{
-            // if(isloading){
-            // }
-
-            submit.setAttribute("disabled", true);
-            if (searched === true){
-                let tickets = document.querySelectorAll(".ticket");
-                tickets.forEach(ticket =>{
-                    ticket.remove()
-
-                })
-            }
-
-            evt.preventDefault();
-            let event = [];
-            for (let i = 0;i< evt.target.length-1;i++){
-
-                event[i] = evt.target[i].value;
-                console.log(`event: ${i}: `,evt.target[i].value);
-            }
-            let requestOptions = {
-                method: 'GET',
-                redirect: 'manual'
-            };
-            // \ ========== Trim and format for API ============== /
-            if(event[3].includes(" ") || event[4].includes(" ")){
-                event[3] = event[3].trim().replaceAll(" ", '-').toLowerCase()
-                event[4] = event[4].trim().replaceAll(" ", '-').toLowerCase()
-            }
-            // \ ========== Trim and format for API ============== /
-
-
-            // City 1
-            fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[3]}&type=airport`, requestOptions)
-                .then(response => response.json())
-                .then(airport1 => {
-
-                    // City 2
-                    fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[4]}&type=airport`, requestOptions)
-                        .then(response => response.json())
-                        .then(airport2 => {
-                            console.log("fetch2")
-                            const dateObject = Object.freeze({
-                                ONE_DATE: event[5],
-                                TWO_DATE: `${event[5]}/${event[6]}`
-                            });
-
-                            // /======= Default PARAMS ======\
-                            let DATE = dateObject.ONE_DATE;
-                            let TRIP = TRIP_TYPE.ONEWAY;
-                            let CABIN = "";
-                            // \======= Default PARAMS ======/
-
-                            if (event[0] === TRIP_TYPE.ROUNDTRIP){
-                                DATE = dateObject.TWO_DATE;
-                                TRIP = TRIP_TYPE.ROUNDTRIP;
-                                display = DISPLAY.FLEX
-                            }
-                            if(event[1] === TRIP_CABIN.BUSINESS){
-                                CABIN = TRIP_CABIN.BUSINESS;
-                            }else {
-                                CABIN = TRIP_CABIN.ECONOMY;
-                            }
-                            console.log("CABIN: ",CABIN)
-
-                            // Query
-                            fetch(`${BASE}/${TRIP}/${KEY}/${airport1.data[0].iata}/${airport2.data[0].iata}/${DATE}/1/0/0/${CABIN}/USD`, requestOptions)
-                                .then(response => response.json())
-                                .then(result => {
-
-
-                                    renderContainer.innerHTML = "";
-                                    console.log("Status",result.status);
-                                    if (result.status == 504) {
-                                        alert("Sorry there are no flights.");
+                        // Query
+                        fetch(`${BASE}/${TRIP}/${KEY}/${airport1.data[0].iata}/${airport2.data[0].iata}/${DATE}/1/0/0/${CABIN}/USD`, requestOptions)
+                            .then(response => response.json())
+                            .then(result => {
+                                renderContainer.innerHTML = "";
+                                console.log("Status", result.status);
+                                if (result.status !== 200) {
+                                    if (result.status === 504) {
+                                        alertBar.innerText = alert.NOT_EXIST;
+                                        alertBar.classList.add("slide-down");
                                         loader.style.display = "none"
-
-                                        // throw new Error('Sorry there are no flights');
                                     }
-                                    // console.log("Airport1: ",airport1.data[0].iata)
-                                    // console.log( "Airport2: ",airport2.data[0].iata)
-                                    console.log(result)
-                                    // let renderContainer = document.getElementById("render-container");
-                                    // let stopOverCount = 0;
-                                    let tranferArr = [];
-                                    let roundtripArr = [];
-                                    let search = [];
-                                    for (let n = 0;n<result.airlines.length;n++){
-                                        search.push({
-                                            code:result.airlines[n].code,
-                                            name:result.airlines[n].name
-                                        });
+                                }
+                                let tranferArr = [];
+                                let search = [];
+                                for (let n = 0; n < result.airlines.length; n++) {
+                                    search.push({
+                                        code: result.airlines[n].code,
+                                        name: result.airlines[n].name
+                                    });
+                                }
+                                let flightObj = {};
+                                // FOR LOOP FOR ONEWAY TRIP
+                                for (let i = 0; i < LIMIT; i++) {
+                                    if (result.legs[i].stopoversCount !== undefined) {
+                                        if (result.legs[i].stopoversCount === 0) {
+                                            layover = "Nonstop"
+                                        } else {
+                                            layover = "layover: " + result.legs[i].stopoversCount;
+                                        }
                                     }
-                                    let flightObj = {};
-                                    let flightBackObj = {};
-
-
-                                    if (TRIP === TRIP_TYPE.ONEWAY) {
-
-                                        // FOR LOOP FOR ONEWAY TRIP
-                                        for (let i = 0; i < result.legs.length; i++) {
-                                            if(result.legs[i].stopoversCount == 0 ){
-                                                layover = "Nonstop"
-                                            }else {
-                                                layover = "layover: "+ result.legs[i].stopoversCount;
+                                    flightObj = {
+                                        departureTime: result.legs[i].departureTime,
+                                        arrivalTime: result.legs[i].arrivalTime,
+                                        departureAirport: result.legs[i].departureAirportCode,
+                                        arrivalAirport: result.legs[i].arrivalAirportCode,
+                                        duration: result.legs[i].duration,
+                                        layover: layover,
+                                        price: result.fares[i].price.totalAmountUsd,
+                                        cabin: CABIN,
+                                        trip: TRIP,
+                                        airline: []
+                                    }
+                                    tranferArr.push(flightObj);
+                                    result.legs[i].airlineCodes.forEach(airlineCode => {
+                                        for (let z = 0; z < search.length; z++) {
+                                            if (airlineCode === search[z].code) {
+                                                flightObj.airline.push(search[z].name);
                                             }
-                                            // need to add round trip
-                                            flightObj = {
-                                                departureTime: result.legs[i].departureTime,
-                                                arrivalTime: result.legs[i].arrivalTime,
-                                                departureAirport: result.legs[i].departureAirportCode,
-                                                arrivalAirport: result.legs[i].arrivalAirportCode,
-                                                duration: result.legs[i].duration,
-                                                layover: layover,
-                                                price: result.fares[i].price.totalAmountUsd,
-                                                cabin: CABIN,
-                                                trip: TRIP,
-                                                airline: []
-                                            }
-                                            tranferArr.push(flightObj);
-                                            result.legs[i].airlineCodes.forEach(airlineCode => {
-                                                for (let z = 0; z < search.length; z++) {
-                                                    if (airlineCode === search[z].code) {
-                                                        flightObj.airline.push(search[z].name);
-                                                    }
-                                                }
-                                            }) // end of forEach
-                                        } // end of for loop
-                                    } // end of if (TRIP === TRIP_TYPE.ONEWAY)
+                                        }
+                                    }) // end of forEach
+                                } // end of for loop
+                                tranferArr = shuffleArray(tranferArr);
+                                let sh = [1, 2, 3, 4]
+                                console.log("sh : ", shuffleArray(sh));
 
-                                    loader.style.display = "none";
-                                        let HTML = "";
-                                    for (let i = 0; i<10;i++) {
+                                let HTML = "";
+                                for (let i = 0; i < 10; i++) {
 
-                                        HTML +=
+                                    HTML +=
+                                        // Template literal starts
                                         `                                                                              
                                           <div class="tickets-cont d-flex ">
                 <div class="ticket card-paper1">
@@ -234,7 +196,7 @@
                             <div class="info-column ms-3 flex-column justify-content-center">
                                 <p class="responsive-font fw-bold">
              
-                                    <span id="flight-start-time-oneway">${Hour12Time( tranferArr[i].departureTime )}</span>
+                                    <span id="flight-start-time-oneway">${Hour12Time(tranferArr[i].departureTime)}</span>
                                     -
                                     <span id="flight-end-time-oneway">${Hour12Time(tranferArr[i].arrivalTime)}</span>
                                 </p>
@@ -259,13 +221,12 @@
                     </div>
                     <!-- need to be in form  -->
                     <div class="buy-deal-cont d-flex justify-content-center">
-                      
-                        <div class="buy-deal-row mb-3">
-                            <span class="fs-13" id="price">$${tranferArr[i].price}</span>
+                         <div class="buy-deal-row mb-3">
+                            <span class="fs-13" id="price">$${tranferArr[i].price.toPrecision(5)}</span>
                         </div>
                         <div class="buy-deal-row">
                             <a href="booking.html"></a>
-                            <form action="/create/checkout/session" method="POST">
+                            <form action="/checkout" method="GET">
                             <input type="hidden"  class="d-none" name="departureTime" value='${Hour12Time(tranferArr[i].departureTime)}'>
                              <input type="hidden"  class="d-none" name="arrivalTime" value='${Hour12Time(tranferArr[i].arrivalTime)}'>
                               <input type="hidden"  class="d-none" name="duration" value='${tranferArr[i].duration}'>
@@ -273,11 +234,8 @@
                                 <input type="hidden" class="d-none"  name="arrivalAirport" value='${tranferArr[i].arrivalAirport}'>
                                  <input type="hidden"  class="d-none" name="price" value='$${tranferArr[i].price}'>
                                   <input type="hidden"  class="d-none" name="airline" value='${tranferArr[i].airline[0]}'>
-                                 <input type="hidden"  class="d-none" name="cabin" value='${tranferArr[i].cabin}'>
-
-                        
-                            
-                            <button class="btn-buy fw-bold">Get Ticket
+                                 <input type="hidden"  class="d-none" name="cabin" value='${tranferArr[i].cabin}'>        
+                                   <button class="btn-buy fw-bold">Get Ticket
                                 <ion-icon name="paper-plane-outline"></ion-icon>
                             </button>
                             </form>
@@ -286,90 +244,37 @@
                 </div>
             </div>                                                                                                                                                         
                                         `// html end
-                                    } // end of loop
+                                } // end of loop
 
-                                    renderContainer.innerHTML = HTML;
-                                    submit.setAttribute("disabled",false)
-                                    submit.removeAttribute("disabled");
-                                    searched = true;
-
-
+                                renderContainer.innerHTML = HTML;
+                                submit.setAttribute("disabled", false)
+                                submit.removeAttribute("disabled");
+                                searched = true;
 
 
+                                console.log(tranferArr)
+                                console.log("search: ", search);
 
-                                    console.log(tranferArr)
-                                    console.log("search: ",search);
+                                loader.style.display = "none";
 
+                            }).catch(error => console.log(error))
+                        // fetch 2
+                    }).catch(error => {
+                    if (error.message.includes("Cannot read properties of undefined")) {
+                        alertBar.innerHTML = alert.NOT_EXIST;
+                        alertBar.classList.add("slide-down");
+                    }
+                    });
+                // fetch 1
+                console.log("fetch1")
+            }).catch(error => {
+            if (error.message.includes("Cannot read properties of undefined")) {
+                alertBar.innerHTML = alert.NOT_EXIST;
+                alertBar.classList.add("slide-down");
+                submit.setAttribute("disabled", false);
 
-
-
-                                }).catch(error => console.log(error))
-        // fetch 2
-        }).catch(error => {
-
-
-
-
-
-            console.log('error', error)});
-
-         // fetch 1
-        console.log("fetch1")
-    }).catch(error => console.log(error))
-
-
-
-
-
-
-
-
-
-
-
-        })//form event
-
-
-
-
-
-
-
-
-
-
-    // }) // dom loaded
+            }
+            loader.style.display = "none";
+        })
+    })//form event
 })();
-
-//
-// <div className="info-row">
-//     <div className="info-column">
-//         <img src="assets/img/UA.png" alt="">
-//     </div>
-//     <div className="info-column ms-3 flex-column justify-content-center">
-//         <p className="responsive-font fw-bold">
-//             <span id="flight-start-time-roundtrip">n</span>
-//             -
-//             <span id="flight-end-time-roundtrip">n</span>
-//         </p>
-//
-//         <p id="airline-name-roundtrip">
-//             n
-//         </p>
-//     </div>
-//     <div className="info-column">
-//         <p id="stopOver-type-roundtrip">Nonstop</p>
-//     </div>
-//     <div className="info-column ms-3 flex-column justify-content-center">
-//
-//         <p className="fs-13 fw-bold">
-//             <span id="flight-duration-roundtrip">3h</span>
-//         </p>
-//
-//         <p id="airport-names-cont-roundtrip">
-//             <span id="airport1-roundtrip">airp</span>
-//             -
-//             <span id="airport2-roundtrip">airp</span>
-//         </p>
-//     </div>
-// </div>

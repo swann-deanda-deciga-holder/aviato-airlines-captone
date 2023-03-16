@@ -1,23 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
 <th:block th:insert="~{partials/head:: head}"></th:block>
+<div>
+  <h1 th:text="${departureTime}" ></h1>
+  <h1 th:text="${arrivalTime}" ></h1>
+  <h1 th:text="${arrivalAirport}" ></h1>
+  <h1 th:text="${airline}" ></h1>
 
-<section>
-  <div class="product">
-    <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
-    <div class="description">
-      <h3>Stubborn Attachments</h3>
-      <h5>$100.00</h5>
-    </div>
-  </div>
-  <form action="/create-checkout-session" method="POST">
-    <button type="submit" id="checkout-button">Checkout</button>
-  </form>
-</section>
+
+</div>
+<form action='/charge' method='POST' id='checkout-form'>
+  <input type='hidden' th:value='${amount}' name='amount' />
+  <label>Price:<span th:text='${amount/100}' /></label>
+  <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+  <script
+          src='https://checkout.stripe.com/checkout.js'
+          class='stripe-button'
+          th:attr='data-key=${stripePublicKey},
+         data-amount=${amount},
+         data-currency=${currency}'
+          data-name='TEST-CHECKOUT'
+          data-description='Spring course checkout'
+          data-image
+                  ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
+          data-locale='auto'
+          data-zip-code='false'>
+  </script>
+</form>
+
+
+<!--<section>-->
+<!--  <div class="product">-->
+<!--    <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />-->
+<!--    <div class="description">-->
+<!--      <h3>Stubborn Attachments</h3>-->
+<!--      <h5>$100.00</h5>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <form action="/create-checkout-session" method="POST">-->
+<!--    <button type="submit" id="checkout-button">Checkout</button>-->
+<!--  </form>-->
+<!--</section>-->
 
 
 <th:block th:insert="~{partials/footer:: footer}"></th:block>
