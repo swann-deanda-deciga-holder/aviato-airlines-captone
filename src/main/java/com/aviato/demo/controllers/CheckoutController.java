@@ -11,6 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
+
 
 @Controller
 public class CheckoutController {
@@ -25,13 +30,24 @@ public class CheckoutController {
 
     @GetMapping("/checkout")
     public String checkout(Model model,
-                           @RequestParam double price,
+                           @RequestParam String price,
                            @RequestParam String departureTime,
                            @RequestParam String arrivalTime,
                            @RequestParam String arrivalAirport,
                            @RequestParam String airline
-                           ) {
-        model.addAttribute("amount", price); // in cents
+                           ) throws ParseException {
+
+        //Number num = NumberFormat.getInstance().parse(price);
+
+        Locale locale = Locale.US;
+        Number parsedPrice = NumberFormat.getCurrencyInstance(locale).parse(price);
+        Integer priceToUse = parsedPrice.intValue() * 100;
+
+        String sPrice = priceToUse.toString();
+
+
+        model.addAttribute("amount", priceToUse); // in cents
+        model.addAttribute("displayAmount", sPrice); // in cents
         model.addAttribute("stripePublicKey", stripePublicKey);
         model.addAttribute("currency", ChargeRequest.Currency.USD);
         model.addAttribute("departureTime", departureTime);
@@ -54,11 +70,11 @@ public class CheckoutController {
         return "paymentStatus";
     }
 
-    @ExceptionHandler(StripeException.class)
-    public String handleError(Model model, StripeException ex) {
-        model.addAttribute("error", ex.getMessage());
-        return "paymentStatus";
-    }
+//    @ExceptionHandler(StripeException.class)
+//    public String handleError(Model model, StripeException ex) {
+//        model.addAttribute("error", ex.getMessage());
+//        return "paymentStatus";
+//    }
 
 }
 
