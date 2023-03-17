@@ -106,9 +106,17 @@ body {
         transform: rotate(360deg);
     }
 }
+.results-page_main-section{
+    min-height: 500px !important;
+}
 #vectorImg {
     opacity: 60%;
     margin-top:8rem !important;
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+
 }
 /*++++++++++Loader+++++++++++*/
 /*++++++++++Alert+++++++++++*/

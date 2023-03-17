@@ -4,11 +4,13 @@
     let BASE = `https://api.flightapi.io`;
     let KEY = `64138433f75e113b18804e8c`;
     let display = "d-none";
+
     let layover = "Nonstop";
     let submit = document.getElementById("submit");
     let loader = document.getElementById("loading-screen");
     let alertBar = document.getElementById("alert");
     let spadesImg = document.getElementById("vectorImg");
+    let cabin_title = document.getElementById("cabin");
     let CABIN = "Economy";
     let TRIP = "onewaytrip"
     let LIMIT = 10;
@@ -16,8 +18,7 @@
     let searched = false;
 
     const DISPLAY = Object.freeze({
-        NONE: "d-none",
-        FLEX: "d-flex"
+        NONE: "d-none", FLEX: "d-flex"
     });
     const alert = Object.freeze({
         NOT_EXIST: "Sorry there are no flights for this search",
@@ -26,7 +27,6 @@
     const TRIP_CABIN = Object.freeze({
         ECONOMY: "Economy",
     });
-
 
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
@@ -57,6 +57,7 @@
         }
         return result;
     }
+
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -73,7 +74,8 @@
         const time12 = `${hours12}:${minutes.toString().padStart(2, '0')} ${isPM ? 'PM' : 'AM'}`;
         return time12;
     }
-     // ++++++++++++++++++++++ Functions End +++++++++++++++++++++++++++++++++||
+
+    // ++++++++++++++++++++++ Functions End +++++++++++++++++++++++++++++++++||
 
     let form = document.getElementById("form");
     // Form Event
@@ -83,9 +85,9 @@
         loader.style.display = "flex";
         spadesImg.style.display = "none";
         if (searched === true) {
-            let tickets = document.querySelectorAll(".ticket");
-            tickets.forEach(ticket => {
-                ticket.remove()
+            let flightRows = document.querySelectorAll(".flightRow");
+            flightRows.forEach(row => {
+                row.remove()
             })
         }
 
@@ -94,20 +96,19 @@
         try {
 
             for (let i = 0; i < evt.target.length - 1; i++) {
-                if (evt.target[i].value === ""){
+                if (evt.target[i].value === "") {
                     throw Error("Please Enter Valid input")
                 }
                 event[i] = evt.target[i].value;
                 console.log(`typeof event: ${i}: `, evt.target[i].value);
             }
-        } catch (error){
+        } catch (error) {
             alertBar.innerText = error.message;
             alertBar.classList.add("slide-down");
         }
 
         let requestOptions = {
-            method: 'GET',
-            redirect: 'manual'
+            method: 'GET', redirect: 'manual'
         };
         // \ ========== Trim and format for API ============== /
         if (event[3].includes(" ")) {
@@ -127,7 +128,7 @@
                     .then(response => response.json())
                     .then(airport2 => {
                         console.log("fetch2")
-                        console.log("Status: ",airport2.message)
+                        console.log("Status: ", airport2.message)
                         const dateObject = Object.freeze({
                             ONE_DATE: event[5]
                         });
@@ -143,7 +144,7 @@
                                 renderContainer.innerHTML = "";
                                 console.log("Status", result.status);
                                 if (result.status !== 200) {
-                                    if(result.status === 404){
+                                    if (result.status === 404) {
                                         alertBar.innerText = alert.NOT_EXIST;
                                         alertBar.classList.add("slide-down");
                                     }
@@ -157,8 +158,7 @@
                                 let search = [];
                                 for (let n = 0; n < result.airlines.length; n++) {
                                     search.push({
-                                        code: result.airlines[n].code,
-                                        name: result.airlines[n].name
+                                        code: result.airlines[n].code, name: result.airlines[n].name
                                     });
                                 }
                                 let flightObj = {};
@@ -195,76 +195,23 @@
                                 tranferArr = shuffleArray(tranferArr);
                                 let sh = [1, 2, 3, 4]
                                 console.log("sh : ", shuffleArray(sh));
-
+                                cabin_title.innerText = CABIN;
+                                cabin_title.style.fontSize = "25px"
                                 let HTML = "";
                                 for (let i = 0; i < 10; i++) {
 
-                                    HTML +=
-                                        // Template literal starts
-                                        `                                                                              
-                                          <div class="tickets-cont d-flex ">
-                <div class="ticket card-paper1">
-                    <div class="info-cont">
-                        <div class="info-row mb-4 border-bottom justify-content-between m-0">
-                            <p>${CABIN}</p>
-                        </div>
-                        <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
-                        <div class="info-row">
-                            <div class="info-column">
-                                <ion-icon class="fs-12" name="airplane-sharp"></ion-icon>
-                            </div>
-                            <div class="info-column ms-3 flex-column justify-content-center">
-                                <p class="responsive-font fw-bold">
-             
-                                    <span id="flight-start-time-oneway">${Hour12Time(tranferArr[i].departureTime)}</span>
-                                    -
-                                    <span id="flight-end-time-oneway">${Hour12Time(tranferArr[i].arrivalTime)}</span>
-                                </p>
-                                <p id="airline-name-oneway">
-                                   ${tranferArr[i].airline[0]}
-                                </p>
-                            </div>
-                            <div class="info-column">
-                                <p id="stopOver-type-oneway">${layover}</p>
-                            </div>
-                            <div class="info-column ms-3 flex-column justify-content-center">
-                                <p id="flight-duration-oneway" class="fs-15 fw-bold">
-                                    ${tranferArr[i].duration}
-                                </p>
-                                <p id="airport-names-cont-oneway">
-                                    <span class="airport" id="airport1-oneway">${tranferArr[i].departureAirport}</span>
-                                    -
-                                    <span class="airport" id="airport2-oneway">${tranferArr[i].arrivalAirport}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- need to be in form  -->
-                    <div class="buy-deal-cont d-flex justify-content-center">
-
-                         <div class="buy-deal-row mb-3">
-                            <span class="fs-13" id="price">$${tranferArr[i].price.toPrecision(5)}</span>
-                        </div>
-                        <div class="buy-deal-row">
-                            <a href="booking.html"></a>
-                            <form action="/checkout" method="GET">
-                            <input type="hidden"  class="d-none" name="departureTime" value='${Hour12Time(tranferArr[i].departureTime)}'>
-                             <input type="hidden"  class="d-none" name="arrivalTime" value='${Hour12Time(tranferArr[i].arrivalTime)}'>
-                              <input type="hidden"  class="d-none" name="duration" value='${tranferArr[i].duration}'>
-                               <input type="hidden"  class="d-none" name="cabin" value='${tranferArr[i].departureAirport}'>
-                                <input type="hidden" class="d-none"  name="arrivalAirport" value='${tranferArr[i].arrivalAirport}'>
-                                 <input type="hidden"  class="d-none" name="price" value='$${tranferArr[i].price}'>
-                                  <input type="hidden"  class="d-none" name="airline" value='${tranferArr[i].airline[0]}'>
-                                 <input type="hidden"  class="d-none" name="cabin" value='${tranferArr[i].cabin}'>        
-                                   <button class="btn-buy fw-bold">Get Ticket
-                                <ion-icon name="paper-plane-outline"></ion-icon>
-                            </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>                                                                                                                                                         
-                                        `// html end
+                                    HTML += // Template literal starts
+                                        `
+                                       <tr class="flightRow">
+                                        <th scope="row">${i+1}</th>
+                                        <td>${tranferArr[i].airline}</td>
+                                        <td>${Hour12Time(tranferArr[i].departureTime)} - ${Hour12Time(tranferArr[i].arrivalTime)}</td>
+                                        <td>${tranferArr[i].departureAirport} - ${tranferArr[i].arrivalAirport}</td>
+                                        <td>${tranferArr[i].price}</td>
+                                        
+                                        <td><a href="/checkout"></></td>
+                                       </tr>
+                                      `// html end
                                 } // end of loop
 
                                 renderContainer.innerHTML = HTML;
@@ -278,15 +225,15 @@
 
                                 loader.style.display = "none";
 
-                            // fetch 3 Query
+                                // fetch 3 Query
                             }).catch(error => {
-                            if(error.message !== FETCH_STATUS){
+                            if (error.message.includes(alert.UNDEFINED)) {
                                 alertBar.innerText = alert.NOT_EXIST;
                                 alertBar.classList.add("slide-down");
                             }
-                                console.log(error)
+                            console.log(error)
 
-                            })
+                        })
                         // fetch 2
                     }).catch(error => {
 
@@ -294,7 +241,7 @@
                         alertBar.innerHTML = alert.NOT_EXIST;
                         alertBar.classList.add("slide-down");
                     }
-                    });
+                });
                 // fetch 1
                 console.log("fetch1")
             }).catch(error => {
