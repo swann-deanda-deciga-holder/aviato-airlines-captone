@@ -66,6 +66,7 @@ public class ProfileController {
         return "redirect:/login";
     }
 
+
     @GetMapping("/profile/flights")
     public String userFlights(Model model) {
 
