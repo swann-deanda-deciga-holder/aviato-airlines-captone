@@ -40,9 +40,7 @@
         }
         return array;
     }
-
     function Hour12Time(militaryTime) {
-
         const [hours, minutes] = militaryTime.split(':').map(Number);
         const isPM = hours >= 12;
         const hours12 = hours % 12 || 12;
