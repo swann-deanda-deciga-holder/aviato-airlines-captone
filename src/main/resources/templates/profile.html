@@ -55,12 +55,29 @@
             <!--Save Changes button-->
             <div style="display: flex; justify-content: space-between;">
                 <input type="hidden" th:field="*{password}">
-                <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #56C1E3 0%, #5B6AF0 100%);">Save Changes</button>
+                <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" onclick="confirmSaveChanges()" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #56C1E3 0%, #5B6AF0 100%);">Save Changes</button>
+
+                Save Changes
+                </button>
+
+                <script>
+                    function confirmSaveChanges() {
+                        if (confirm("Are you sure you want to save changes?")) {
+                            showAlert();
+                        }
+                    }
+
+                    function showAlert() {
+                        alert("Changes have been saved!");
+                    }
+                </script>
+
+
 
                 <!--Delete Profile-->
-                <form class="mb-8" th:method="post" onsubmit="return confirm('Are you sure you want to delete your account?')" th:action="@{/profile/delete}">
-                    <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #F37272 0%, #D9534F 100%);">Delete Profile</button>
-                </form>
+<!--                <form class="mb-8" th:method="post" onsubmit="return confirm('Are you sure you want to delete your account?')" th:action="@{/profile/delete}">-->
+<!--                    <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #F37272 0%, #D9534F 100%);">Delete Profile</button>-->
+<!--                </form>-->
             </div>
 
         </form>
@@ -74,7 +91,7 @@
 
         <!--Flight list-->
 
-        <h2>Flights List:</h2>
+        <h4 class="fs-10 text-white mb-5">Flight List</h4>
 
         <table class="table table-striped">
             <thead>
