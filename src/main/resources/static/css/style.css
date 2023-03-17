@@ -612,6 +612,9 @@ footer {
 }
 
 @media screen and (max-width: 500px) {
+    .col_remove{
+        display: none;
+    }
     .hero {
         background-position: center -50%;
     }
