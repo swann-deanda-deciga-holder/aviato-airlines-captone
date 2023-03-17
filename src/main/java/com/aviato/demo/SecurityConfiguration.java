@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                 /* Logout configuration */
                 .and()
                 .logout()
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JESSIONID")// append a query string value
