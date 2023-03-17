@@ -97,81 +97,91 @@
             // \ ========== Trim and format for API ============== /
 
 
-            // City 1
-            fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[3]}&type=airport`, requestOptions)
-                .then(response => response.json())
-                .then(airport1 => {
-                    // City 2
-                    fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[4]}&type=airport`, requestOptions)
-                        .then(response => response.json())
-                        .then(airport2 => {
-                            console.log("fetch2")
-                            const dateObject = Object.freeze({
-                                ONE_DATE: event[5]
-                            });
+                // City 1
+                fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[3]}&type=airport`, requestOptions)
+                    .then(response => response.json())
+                    .then(airport1 => {
 
-                            // /======= Default PARAMS ======\
-                            let DATE = dateObject.ONE_DATE;
-                            // \======= Default PARAMS ======/
 
-                            // Query
-                            fetch(`${BASE}/${TRIP}/${KEY}/${airport1.data[0].iata}/${airport2.data[0].iata}/${DATE}/1/0/0/${CABIN}/USD`, requestOptions)
+                            // City 2
+                            fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[4]}&type=airport`, requestOptions)
                                 .then(response => response.json())
-                                .then(result => {
-                                    renderContainer.innerHTML = "";
-                                    console.log("Status", result.status);
+                                .then(airport2 => {
+                                    console.log("fetch2")
+                                    const dateObject = Object.freeze({
+                                        ONE_DATE: event[5]
+                                    });
 
-                                    let tranferArr = [];
-                                    let search = [];
-                                    for (let n = 0; n < result.airlines.length; n++) {
-                                        search.push({
-                                            code: result.airlines[n].code,
-                                            name: result.airlines[n].name
-                                        });
-                                    }
-                                    let flightObj = {};
-                                    // FOR LOOP FOR ONEWAY TRIP
-                                    for (let i = 0; i < LIMIT; i++) {
-                                        // console.log("result.legs[i].stopoversCount: ",result.legs[i].stopoversCount)
-                                        if (result.legs[i].stopoversCount !== undefined) {
-                                            if (result.legs[i].stopoversCount === 0) {
-                                                layover = "Nonstop"
-                                            } else {
-                                                layover = "layover: " + result.legs[i].stopoversCount;
+                                    // /======= Default PARAMS ======\
+                                    let DATE = dateObject.ONE_DATE;
+                                    // \======= Default PARAMS ======/
+                                    if (airport1.data[0].iata !== undefined || airport2.data[0].iata !== undefined) {
+
+                                    // Query
+                                    fetch(`${BASE}/${TRIP}/${KEY}/${airport1.data[0].iata}/${airport2.data[0].iata}/${DATE}/1/0/0/${CABIN}/USD`, requestOptions)
+                                        .then(response => response.json())
+                                        .then(result => {
+                                            renderContainer.innerHTML = "";
+                                            console.log("Status", result.status);
+
+                                            let tranferArr = [];
+                                            let search = [];
+                                            for (let n = 0; n < result.airlines.length; n++) {
+                                                search.push({
+                                                    code: result.airlines[n].code,
+                                                    name: result.airlines[n].name
+                                                });
                                             }
-                                        }
-                                        flightObj = {
-                                            departureTime: result.legs[i].departureTime,
-                                            arrivalTime: result.legs[i].arrivalTime,
-                                            departureAirport: result.legs[i].departureAirportCode,
-                                            arrivalAirport: result.legs[i].arrivalAirportCode,
-                                            duration: result.legs[i].duration,
-                                            layover: layover,
-                                            price: result.fares[i].price.totalAmountUsd,
-                                            cabin: CABIN,
-                                            trip: TRIP,
-                                            airline: []
-
-                                        }
-                                        tranferArr.push(flightObj);
-                                        result.legs[i].airlineCodes.forEach(airlineCode => {
-                                            for (let z = 0; z < search.length; z++) {
-                                                if (airlineCode === search[z].code) {
-                                                    flightObj.airline.push(search[z].name);
+                                            let flightObj = {};
+                                            // FOR LOOP FOR ONEWAY TRIP
+                                            for (let i = 0; i < LIMIT; i++) {
+                                                if (result.legs[i].stopoversCount === undefined) {
+                                                    alertBar.style.cursor = "pointer"
+                                                    alertBar.innerHTML = `<p class="text-center">${alert.SORRY} <br> Click to refresh<p>`
+                                                    alertBar.classList.add("slide-down");
+                                                    loader.style.display = "none";
+                                                    throw Error("stopoversCount === undefined");
                                                 }
-                                            }
-                                        }) // end of forEach
-                                    } // end of for loop
-                                    tranferArr = shuffleArray(tranferArr);
-                                    let sh = [1, 2, 3, 4]
-                                    console.log("sh : ", shuffleArray(sh));
-                                    cabin_title.innerText = CABIN;
-                                    cabin_title.style.fontSize = "25px"
-                                    let HTML = "";
-                                    for (let i = 0; i < 10; i++) {
+                                                // console.log("result.legs[i].stopoversCount: ",result.legs[i].stopoversCount)
+                                                if (result.legs[i].stopoversCount !== undefined) {
+                                                    if (result.legs[i].stopoversCount === 0) {
+                                                        layover = "Nonstop"
+                                                    } else {
+                                                        layover = "layover: " + result.legs[i].stopoversCount;
+                                                    }
+                                                }
+                                                flightObj = {
+                                                    departureTime: result.legs[i].departureTime,
+                                                    arrivalTime: result.legs[i].arrivalTime,
+                                                    departureAirport: result.legs[i].departureAirportCode,
+                                                    arrivalAirport: result.legs[i].arrivalAirportCode,
+                                                    duration: result.legs[i].duration,
+                                                    layover: layover,
+                                                    price: result.fares[i].price.totalAmountUsd,
+                                                    cabin: CABIN,
+                                                    trip: TRIP,
+                                                    airline: []
 
-                                        HTML += // Template literal starts
-                                            `
+                                                }
+                                                tranferArr.push(flightObj);
+                                                result.legs[i].airlineCodes.forEach(airlineCode => {
+                                                    for (let z = 0; z < search.length; z++) {
+                                                        if (airlineCode === search[z].code) {
+                                                            flightObj.airline.push(search[z].name);
+                                                        }
+                                                    }
+                                                }) // end of forEach
+                                            } // end of for loop
+                                            tranferArr = shuffleArray(tranferArr);
+                                            let sh = [1, 2, 3, 4]
+                                            console.log("sh : ", shuffleArray(sh));
+                                            cabin_title.innerText = CABIN;
+                                            cabin_title.style.fontSize = "25px"
+                                            let HTML = "";
+                                            for (let i = 0; i < 10; i++) {
+
+                                                HTML += // Template literal starts
+                                                    `
                                        <tr class="flightRow">
                                         <td class="text-center">${tranferArr[i].airline}</td>
                                         <td class="text-center col_remove">${Hour12Time(tranferArr[i].departureTime)} - ${Hour12Time(tranferArr[i].arrivalTime)}</td>
@@ -199,34 +209,58 @@
 <!--                                        <td><a href="/checkout"></></td>-->
                                        </tr>
                                       `// html end
-                                    } // end of loop
+                                            } // end of loop
 
-                                    renderContainer.innerHTML = HTML;
-                                    submit.setAttribute("disabled", false)
-                                    submit.removeAttribute("disabled");
-                                    searched = true;
+                                            renderContainer.innerHTML = HTML;
+                                            submit.setAttribute("disabled", false)
+                                            submit.removeAttribute("disabled");
+                                            searched = true;
 
 
-                                    console.log(tranferArr)
-                                    console.log("search: ", search);
+                                            console.log(tranferArr)
+                                            console.log("search: ", search);
 
-                                    loader.style.display = "none";
+                                            loader.style.display = "none";
 
-                                    // fetch 3 Query
+                                            // fetch 3 Query
+                                        }).catch(error => {
+                                        // if (error.message.includes(alert.UNDEFINED)) {
+                                        //     throw Error(alert.NOT_EXIST);
+                                        // }
+                                        console.log(error)
+
+                                    })
+                                }else {
+                                        throw Error("Airport is undefined");
+                                    }
+                                    // fetch 2
                                 }).catch(error => {
-                                // if (error.message.includes(alert.UNDEFINED)) {
-                                //     throw Error(alert.NOT_EXIST);
-                                // }
+                                    if(error.message.includes(alert.UNDEFINED)){
+                                        alertBar.style.cursor = "pointer"
+                                        alertBar.innerHTML = `<p class="text-center">${alert.NOT_EXIST} <br> Click to refresh<p>`
+                                        alertBar.classList.add("slide-down");
+                                        loader.style.display = "none";
+                                        throw Error("airport undefined");
+                                    }
                                 console.log(error)
 
                             })
-                            // fetch 2
-                        }).catch(error => { Error(`${error.message}`)});
-                    // fetch 1
-                    console.log("fetch1")
-                }).catch(error => {
-                loader.style.display = "none";
-            })
+
+                        // NESTED FETCHING
+                        // fetch 1
+                        console.log("fetch1")
+                    }).catch(error => {
+                    if(error.message.includes(alert.UNDEFINED)){
+                        alertBar.style.cursor = "pointer"
+                        alertBar.innerHTML = `<p class="text-center">${alert.NOT_EXIST} <br> Click to refresh<p>`
+                        alertBar.classList.add("slide-down");
+                        loader.style.display = "none";
+                        throw Error("airport undefined");
+                    }
+
+                        console.log(error);
+                        loader.style.display = "none";})
+
         })//form event
 
     } catch (errors) {
