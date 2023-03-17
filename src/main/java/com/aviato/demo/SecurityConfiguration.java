@@ -37,13 +37,14 @@ public class SecurityConfiguration {
                 /* Logout configuration */
                 .and()
                 .logout()
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JESSIONID")// append a query string value
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/","home", "/register", "/results", "/css/**", "/js/**", "/img/**", "/about", "/error/**", "/aboutUs", "/mission", "/charge", "/checkout") // anyone can see the home and the ads pages
+                .requestMatchers("/","home", "/register", "/results", "/css/**", "/js/**", "/img/**", "/about", "/error/**", "/aboutUs", "/mission", "/charge", "/checkout", "/success") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()

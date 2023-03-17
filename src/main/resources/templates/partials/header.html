@@ -16,6 +16,14 @@
                 <a th:href="@{/about}">
                     <li class="text-light">Our Mission</li>
                 </a>
+
+               <a th:if="${#authorization.expression('isAuthenticated()')}">
+                    <form th:action="@{/logout}" method="post">
+                        <li class="text-light"><button>Logout</button></li>
+                    </form>
+               </a>
+
+
                 <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
                     <li class="text-light"><button>Login</button></li>
                 </a>

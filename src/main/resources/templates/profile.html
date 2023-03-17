@@ -55,12 +55,31 @@
             <!--Save Changes button-->
             <div style="display: flex; justify-content: space-between;">
                 <input type="hidden" th:field="*{password}">
-                <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #56C1E3 0%, #5B6AF0 100%);">Save Changes</button>
+                <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" onclick="confirmSaveChanges()" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #56C1E3 0%, #5B6AF0 100%);">Save Changes</button>
+
+                </button>
+
+                <script>
+                    function confirmSaveChanges() {
+                        if (confirm("Are you sure you want to save changes?")) {
+                            showAlert();
+                        }
+                    }
+
+                    function showAlert() {
+                        alert("Changes have been saved!");
+                    }
+                </script>
 
                 <!--Delete Profile-->
                 <form class="mb-8" th:method="post" onsubmit="return confirm('Are you sure you want to delete your account?')" th:action="@{/profile/delete}">
+                    <input type="hidden" name="userId" th:value="${#authentication.principal.id}" />
                     <button class="btn btn-light-light fs-20 fw-semibold px-16 py-5 border-0 text-white text-uppercase mb-5 rounded-pill" type="submit" style="letter-spacing: 1px; background: linear-gradient(98.24deg, #F37272 0%, #D9534F 100%);">Delete Profile</button>
                 </form>
+
+
+
+
             </div>
 
         </form>
@@ -74,36 +93,38 @@
 
         <!--Flight list-->
 
-        <h2>Flights List:</h2>
+<!--        -->
 
-        <table class="table table-striped">
-            <thead>
-            <tr style="background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">
-                <th scope="col">#</th>
-                <th scope="col">Airline</th>
-                <th scope="col">Departure</th>
-                <th scope="col">Arrival</th>
-                <th scope="col">Layover</th>
-                <th scope="col">Price</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="flight, flightInfo : ${flights}">
-                <th scope="row" th:text="${flightInfo.count}"></th>
-                <td th:text="${flight.airline}"></td>
-                <td th:text="${flight.departureCity} + ' (' + ${flight.departureAirport} + ') at ' + ${flight.departureTime}"></td>
-                <td th:text="${flight.arrivalCity} + ' (' + ${flight.arrivalAirport} + ') at ' + ${flight.arrivalTime}"></td>
-                <td th:text="${flight.layoverLocation}"></td>
-                <td th:text="'$' + ${flight.price}"></td>
-                <td>
-                    <form th:action="@{/profile/flights/{flightId}(flightId=${flight.id})}" method="post">
-                        <button type="submit">Cancel Flight</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<!--        <h4 class="fs-10 text-white mb-5">Flight List</h4>-->
+
+<!--        <table class="table table-striped">-->
+<!--            <thead>-->
+<!--            <tr style="background: linear-gradient(90deg, rgba(108,213,246,1 ) 0%, rgba(248,157,92,1) 50%, rgba(91,106,240,1) 100%)">-->
+<!--                <th scope="col">#</th>-->
+<!--                <th scope="col">Airline</th>-->
+<!--                <th scope="col">Departure</th>-->
+<!--                <th scope="col">Arrival</th>-->
+<!--                <th scope="col">Layover</th>-->
+<!--                <th scope="col">Price</th>-->
+<!--                <th scope="col">Action</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="flight, flightInfo : ${flights}">-->
+<!--                <th scope="row" th:text="${flightInfo.count}"></th>-->
+<!--                <td th:text="${flight.airline}"></td>-->
+<!--                <td th:text="${flight.departureCity} + ' (' + ${flight.departureAirport} + ') at ' + ${flight.departureTime}"></td>-->
+<!--                <td th:text="${flight.arrivalCity} + ' (' + ${flight.arrivalAirport} + ') at ' + ${flight.arrivalTime}"></td>-->
+<!--                <td th:text="${flight.layoverLocation}"></td>-->
+<!--                <td th:text="'$' + ${flight.price}"></td>-->
+<!--                <td>-->
+<!--                    <form th:action="@{/profile/flights/{flightId}(flightId=${flight.id})}" method="post">-->
+<!--                        <button type="submit">Cancel Flight</button>-->
+<!--                    </form>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
 
 
 
