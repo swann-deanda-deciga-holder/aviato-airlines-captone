@@ -2,7 +2,7 @@
     "use strict"
     // Enum Declarations for State Management
     let BASE = `https://api.flightapi.io`;
-    let KEY = `6413e8ad1ec2973b2848bdb9`;
+    const API_KEY= KEY;
     let display = "d-none";
 
     let layover = "Nonstop";
