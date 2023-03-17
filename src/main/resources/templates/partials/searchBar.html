@@ -2,31 +2,22 @@
 <html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="searchBar">
-
     <section class="search-bar_section ">
         <form id="form" class="pb-6 color-prime box-shadow_bottom
         search-flight-cont h-100 justify-content-start" action="#" method="POST">
             <div class="drop-tabs justify-content-center
             justify-content-md-start flex-wrap">
-                <!-- <label for="passenger">passenger</label> -->
                 <select name="trip type" class="d-none" id="trip-type">
                     <option id="onewaytrip" value="onewaytrip">One Way</option>
-                    <option id="roundtrip" value="roundtrip">Round trip</option>
                 </select>
                 <select name="ecom" class="d-none" id="ecom">
                     <option value="economy">Economy</option>
                     <option value="Business">Business</option>
                 </select>
-                <!--      <input type="button" id="adults-btn" class="form-label" style="background-color: transparent">Adults</input>-->
-                <!--      <input type="number" id="adults-val"  class="form-control" maxlength="3" required>-->
                 <select name="passenger" class="d-none" id="passenger">
                     <option value="adult">Adult</option>
                     <option value="child">Child</option>
                 </select>
-
-                <!--      <label for="lugguge">Bags</label>-->
-                <!--      <input type="number" placeholder="0" min="0" name="lugguge">-->
-
             </div>
 
             <div class="drop-tabs flex-wrap justify-content-center

@@ -1,29 +1,32 @@
 (function () {
     "use strict"
     // Enum Declarations for State Management
+    let BASE = `https://api.flightapi.io`;
+    let KEY = `64138433f75e113b18804e8c`;
     let display = "d-none";
     let layover = "Nonstop";
     let submit = document.getElementById("submit");
     let loader = document.getElementById("loading-screen");
     let alertBar = document.getElementById("alert");
+    let spadesImg = document.getElementById("vectorImg");
     let CABIN = "Economy";
     let TRIP = "onewaytrip"
     let LIMIT = 10;
     let renderContainer = document.getElementById("render-container");
     let searched = false;
+
     const DISPLAY = Object.freeze({
         NONE: "d-none",
         FLEX: "d-flex"
     });
     const alert = Object.freeze({
         NOT_EXIST: "Sorry there are no flights for this search",
+        UNDEFINED: "Cannot read properties of undefined"
     });
     const TRIP_CABIN = Object.freeze({
         ECONOMY: "Economy",
-        BUSINESS: "Business"
     });
-    let BASE = `https://api.flightapi.io`;
-    let KEY = `64138433f75e113b18804e8c`;
+
 
 
 // ++++++++++++++++++++++ Functions +++++++++++++++++++++++++++++++++
@@ -78,6 +81,7 @@
         alertBar.classList.remove("slide-down");
         // Loader flex
         loader.style.display = "flex";
+        spadesImg.style.display = "none";
         if (searched === true) {
             let tickets = document.querySelectorAll(".ticket");
             tickets.forEach(ticket => {
@@ -104,7 +108,7 @@
         }
         // \ ========== Trim and format for API ============== /
 
-
+        // if ( || || || ||)
         // City 1
         fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[3]}&type=airport`, requestOptions)
             .then(response => response.json())
@@ -116,6 +120,7 @@
                     .then(response => response.json())
                     .then(airport2 => {
                         console.log("fetch2")
+                        console.log("Status: ",airport2.message)
                         const dateObject = Object.freeze({
                             ONE_DATE: event[5]
                         });
@@ -131,6 +136,10 @@
                                 renderContainer.innerHTML = "";
                                 console.log("Status", result.status);
                                 if (result.status !== 200) {
+                                    if(result.status === 404){
+                                        alertBar.innerText = alert.NOT_EXIST;
+                                        alertBar.classList.add("slide-down");
+                                    }
                                     if (result.status === 504) {
                                         alertBar.innerText = alert.NOT_EXIST;
                                         alertBar.classList.add("slide-down");
@@ -262,10 +271,19 @@
 
                                 loader.style.display = "none";
 
-                            }).catch(error => console.log(error))
+                            // fetch 3 Query
+                            }).catch(error => {
+                            if(error.message !== FETCH_STATUS){
+                                alertBar.innerText = alert.NOT_EXIST;
+                                alertBar.classList.add("slide-down");
+                            }
+                                console.log(error)
+
+                            })
                         // fetch 2
                     }).catch(error => {
-                    if (error.message.includes("Cannot read properties of undefined")) {
+
+                    if (error.message.includes(alert.UNDEFINED)) {
                         alertBar.innerHTML = alert.NOT_EXIST;
                         alertBar.classList.add("slide-down");
                     }
@@ -273,7 +291,7 @@
                 // fetch 1
                 console.log("fetch1")
             }).catch(error => {
-            if (error.message.includes("Cannot read properties of undefined")) {
+            if (error.message.includes(alert.UNDEFINED)) {
                 alertBar.innerHTML = alert.NOT_EXIST;
                 alertBar.classList.add("slide-down");
                 submit.setAttribute("disabled", false);
