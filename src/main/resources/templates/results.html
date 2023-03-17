@@ -18,16 +18,31 @@
 
 
 
-<main class="color-accent position-relative align-items-center justify-content-end">
+<main class="results-page_main-section color-accent position-relative align-items-center justify-content-start">
   <div id="loading-screen" class="loading-screen">
     <div class="loading-icon"></div>
   </div>
+
+
   <img width="300px" id="vectorImg" class="img-fluid mt-20" th:src="@{img/cards.png}" alt="">
-  <section id="render-container" class="d-flex flex-column gap-5">
+  <section class="d-flex justify-content-center flex-column gap-5">
+    <table class="table mt-4 table-striped table-hover">
+      <thead>
+      <p id="cabin"></p>
+      <tr>
+        <th scope="col" class="text-center">Airline</th>
+        <th scope="col" class="text-center">Time</th>
+        <th scope="col" class="text-center col_remove">Duration</th>
+        <th scope="col" class="text-center">Airport</th>
+        <th scope="col" class="text-center">Price</th>
+        <th scope="col">Booking</th>
+      </tr>
+      </thead>
+      <tbody id="render-container">
 
+      </tbody>
+    </table>
   </section>
-
-
 
 </main>
 
