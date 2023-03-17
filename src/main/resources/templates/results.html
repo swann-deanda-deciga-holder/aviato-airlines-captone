@@ -18,22 +18,38 @@
 
 
 
-
-<main class="color-accent">
+<main class="results-page_main-section color-accent position-relative align-items-center justify-content-start">
   <div id="loading-screen" class="loading-screen">
     <div class="loading-icon"></div>
   </div>
-  <section id="render-container" class="d-flex flex-column gap-5">
 
+
+  <img width="300px" id="vectorImg" class="img-fluid mt-20" th:src="@{img/cards.png}" alt="">
+  <section class="d-flex justify-content-center flex-column gap-5">
+    <table class="table mt-4 table-striped table-hover">
+      <thead>
+      <p id="cabin"></p>
+      <tr>
+        <th scope="col" class="text-center">Airline</th>
+        <th scope="col" class="text-center">Time</th>
+        <th scope="col" class="text-center col_remove">Duration</th>
+        <th scope="col" class="text-center">Airport</th>
+        <th scope="col" class="text-center">Price</th>
+        <th scope="col">Booking</th>
+      </tr>
+      </thead>
+      <tbody id="render-container">
+
+      </tbody>
+    </table>
   </section>
-
-
 
 </main>
 
 <th:block th:insert="~{partials/footer:: footer}"></th:block>
 <th:block th:insert="~{partials/scripts:: scripts}"></th:block>
 <script th:src="@{js/search-bar.js}"></script>
+<script th:src="@{js/keys.js}"></script>
 <script th:src="@{js/submit.js}"></script>
 <script th:src="@{js/effects.js}"></script>
 

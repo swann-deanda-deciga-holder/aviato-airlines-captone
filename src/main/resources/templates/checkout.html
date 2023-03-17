@@ -5,33 +5,86 @@
   <th:block th:insert="~{partials/head:: head}"></th:block>
 </head>
 <body>
-<th:block th:insert="~{partials/head:: head}"></th:block>
-<div>
-  <h1 th:text="${departureTime}" ></h1>
-  <h1 th:text="${arrivalTime}" ></h1>
-  <h1 th:text="${arrivalAirport}" ></h1>
-  <h1 th:text="${airline}" ></h1>
+<th:block th:insert="~{partials/offcanvas:: offcanvas}"></th:block>
+<th:block th:insert="~{partials/header:: header}"></th:block>
 
+<!--<div>-->
+<!--  <h1 th:text="${departureTime}" ></h1>-->
+<!--  <h1 th:text="${arrivalTime}" ></h1>-->
+<!--  <h1 th:text="${arrivalAirport}" ></h1>-->
+<!--  <h1 th:text="${airline}" ></h1>-->
+<!--</div>-->
+<div class="tickets-cont mb-20 d-flex ">
+  <div class="ticket card-paper1">
+    <div class="info-cont ">
+      <div class="info-row color-offwhite border-bottom align-self-start justify-content-between m-0">
+        <p class="ms-5">Economy</p>
+        <img width="30px"  class="me-5" th:src="@{img/spade-circle.png}" alt="">
+      </div>
+      <div class="info w-100">
 
-</div>
-<form th:action='@{/charge}' th:method='POST' id='checkout-form'>
-  <input type='hidden' th:value='${amount}' name='amount' />
-  <label>Price:<span th:text='${displayAmount}' /></label>
-  <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
-  <script
-          src='https://checkout.stripe.com/checkout.js'
-          class='stripe-button'
-          th:attr='data-key=${stripePublicKey},
+      <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
+      <div class="info-row mt-12">
+        <div class="info-column ms-3 flex-column justify-content-center">
+          <p class="responsive-font fw-bold text-center">
+            <span id="flight-start-time-oneway" th:text="${departureTime}"></span>
+            -
+            <span id="flight-end-time-oneway" th:text="${arrivalTime}">11:40am</span>
+          </p>
+          <p id="airline-name-oneway" th:text="${airline}">
+          </p>
+        </div>
+        <div class="info-column">
+          <p id="stopOver-type-oneway">Nonstop</p>
+        </div>
+        <div class="info-column ms-3 flex-column justify-content-center">
+          <p id="flight-duration-oneway" class="fs-15 fw-bold">
+            3h
+          </p>
+          <p id="airport-names-cont-oneway">
+            <span class="airport" id="airport1-oneway" th:text="${arrivalAirport}"></span>
+            -
+            <span class="airport" id="airport2-oneway">HOU</span>
+          </p>
+        </div>
+        </div>
+
+      <!-- +++++++++++++++++++ ONETRIP ++++++++++++++++++++++++++ -->
+      </div>
+      <form th:action='@{/charge}' class="mb-20" th:method='POST' id='checkout-form'>
+        <input type='hidden' th:value='${amount}' name='amount' />
+        <label>Price:<span th:text='${displayAmount}' /></label>
+        <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+        <script
+                src='https://checkout.stripe.com/checkout.js'
+                class='stripe-button'
+                th:attr='data-key=${stripePublicKey},
          data-amount=${amount},
          data-currency=${currency}'
-          data-name='TEST-CHECKOUT'
-          data-description='Spring course checkout'
-          data-image
-                  ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
-          data-locale='auto'
-          data-zip-code='false'>
-  </script>
-</form>
+                data-name='TEST-CHECKOUT'
+                data-description='Spring course checkout'
+                data-image
+                        ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
+                data-locale='auto'
+                data-zip-code='false'>
+        </script>
+      </form>
+<!--      <div class="buy-deal-cont">-->
+<!--        <div class="buy-deal-row">-->
+<!--          <span class="fs-13" id="price">$216.45</span>-->
+<!--        </div>-->
+<!--        <button class="btn-buy fw-bold">Get Ticket-->
+<!--          <ion-icon name="paper-plane-outline"></ion-icon>-->
+<!--        </button>-->
+<!--      </div>-->
+
+
+    </div>
+    <!-- need to be in form  -->
+
+  </div>
+</div>
+
 
 
 <!--<section>-->
