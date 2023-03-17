@@ -9,6 +9,7 @@
     let submit = document.getElementById("submit");
     let loader = document.getElementById("loading-screen");
     let alertBar = document.getElementById("alert");
+    alertBar.addEventListener("click",()=> location.reload());
     let spadesImg = document.getElementById("vectorImg");
     let cabin_title = document.getElementById("cabin");
     let CABIN = "Economy";
@@ -22,6 +23,7 @@
     });
     const alert = Object.freeze({
         NOT_EXIST: "Sorry there are no flights for this search",
+        NOT_VALID: "Please Enter a valid input",
         UNDEFINED: "Cannot read properties of undefined",
         SORRY: "Sorry we are experiencing technical difficulties"
     });
@@ -72,7 +74,11 @@
 
                 for (let i = 0; i < evt.target.length - 1; i++) {
                     if (evt.target[i].value === "") {
-                        throw Error("Please Enter Valid input")
+                        alertBar.style.cursor = "pointer"
+                        alertBar.innerHTML = `<p class="text-center">${alert.NOT_VALID} <br> Click to refresh<p>`
+                        alertBar.classList.add("slide-down");
+                        loader.style.display = "none";
+                        throw Error("Please Enter Valid input");
                     }
                     event[i] = evt.target[i].value;
                     console.log(`typeof event: ${i}: `, evt.target[i].value);
@@ -126,6 +132,7 @@
                                     let flightObj = {};
                                     // FOR LOOP FOR ONEWAY TRIP
                                     for (let i = 0; i < LIMIT; i++) {
+                                        // console.log("result.legs[i].stopoversCount: ",result.legs[i].stopoversCount)
                                         if (result.legs[i].stopoversCount !== undefined) {
                                             if (result.legs[i].stopoversCount === 0) {
                                                 layover = "Nonstop"
@@ -223,6 +230,7 @@
         })//form event
 
     } catch (errors) {
+        console.log("ERROR: ",errors)
         alertBar.style.cursor = "pointer"
         alertBar.innerHTML = `<p>${errors.message} <br> Click to refresh<p>`
         alertBar.classList.add("slider-down");
