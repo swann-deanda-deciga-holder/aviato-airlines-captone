@@ -91,24 +91,31 @@
 
         evt.preventDefault();
         let event = [];
-        for (let i = 0; i < evt.target.length - 1; i++) {
+        try {
 
-
-            event[i] = evt.target[i].value;
-            console.log(`event: ${i}: `, evt.target[i].value);
+            for (let i = 0; i < evt.target.length - 1; i++) {
+                if (evt.target[i].value === ""){
+                    throw Error("Please Enter Valid input")
+                }
+                event[i] = evt.target[i].value;
+                console.log(`typeof event: ${i}: `, evt.target[i].value);
+            }
+        } catch (error){
+            alertBar.innerText = error.message;
+            alertBar.classList.add("slide-down");
         }
+
         let requestOptions = {
             method: 'GET',
             redirect: 'manual'
         };
         // \ ========== Trim and format for API ============== /
-        if (event[3].includes(" ") || event[4].includes(" ")) {
+        if (event[3].includes(" ")) {
             event[3] = event[3].trim().replaceAll(" ", '-').toLowerCase()
             event[4] = event[4].trim().replaceAll(" ", '-').toLowerCase()
         }
         // \ ========== Trim and format for API ============== /
 
-        // if ( || || || ||)
         // City 1
         fetch(`https://api.flightapi.io/iata/${KEY}?name=${event[3]}&type=airport`, requestOptions)
             .then(response => response.json())
